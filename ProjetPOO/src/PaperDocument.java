@@ -1,8 +1,14 @@
 
-public class PaperDocument {
-	private String commentaire;
+public class PaperDocument extends Document {
 	
-	public PaperDocument(){
+	private String commentaire;
+
+	public PaperDocument(String document){
+		super(document);
+	}
+	
+	public PaperDocument(String document, String commentaire){
+		this(document);
 		this.commentaire=commentaire;
 	}
 
