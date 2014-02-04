@@ -1,4 +1,3 @@
-
 public enum Etoile {
 	
 	UNE_ETOILE("Une étoile", 1),
