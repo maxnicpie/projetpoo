@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -8,22 +9,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.UIManager;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
-import javax.swing.JLabel;
+import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class AccueilMenu extends JFrame {
