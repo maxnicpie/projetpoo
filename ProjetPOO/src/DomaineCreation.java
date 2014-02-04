@@ -1,14 +1,20 @@
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Statement;
 
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
@@ -49,24 +55,52 @@ public class DomaineCreation extends JDialog {
 		listeMotsCles.setEnabled(false);
 		scrollPane_1.setViewportView(listeMotsCles);
 
-		JButton btnAddCategorie = new JButton("Ajouter Categorie");
-		btnAddCategorie.setBounds(314, 521, 205, 27);
-		getContentPane().add(btnAddCategorie);
-
 		nomCategorie = new JTextField();
+		nomCategorie.setForeground(SystemColor.windowBorder);
+		nomCategorie.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		nomCategorie.setText("  Catégorie ...");
 		nomCategorie.setBounds(314, 483, 205, 27);
 		getContentPane().add(nomCategorie);
 		nomCategorie.setColumns(10);
+		nomCategorie.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nomCategorie.setText("");
+				nomCategorie.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				nomCategorie.setForeground(Color.BLACK);
+			}
+		});
 
 		nomMotsCles = new JTextField();
+		nomMotsCles.setForeground(SystemColor.windowBorder);
+		nomMotsCles.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		nomMotsCles.setText("  Mot clé ...");
 		nomMotsCles.setEnabled(false);
 		nomMotsCles.setColumns(10);
 		nomMotsCles.setBounds(563, 483, 205, 27);
+		nomMotsCles.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nomMotsCles.setText("");
+				nomMotsCles.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				nomMotsCles.setForeground(Color.BLACK);
+			}
+		});
 		getContentPane().add(nomMotsCles);
 
 		JButton btnAddMotsCles = new JButton("Ajouter Mot Clé");
 		btnAddMotsCles.setEnabled(false);
 		btnAddMotsCles.setBounds(563, 521, 205, 27);
+		btnAddMotsCles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if ((nomMotsCles.getText().equals("  Mot clé ..."))
+						|| (nomMotsCles.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"Entrez un mot-clé",
+							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		getContentPane().add(btnAddMotsCles);
 
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -77,11 +111,33 @@ public class DomaineCreation extends JDialog {
 		scrollPane_2.setViewportView(listCriteres);
 
 		nomCritere = new JTextField();
+		nomCritere.setForeground(SystemColor.windowBorder);
+		nomCritere.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		nomCritere.setText("  Critère ...");
+		nomCritere.setToolTipText("");
 		nomCritere.setColumns(10);
 		nomCritere.setBounds(41, 359, 205, 27);
+		nomCritere.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nomCritere.setText("");
+				nomCritere.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				nomCritere.setForeground(Color.BLACK);
+			}
+		});
 		getContentPane().add(nomCritere);
 
 		JButton btnAjouterCritere = new JButton("Ajouter Critère");
+		btnAjouterCritere.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if ((nomCritere.getText().equals("  Critère ..."))
+						|| (nomCritere.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"Entrez un critère",
+							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnAjouterCritere.setBounds(41, 397, 205, 27);
 		getContentPane().add(btnAjouterCritere);
 
@@ -89,6 +145,20 @@ public class DomaineCreation extends JDialog {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(41, 464, 205, 84);
 		getContentPane().add(btnNewButton);
+		
+		JButton btnAddCategorie = new JButton("Ajouter Categorie");
+		btnAddCategorie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if ((nomCategorie.getText().equals("  Catégorie ..."))
+						|| (nomCategorie.getText().equals(""))) {
+					JOptionPane.showMessageDialog(null,
+							"Entrez une catégorie",
+							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAddCategorie.setBounds(314, 521, 205, 27);
+		getContentPane().add(btnAddCategorie);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(10, 110, 266, 2);
