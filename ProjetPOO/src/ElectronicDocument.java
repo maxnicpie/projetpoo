@@ -1,4 +1,3 @@
-
 public class ElectronicDocument extends Document {
 	private String link;
 	

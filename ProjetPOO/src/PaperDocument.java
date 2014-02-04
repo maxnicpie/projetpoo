@@ -11,5 +11,6 @@ public class PaperDocument extends Document {
 		this(document);
 		this.commentaire=commentaire;
 	}
+	
 
 }

@@ -4,4 +4,16 @@ public class Critere {
 	public Critere(String nom) {
 		this.nom = nom;
 	}
+	
+	public String getCritere(){
+		return nom;
+	}
+	
+	public void setCritere(){
+		this.nom=nom;
+	}
+	
+/*	public String creerCritere(){
+		
+	}*/
 }
