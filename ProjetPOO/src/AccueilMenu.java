@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class AccueilMenu extends JFrame {
@@ -63,6 +65,12 @@ public class AccueilMenu extends JFrame {
 		getContentPane().add(separator);
 		
 		JButton btnNewButton = new JButton("Nouveau domaine\r\n");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DomaineCreation creation = new DomaineCreation(st);
+				creation.setVisible(true);
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(425, 11, 349, 29);
 		getContentPane().add(btnNewButton);
