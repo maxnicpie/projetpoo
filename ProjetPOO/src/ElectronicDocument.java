@@ -1,5 +1,5 @@
-
 public class ElectronicDocument extends Document {
+	
 	private String link;
 	
 	public ElectronicDocument(String document){
@@ -8,7 +8,6 @@ public class ElectronicDocument extends Document {
 	
 	public ElectronicDocument(String document, String link){
 		this(document);
-		this.link=link;
+		this.link = link;
 	}
-
 }

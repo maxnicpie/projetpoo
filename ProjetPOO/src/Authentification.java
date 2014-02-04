@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-
 @SuppressWarnings("serial")
 public class Authentification extends JDialog {
 	private JTextField txtRoot;

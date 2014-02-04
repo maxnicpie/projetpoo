@@ -1,4 +1,3 @@
-
 public class PaperDocument extends Document {
 	
 	private String commentaire;
@@ -9,7 +8,6 @@ public class PaperDocument extends Document {
 	
 	public PaperDocument(String document, String commentaire){
 		this(document);
-		this.commentaire=commentaire;
+		this.commentaire = commentaire;
 	}
-
 }

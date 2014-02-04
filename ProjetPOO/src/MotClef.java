@@ -1,4 +1,3 @@
-
 public class MotClef {
 	private String libelle;
 	

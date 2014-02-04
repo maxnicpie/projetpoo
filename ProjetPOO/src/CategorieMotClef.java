@@ -4,4 +4,6 @@ public class CategorieMotClef {
 	public CategorieMotClef(String nom) {
 		this.nom = nom;
 	}
+	
+	
 }
