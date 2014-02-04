@@ -8,8 +8,7 @@ DROP TABLE IF EXISTS CRITERE;
 DROP TABLE IF EXISTS DOMAINE;
 DROP TABLE IF EXISTS DOCUMENT;
 
-													/* CREATION DES TABLES */
-
+												/* CREATION DES TABLES */
 CREATE TABLE DOMAINE(
 	idDomaine INT NULL AUTO_INCREMENT,
 	nomDomaine VARCHAR(50),
@@ -83,4 +82,38 @@ CREATE TABLE EST_TAGE(
 	);
 	
 													/* INSERTION DES ELEMENTS DES TABLES */
+
+INSERT INTO DOMAINE VALUES
+(null, 'Sport'),
+(null, 'Musique');
+
+INSERT INTO CRITERE VALUES
+(null, 'Critere 1', 1),
+(null, 'Critere 2', 2); 
+
+INSERT INTO NOTE VALUES
+(null, 3, 1),
+(null, 5, 2);
+
+INSERT INTO CATEGORIEMOTCLEF VALUES
+(null, 'Lieux', 1),
+(null, 'Genre',2 );
+
+INSERT INTO MOTCLEF VALUES
+(null, 'Belfort', 1),
+(null, 'Raddon', 2); 
+
+INSERT INTO DOCUMENT VALUES
+(null, 'Document 1'),
+(null, 'Document 2');
+
+INSERT INTO ELECTRONICDOCUMENT VALUES
+(null, 'http://monpremierdocumentelectronique.fr', 2);
+
+INSERT INTO PAPERDOCUMENT VALUES
+(null, 'ceci est un commentaire', 1);
+
+INSERT INTO EST_TAGE VALUES
+(1, 2),
+(2,1 );
 
