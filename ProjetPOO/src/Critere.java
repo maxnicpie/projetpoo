@@ -4,8 +4,7 @@ import java.sql.Statement;
 public class Critere {
 	private String nom;
 	private Statement st;
-	private String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null, \""
-			+ nom + "\")";
+	
 
 	public Critere(String nom) {
 		this.nom = nom;
@@ -19,7 +18,10 @@ public class Critere {
 		this.nom=nom;
 	}
 	
-	public void creer_critere(String nom) {
+	public void creer_critere() {
+		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null, \""
+				+ nom + "\")";
+		
 		try {
 			st.executeQuery(CREER_CRITERE);
 		} catch (SQLException e) {
