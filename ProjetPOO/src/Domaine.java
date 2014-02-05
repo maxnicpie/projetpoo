@@ -7,6 +7,7 @@ public class Domaine {
 
 	private String nom;
 	private Statement st;
+	private ResultSet rs;
 	
 	public String recupIdDomaine(){
     	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
@@ -53,14 +54,27 @@ public class Domaine {
 		}
 	}
 	
-	public void afficherListeDomaines() {
+	public String[] afficherListeDomaines() {
 		String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
+		int nbLignes = 0;
+		int i = 1;
+		String[] listeDomaines = new String[nbLignes + 1];
+		listeDomaines[0] = "";
+
 		try {
-			st.executeQuery(AFFICHER_LISTE_DOMAINES);
+			rs = st.executeQuery(AFFICHER_LISTE_DOMAINES);
+			rs.last();
+			nbLignes = rs.getRow();
+			rs.first();
+			while (i != nbLignes + 1) {
+				listeDomaines[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return listeDomaines;
 	}
 	
 }
