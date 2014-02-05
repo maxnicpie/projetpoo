@@ -1,10 +1,22 @@
 import java.sql.SQLException;
+
 import com.mysql.jdbc.Statement;
 
 public class Domaine {
 
 	private String nom;
 	private Statement st;
+	
+	public String recupIdDomaine(){
+    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
+	}
 	
 	public Domaine(String nom) {
 		this.nom = nom;
@@ -16,7 +28,7 @@ public class Domaine {
 		return nom;
 	}
  
-	public void setNom(String nom) {
+	public void setNom(String nom){
 		this.nom = nom;
 	}
 	
@@ -49,4 +61,5 @@ public class Domaine {
 			e.printStackTrace();
 		}
 	}
+	
 }

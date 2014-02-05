@@ -1,12 +1,12 @@
 public class ElectronicDocument extends Document {
-	
+
 	private String link;
-	
-	public ElectronicDocument(String document){
+
+	public ElectronicDocument(String document) {
 		super(document);
 	}
-	
-	public ElectronicDocument(String document, String link){
+
+	public ElectronicDocument(String document, String link) {
 		this(document);
 		this.setLink(link);
 	}
@@ -18,4 +18,5 @@ public class ElectronicDocument extends Document {
 	public void setLink(String link) {
 		this.link = link;
 	}
+
 }
