@@ -6,10 +6,6 @@ public class Domaine {
 	private String nom;
 	private Statement st;
 	
-	private String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\""+nom+"\")";
-	private String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\""+nom+"\"";
-	private String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
-	
 	public Domaine(String nom) {
 		this.nom = nom;
 	}
@@ -24,7 +20,8 @@ public class Domaine {
 		this.nom = nom;
 	}
 	
-	public void creerDomaine(String nom) {
+	public void creerDomaine() {
+		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\""+nom+"\")";
 		try {
 			st.executeQuery(CREER_DOMAINE);
 		} catch (SQLException e) {
@@ -34,6 +31,7 @@ public class Domaine {
 	}
 	
 	public void supprimerDomaine() {
+		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\""+nom+"\"";
 		try {
 			st.executeQuery(SUPPRIMER_DOMAINE);
 		} catch (SQLException e) {
@@ -43,6 +41,7 @@ public class Domaine {
 	}
 	
 	public void afficherListeDomaines() {
+		String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
 		try {
 			st.executeQuery(AFFICHER_LISTE_DOMAINES);
 		} catch (SQLException e) {
