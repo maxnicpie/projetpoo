@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -6,9 +7,21 @@ import com.mysql.jdbc.Statement;
 public class Domaine {
 
 	private String nom;
-	private Statement st;
 	private ArrayList<CategorieMotClef> listeCategoriesMotClefs = new ArrayList<CategorieMotClef>();
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
+	private Statement st;
+	private ResultSet rs;
+	
+	public String recupIdDomaine(){
+    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
+	}
 	
 	public Domaine() {
 
@@ -17,8 +30,8 @@ public class Domaine {
 	public String getNom() {
 		return nom;
 	}
-
-	public void setNom(String nom) {
+ 
+	public void setNom(String nom){
 		this.nom = nom;
 	}
 
@@ -43,15 +56,28 @@ public class Domaine {
 			e.printStackTrace();
 		}
 	}
-
-	public void afficherListeDomaines() {
+	
+	public String[] afficherListeDomaines() {
 		String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
+		int nbLignes = 0;
+		int i = 1;
+		String[] listeDomaines = new String[nbLignes + 1];
+		listeDomaines[0] = "";
+
 		try {
-			st.executeQuery(AFFICHER_LISTE_DOMAINES);
+			rs = st.executeQuery(AFFICHER_LISTE_DOMAINES);
+			rs.last();
+			nbLignes = rs.getRow();
+			rs.first();
+			while (i != nbLignes + 1) {
+				listeDomaines[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return listeDomaines;
 	}
 
 	public void ajouterCategorie(String text) {
@@ -103,5 +129,4 @@ public class Domaine {
 			//enregistrement tout les mots clés associés
 		}
 	}
-
 }

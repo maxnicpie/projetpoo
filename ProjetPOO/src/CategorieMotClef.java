@@ -3,13 +3,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CategorieMotClef {
-
+	Domaine domaine = new Domaine();
 	private String nom;
 	private Statement st;
 	private ArrayList<MotClef> listeMotClefs  = new ArrayList<MotClef>();
 
-	public CategorieMotClef(String nom) {
-		this.nom = nom;
+	public CategorieMotClef(String text) {
+		this.nom = text;
+	}
+	
+	public CategorieMotClef() {
+		
 	}
 
 	public String getNomCategorieMotClef() {
@@ -18,6 +22,31 @@ public class CategorieMotClef {
 
 	public void setNomCategorieMotClef(String nom) {
 		this.nom = nom;
+	}
+	
+	public String recupIdCategorieMotClef(){
+    	String id = "SELECT idCategorieMotClef FROM CATEGORIEMOTCLEF where nomCategorieMotClef = \""+nom+"\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	public void recupererCategorieMotClef(){
+		String idDomaine = domaine.recupIdDomaine();
+
+		String recupCategorieMotClef = "SELECT nomCategorieMotClef FROM CATEGORIEMOTCLEF WHERE idDomaine = \""
+				+ idDomaine + "\"";
+
+		try {
+			st.executeQuery(recupCategorieMotClef);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
 	}
 
 	public String toString() {

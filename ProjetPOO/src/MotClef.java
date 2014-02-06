@@ -2,11 +2,28 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MotClef {
+	
+	CategorieMotClef categorie_mot_clef = new CategorieMotClef();
+	
 	private String libelle;
 	private Statement st;
 
 	public MotClef(String libelle) {
 		this.libelle = libelle;
+	}
+	
+	public MotClef() {
+	}
+
+	public String recupIdMotClef(){
+    	String id = "SELECT idMotClef FROM MOTCLEF where libelle = \""+libelle+"\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	public String getMotClef() {
@@ -32,5 +49,19 @@ public class MotClef {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void recupererMotClef(){
+		String idCategorieMotClef = categorie_mot_clef.recupIdCategorieMotClef();
+
+		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
+				+ idCategorieMotClef + "\"";
+
+		try {
+			st.executeQuery(recupMotClef);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
 	}
 }
