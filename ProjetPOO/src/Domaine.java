@@ -46,7 +46,7 @@ public class Domaine {
 	public void creerDomaine() {
 		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\""+nom+"\")";
 		try {
-			st.executeQuery(CREER_DOMAINE);
+			st.executeUpdate(CREER_DOMAINE);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
