@@ -20,6 +20,10 @@ public class Domaine {
 		this.nom = nom;
 		this.st = st;
 	}
+	
+	public String toString() {
+		return nom;
+	}
 
 	public String getNomDomaine() {
 		return nom;
@@ -111,7 +115,7 @@ public class Domaine {
 		return listeCategoriesMotsClefs.toArray();
 	}
 
-	public void ajoutCritere(String nom) {
+	public void ajouterCritere(String nom) {
 		// TODO Auto-generated method stub
 		Critere c = new Critere(nom,st);
 		listeCriteres.add(c);
@@ -146,14 +150,13 @@ public class Domaine {
 	public void enregistrerCategoriesMotsClefs(int id) {
 		// TODO Auto-generated method stub
 		Iterator<CategorieMotClef> it = listeCategoriesMotsClefs.iterator();
-		MotClef mot = new MotClef(st);
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
 				String INSERER_CATEGORIE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CATEGORIE);
-				mot.enregistrerMotsClefs(c.getIdCategorieMotClef());
+				c.enregistrerMotsClefs(c.getIdCategorieMotClef());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

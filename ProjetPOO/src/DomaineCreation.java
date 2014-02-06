@@ -24,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
 public class DomaineCreation extends JDialog {
 	private JTextField nomDomaine;
 	private JTextField nomCategorie;
-	private JTextField nomMotsCles;
+	private JTextField nomMotClef;
 	private JTextField nomCritere;
 	private JComboBox listeComboDomaines;
 
@@ -95,22 +95,22 @@ public class DomaineCreation extends JDialog {
 			}
 		});
 
-		nomMotsCles = new JTextField();
-		nomMotsCles.setForeground(SystemColor.windowBorder);
-		nomMotsCles.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		nomMotsCles.setText("  Mot clé ...");
-		nomMotsCles.setEnabled(false);
-		nomMotsCles.setColumns(10);
-		nomMotsCles.setBounds(563, 483, 205, 27);
-		nomMotsCles.addMouseListener(new MouseAdapter() {
+		nomMotClef = new JTextField();
+		nomMotClef.setForeground(SystemColor.windowBorder);
+		nomMotClef.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		nomMotClef.setText("  Mot clé ...");
+		nomMotClef.setEnabled(false);
+		nomMotClef.setColumns(10);
+		nomMotClef.setBounds(563, 483, 205, 27);
+		nomMotClef.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				nomMotsCles.setText("");
-				nomMotsCles.setFont(new Font("Tahoma", Font.PLAIN, 11));
-				nomMotsCles.setForeground(Color.BLACK);
+				nomMotClef.setText("");
+				nomMotClef.setFont(new Font("Tahoma", Font.PLAIN, 11));
+				nomMotClef.setForeground(Color.BLACK);
 			}
 		});
-		getContentPane().add(nomMotsCles);
+		getContentPane().add(nomMotClef);
 
 		final JButton btnAddMotsCles = new JButton("Ajouter Mot Clé");
 		btnAddMotsCles.setEnabled(false);
@@ -118,8 +118,8 @@ public class DomaineCreation extends JDialog {
 		btnAddMotsCles.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
-				if ((nomMotsCles.getText().equals("  Mot clé ..."))
-						|| (nomMotsCles.getText().equals(""))) {
+				if ((nomMotClef.getText().equals("  Mot clé ..."))
+						|| (nomMotClef.getText().equals(""))) {
 					JOptionPane.showMessageDialog(null, "Entrez un mot-clé",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
@@ -134,9 +134,9 @@ public class DomaineCreation extends JDialog {
 						CategorieMotClef cat = a
 								.chercherCategorie(listeCategories
 										.getSelectedValue());
-						cat.ajouterMotClef(nomMotsCles.getText());
+						cat.ajouterMotClef(nomMotClef.getText());
 						listeMotsCles.setListData(cat.afficherListeMotsClefs());
-						nomMotsCles.setText("");
+						nomMotClef.setText("");
 					}
 				}
 				
@@ -178,7 +178,7 @@ public class DomaineCreation extends JDialog {
 					JOptionPane.showMessageDialog(null, "Entrez un critère",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
-					a.ajoutCritere(nomCritere.getText());
+					a.ajouterCritere(nomCritere.getText());
 					listCriteres.setListData(a.afficherCriteres());
 				}
 				nomCritere.setText("");
@@ -224,7 +224,7 @@ public class DomaineCreation extends JDialog {
 						&& (!nomCategorie.getText().equals(""))) {
 
 					listeMotsCles.setEnabled(true);
-					nomMotsCles.setEnabled(true);
+					nomMotClef.setEnabled(true);
 					btnAddMotsCles.setEnabled(true);
 
 					a.ajouterCategorie(nomCategorie.getText());

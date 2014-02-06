@@ -9,7 +9,6 @@ public class MotClef {
 	CategorieMotClef categorie = new CategorieMotClef(st);
 	ResultSet rs;
 	private String libelle;
-	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
 	public MotClef(String libelle) {
 		this.libelle = libelle;
@@ -19,13 +18,17 @@ public class MotClef {
 		this.st = st;
 	}
 
+	public MotClef(String libelle, Statement st) {
+		this.st = st;
+		this.libelle = libelle;
+	}
+	
 	public int getIdMotClef() {
 		int recupIdMotClef = 0;
-		String id = "SELECT idMotClef FROM MOT_CLEF WHERE libelle = \""
-				+ libelle + "\"";
+		String id = "SELECT idMotClef FROM MOT_CLEF WHERE libelle=\""+ libelle +"\"";
 		try {
-			rs.next();
 			rs = st.executeQuery(id);
+			rs.next();
 			recupIdMotClef = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
@@ -52,7 +55,7 @@ public class MotClef {
 				+ libelle + "\")";
 
 		try {
-			st.executeQuery(CREER_MOT_CLEF);
+			st.executeUpdate(CREER_MOT_CLEF);
 		} catch (SQLException e) {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
@@ -60,7 +63,7 @@ public class MotClef {
 
 	}
 
-	public String[] getNomMotClef() {
+	public String[] getMotsClefs() {
 		int i = 0;
 		int idCategorieMotClef = categorie.getIdCategorieMotClef();
 		String recupMotClef = "SELECT libelle FROM MOT_CLEF WHERE idCategorieMotClef = \""
@@ -86,21 +89,5 @@ public class MotClef {
 		} catch (SQLException e) {
 		}
 		return motClef;
-	}
-
-	public void enregistrerMotsClefs(int id) {
-		// TODO Auto-generated method stub
-		Iterator<MotClef> it = listeMotsClefs.iterator();
-		while (it.hasNext()) {
-			MotClef mot = it.next();
-			try {
-				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
-						+ mot.getNomMotClef() + "\"," + id + ")";
-				st.executeUpdate(INSERER_MOT_CLEF);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 }
