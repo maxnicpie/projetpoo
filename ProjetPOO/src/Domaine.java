@@ -2,16 +2,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Domaine {
 
-	ResultSet rs;
 	private String nom;
 	private ArrayList<CategorieMotClef> listeCategoriesMotClefs = new ArrayList<CategorieMotClef>();
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 	private Statement st;
-	
-	
+	private ResultSet rs;
+
+	public String recupIdDomaine() {
+		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
+				+ "\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
+	}
+
 	public Domaine(Statement st) {
 		this.st = st;
 	}
@@ -19,26 +31,26 @@ public class Domaine {
 	public String getNom() {
 		return nom;
 	}
- 
-	public void setNom(String nom){
+
+	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	public int getIdDomaine(){
+
+	public int getIdDomaine() {
 		int recupId = 0;
-    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
-    	
+		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
+				+ "\"";
+
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
-			recupId = rs.getInt(1);			
+			recupId = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
 		return recupId;
 	}
-	
 
 	public void creerDomaine() {
 		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom
@@ -61,20 +73,20 @@ public class Domaine {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String[] afficherListeDomaines() {
 		String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
 		int nbLignes = 0;
 		int i = 0;
 		String[] listeDomaines = null;
-		
+
 		try {
 			rs = st.executeQuery(AFFICHER_LISTE_DOMAINES);
 			rs.last();
 			nbLignes = rs.getRow();
 			listeDomaines = new String[nbLignes];
 			rs.first();
-			
+
 			while (i != nbLignes) {
 				listeDomaines[i] = rs.getString(1);
 				i++;
@@ -123,16 +135,28 @@ public class Domaine {
 		return listeCriteres;
 	}
 
-	public void enregistrerCriteres() {
+	public void enregistrerCriteres(int id) {
 		// TODO Auto-generated method stub
-		
+		Iterator<Critere> it = listeCriteres.iterator();
+
+		while (it.hasNext()) {
+			Critere c = it.next();
+			try {
+				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,"
+						+ c.getNomCritere() + "," + id + ")";
+				st.executeQuery(INSERER_CRITERE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void enregistrerCategoriesMotsCles() {
 		// TODO Auto-generated method stub
 		for (CategorieMotClef c : listeCategoriesMotClefs) {
-			//enregistrement categorie dans BDD
-			//enregistrement tout les mots clés associés
+			// enregistrement categorie dans BDD
+			// enregistrement tout les mots clés associés
 		}
 	}
 }
