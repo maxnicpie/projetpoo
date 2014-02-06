@@ -57,12 +57,10 @@ public class MotClef {
 	}
 	
 	public void getNomMotClef(){
-		int i = 1;
+	
 		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
 		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
-		
-		int nbLignes = 0;
 		try {
 			st.executeQuery(recupMotClef);
 		} catch (SQLException e) {

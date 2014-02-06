@@ -31,7 +31,7 @@ public class Domaine {
 
 	public int getIdDomaine() {
 		int recupId = 0;
-		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine = " + nom;
+		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine = \""+nom+"\"";
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -161,7 +161,7 @@ public class Domaine {
 		// TODO Auto-generated method stub
 		String AFFICHER_CATEGORIES = "select nomCategorieMotClef "+
 									 "FROM CATEGORIEMOTCLEF,DOMAINE "+
-									 "where DOMAINE.idDomaine=1 "+
+									 "where DOMAINE.idDomaine="+idDomaine+" "+
 									 "AND DOMAINE.idDomaine=CATEGORIEMOTCLEF.idDomaine";
 		int nbLignes = 0;
 		int i = 0;
