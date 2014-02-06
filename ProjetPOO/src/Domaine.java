@@ -12,18 +12,6 @@ public class Domaine {
 	private Statement st;
 	private ResultSet rs;
 
-	public String recupIdDomaine() {
-		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
-				+ "\"";
-		try {
-			st.executeQuery(id);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-		return id;
-	}
-
 	public Domaine(Statement st) {
 		this.st = st;
 	}
@@ -33,11 +21,11 @@ public class Domaine {
 		this.st = st;
 	}
 
-	public String getNom() {
+	public String getNomDomaine() {
 		return nom;
 	}
 
-	public void setNom(String nom) {
+	public void setNomDomaine(String nom) {
 		this.nom = nom;
 	}
 
@@ -57,8 +45,7 @@ public class Domaine {
 	}
 
 	public void creerDomaine() {
-		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom
-				+ "\")";
+		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null," + nom + ")";
 		try {
 			st.executeQuery(CREER_DOMAINE);
 		} catch (SQLException e) {
@@ -68,8 +55,8 @@ public class Domaine {
 	}
 
 	public void supprimerDomaine() {
-		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\""
-				+ nom + "\"";
+		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine="
+				+ nom;
 		try {
 			st.executeQuery(SUPPRIMER_DOMAINE);
 		} catch (SQLException e) {
@@ -142,7 +129,6 @@ public class Domaine {
 	public void enregistrerCriteres(int id) {
 		// TODO Auto-generated method stub
 		Iterator<Critere> it = listeCriteres.iterator();
-
 		while (it.hasNext()) {
 			Critere c = it.next();
 			try {
@@ -156,11 +142,19 @@ public class Domaine {
 		}
 	}
 
-	public void enregistrerCategoriesMotsCles() {
+	public void enregistrerCategoriesMotsCles(int id) {
 		// TODO Auto-generated method stub
-		for (CategorieMotClef c : listeCategoriesMotClefs) {
-			// enregistrement categorie dans BDD
-			// enregistrement tout les mots clés associés
+		Iterator<CategorieMotClef> it = listeCategoriesMotClefs.iterator();
+		while (it.hasNext()) {
+			CategorieMotClef c = it.next();
+			try {
+				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,"
+						+ c.getNomCategorieMotClef() + "," + id + ")";
+				st.executeQuery(INSERER_CRITERE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
