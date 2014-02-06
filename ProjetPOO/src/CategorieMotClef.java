@@ -15,8 +15,8 @@ public class CategorieMotClef {
 		this.nom = text;
 	}
 	
-	public CategorieMotClef() {
-		
+	public CategorieMotClef(Statement st) {
+		this.st = st;
 	}
 
 	public String getNomCategorieMotClef() {

@@ -3,17 +3,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MotClef {
-	
-	CategorieMotClef categorie_mot_clef = new CategorieMotClef();
+	private Statement st;
+	CategorieMotClef categorie_mot_clef = new CategorieMotClef(st);
 	ResultSet rs;
 	private String libelle;
-	private Statement st;
-
+	
 	public MotClef(String libelle) {
 		this.libelle = libelle;
 	}
 	
-	public MotClef() {
+	public MotClef(Statement st) {
+		this.st = st;
 	}
 
 	public int getIdMotClef(){
@@ -46,6 +46,7 @@ public class MotClef {
 		
 		String CREER_MOT_CLEF = "INSERT INTO MOTCLEF VALUES(null, \""
 				+ libelle + "\")";
+		
 		try {
 			st.executeQuery(CREER_MOT_CLEF);
 		} catch (SQLException e) {
@@ -55,12 +56,13 @@ public class MotClef {
 
 	}
 	
-	public void recupererMotClef(){
+	public void getNomMotClef(){
+		int i = 1;
 		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
-
 		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
-
+		
+		int nbLignes = 0;
 		try {
 			st.executeQuery(recupMotClef);
 		} catch (SQLException e) {
