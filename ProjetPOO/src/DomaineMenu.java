@@ -21,9 +21,10 @@ public class DomaineMenu extends JDialog {
 		lblNomDeLa.setBounds(29, 26, 124, 22);
 		getContentPane().add(lblNomDeLa);
 		
-		domaineSelect.getCategories(domaineSelect.getIdDomaine());
+		String[] categories = domaineSelect.getCategories(domaineSelect.getIdDomaine());
 		
-		JComboBox comboBox = new JComboBox();
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		JComboBox comboBox = new JComboBox(categories);
 		comboBox.setBounds(29, 59, 191, 22);
 		getContentPane().add(comboBox);
 		

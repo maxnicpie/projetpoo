@@ -28,8 +28,9 @@ public class Domaine {
 		this.st = st;
 	}
 	
-	public Domaine(String nom) {
+	public Domaine(String nom,Statement st) {
 		this.nom = nom;
+		this.st = st;
 	}
 
 	public String getNom() {
@@ -44,7 +45,6 @@ public class Domaine {
 		int recupId = 0;
 		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
 				+ "\"";
-
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -166,26 +166,29 @@ public class Domaine {
 
 	public String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
-		String requete = "SELECT * FROM CATEGORIEMOTCLEF ";
-		resultat = executerRequete(requete);
-		int nbLignes = 0;int i=0;
-		try {
-			resultat.last();
-			nbLignes = resultat.getRow();
-			resultat.first();
-		} catch (SQLException e1) {
-		}
-		
-		String[] villes = new String[nbLignes];
-		try {
-			while(i!=nbLignes+1){
-				villes[i] = resultat.getString(1);
-				i++;
-				resultat.next();
-			}
+		String AFFICHER_CATEGORIES = "select nomCategorieMotClef "+
+									 "FROM CATEGORIEMOTCLEF,DOMAINE "+
+									 "where DOMAINE.idDomaine=1 "+
+									 "AND DOMAINE.idDomaine=CATEGORIEMOTCLEF.idDomaine";
+		int nbLignes = 0;
+		int i = 0;
+		String[] listeCategories = null;
 
+		try {
+			rs = st.executeQuery(AFFICHER_CATEGORIES);
+			rs.last();
+			nbLignes = rs.getRow();
+			listeCategories = new String[nbLignes];
+			rs.first();
+
+			while (i != nbLignes) {
+				listeCategories[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return villes;		
+		return listeCategories;
 	}
 }
