@@ -24,7 +24,7 @@ public class Domaine {
 		this.nom = nom;
 	}
 	
-	public int recupIdDomaine(){
+	public int getIdDomaine(){
 		int recupId = 0;
     	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
     	
