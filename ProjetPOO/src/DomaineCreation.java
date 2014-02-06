@@ -191,7 +191,7 @@ public class DomaineCreation extends JDialog {
 					a.creerDomaine(); // enregistrement nom domaine
 					if (!a.getListeCriteres().isEmpty()) {
 						a.enregistrerCriteres(a.getIdDomaine()); // enregistrement
-																	// criteres
+						// criteres
 					}
 					a.enregistrerCategoriesMotsClefs(a.getIdDomaine());
 
