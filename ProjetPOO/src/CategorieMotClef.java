@@ -10,8 +10,8 @@ public class CategorieMotClef {
 	Domaine domaine = new Domaine(st);
 	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
-	public CategorieMotClef(String text) {
-		this.nom = text;
+	public CategorieMotClef(String nom) {
+		this.nom = nom;
 	}
 	
 	public CategorieMotClef(Statement st) {

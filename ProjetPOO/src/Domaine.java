@@ -111,9 +111,9 @@ public class Domaine {
 		return listeCategoriesMotClefs.toArray();
 	}
 
-	public void ajoutCritere(String text) {
+	public void ajoutCritere(String nom) {
 		// TODO Auto-generated method stub
-		Critere c = new Critere(text);
+		Critere c = new Critere(nom);
 		listeCriteres.add(c);
 	}
 
