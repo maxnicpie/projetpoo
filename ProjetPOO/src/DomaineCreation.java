@@ -16,6 +16,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
 public class DomaineCreation extends JDialog {
@@ -29,6 +31,8 @@ public class DomaineCreation extends JDialog {
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
+
+		final Domaine a = new Domaine();
 
 		JLabel lblNomDuDomaine = new JLabel("Nom du domaine : ");
 		lblNomDuDomaine.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -44,16 +48,30 @@ public class DomaineCreation extends JDialog {
 		scrollPane.setBounds(314, 27, 205, 446);
 		getContentPane().add(scrollPane);
 
-		JList listeCategories = new JList();
+		@SuppressWarnings("rawtypes")
+		final JList listeCategories = new JList();
 		scrollPane.setViewportView(listeCategories);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(563, 27, 205, 446);
 		getContentPane().add(scrollPane_1);
 
-		JList listeMotsCles = new JList();
+		@SuppressWarnings("rawtypes")
+		final JList listeMotsCles = new JList();
 		listeMotsCles.setEnabled(false);
 		scrollPane_1.setViewportView(listeMotsCles);
+
+		listeCategories.addListSelectionListener(new ListSelectionListener() {
+			@SuppressWarnings("rawtypes")
+			public void valueChanged(ListSelectionEvent e) {
+				CategorieMotClef cat = a.chercherCategorie(((JList) e
+						.getSource()).getSelectedValue());
+				if (cat != null) {
+					listeMotsCles.setListData(cat.afficherMotsCles());
+				}
+			}
+
+		});
 
 		nomCategorie = new JTextField();
 		nomCategorie.setForeground(SystemColor.windowBorder);
@@ -88,16 +106,31 @@ public class DomaineCreation extends JDialog {
 		});
 		getContentPane().add(nomMotsCles);
 
-		JButton btnAddMotsCles = new JButton("Ajouter Mot Clé");
+		final JButton btnAddMotsCles = new JButton("Ajouter Mot Clé");
 		btnAddMotsCles.setEnabled(false);
 		btnAddMotsCles.setBounds(563, 521, 205, 27);
 		btnAddMotsCles.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
 				if ((nomMotsCles.getText().equals("  Mot clé ..."))
 						|| (nomMotsCles.getText().equals(""))) {
-					JOptionPane.showMessageDialog(null,
-							"Entrez un mot-clé",
+					JOptionPane.showMessageDialog(null, "Entrez un mot-clé",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
+				} else {
+					if (listeCategories.isSelectionEmpty()) {
+						JOptionPane
+								.showMessageDialog(
+										null,
+										"Selectionnez une catégorie pour ajouter un mot clé",
+										"Message d'erreur",
+										JOptionPane.ERROR_MESSAGE);
+					} else {
+						CategorieMotClef cat = a
+								.chercherCategorie(listeCategories
+										.getSelectedValue());
+						cat.ajoutMotCle(nomMotsCles.getText());
+						listeMotsCles.setListData(cat.afficherMotsCles());
+					}
 				}
 			}
 		});
@@ -107,7 +140,8 @@ public class DomaineCreation extends JDialog {
 		scrollPane_2.setBounds(41, 125, 205, 223);
 		getContentPane().add(scrollPane_2);
 
-		JList listCriteres = new JList();
+		@SuppressWarnings("rawtypes")
+		final JList listCriteres = new JList();
 		scrollPane_2.setViewportView(listCriteres);
 
 		nomCritere = new JTextField();
@@ -129,12 +163,15 @@ public class DomaineCreation extends JDialog {
 
 		JButton btnAjouterCritere = new JButton("Ajouter Critère");
 		btnAjouterCritere.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
 				if ((nomCritere.getText().equals("  Critère ..."))
 						|| (nomCritere.getText().equals(""))) {
-					JOptionPane.showMessageDialog(null,
-							"Entrez un critère",
+					JOptionPane.showMessageDialog(null, "Entrez un critère",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
+				} else {
+					a.ajoutCritere(nomCritere.getText());
+					listCriteres.setListData(a.afficherCriteres());
 				}
 			}
 		});
@@ -142,17 +179,48 @@ public class DomaineCreation extends JDialog {
 		getContentPane().add(btnAjouterCritere);
 
 		JButton btnNewButton = new JButton("Ajouter domaine");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!nomDomaine.getText().equals("")) {
+					a.setNom(nomDomaine.getText());
+					a.creerDomaine(); // enregistrement nom domaine
+					if (!a.getListeCriteres().isEmpty()) {
+						a.enregistrerCriteres(); // enregistrement criteres
+					}
+					a.enregistrerCategoriesMotsCles();
+
+					JOptionPane.showMessageDialog(null,
+							"Domaine ajouté", "Succes",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Entrez un nom de domaine", "Message d'erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(41, 464, 205, 84);
 		getContentPane().add(btnNewButton);
-		
+
 		JButton btnAddCategorie = new JButton("Ajouter Categorie");
 		btnAddCategorie.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
-				if ((nomCategorie.getText().equals("  Catégorie ..."))
-						|| (nomCategorie.getText().equals(""))) {
-					JOptionPane.showMessageDialog(null,
-							"Entrez une catégorie",
+				if ((!nomCategorie.getText().equals("  Catégorie ..."))
+						&& (!nomCategorie.getText().equals(""))) {
+
+					listeMotsCles.setEnabled(true);
+					nomMotsCles.setEnabled(true);
+					btnAddMotsCles.setEnabled(true);
+
+					a.ajouterCategorie(nomCategorie.getText());
+					listeCategories.setListData(a.afficherCategories());
+					listeMotsCles.setModel(null);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Entrez une catégorie",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -183,5 +251,4 @@ public class DomaineCreation extends JDialog {
 		this.setSize(800, 600);
 		this.setLocationRelativeTo(null);
 	}
-
 }

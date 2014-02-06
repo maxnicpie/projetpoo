@@ -18,6 +18,10 @@ public class Critere {
 		this.nom=nom;
 	}
 	
+	public String toString(){
+		return nom;
+	}
+	
 	public void creer_critere() {
 		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null, \""
 				+ nom + "\")";

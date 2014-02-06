@@ -5,12 +5,15 @@ public class MotClef {
 	private String libelle;
 	private Statement st;
 
-
 	public MotClef(String libelle) {
 		this.libelle = libelle;
 	}
 
 	public String getMotClef() {
+		return libelle;
+	}
+	
+	public String toString() {
 		return libelle;
 	}
 
