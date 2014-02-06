@@ -159,10 +159,10 @@ public class Domaine {
 
 	public String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
-		String AFFICHER_CATEGORIES = "select nomCategorieMotClef "+
-									 "FROM CATEGORIEMOTCLEF,DOMAINE "+
-									 "where DOMAINE.idDomaine=1 "+
-									 "AND DOMAINE.idDomaine=CATEGORIEMOTCLEF.idDomaine";
+		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "+
+									 "FROM CATEGORIEMOTCLEF, DOMAINE "+
+									 "WHERE DOMAINE.idDomaine = "+idDomaine+" "+
+									 "AND DOMAINE.idDomaine = CATEGORIEMOTCLEF.idDomaine";
 		int nbLignes = 0;
 		int i = 0;
 		String[] listeCategories = null;
