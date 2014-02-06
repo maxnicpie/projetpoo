@@ -94,7 +94,7 @@ public class MotClef {
 		while (it.hasNext()) {
 			MotClef mot = it.next();
 			try {
-				String INSERER_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
+				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
 						+ mot.getNomMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_MOT_CLEF);
 			} catch (SQLException e) {
