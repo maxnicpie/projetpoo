@@ -23,9 +23,14 @@ public class Critere {
 	public void setNomCritere(String nom) {
 		this.nom = nom;
 	}
+	
+	public String toString() {
+		return nom;
+	}
 
 	public void creerCritere() {
-		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null," + nom + ")";
+		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null, \""
+				+ nom + "\")";
 
 		try {
 			st.executeQuery(CREER_CRITERE);

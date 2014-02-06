@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Domaine {
 
 	private String nom;
-	private ArrayList<CategorieMotClef> listeCategoriesMotClefs = new ArrayList<CategorieMotClef>();
+	private ArrayList<CategorieMotClef> listeCategoriesMotsClefs = new ArrayList<CategorieMotClef>();
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 	private Statement st;
 	private ResultSet rs;
@@ -93,12 +93,12 @@ public class Domaine {
 	public void ajouterCategorie(String text) {
 		// TODO Auto-generated method stub
 		CategorieMotClef c = new CategorieMotClef(text);
-		listeCategoriesMotClefs.add(c);
+		listeCategoriesMotsClefs.add(c);
 	}
 
 	public CategorieMotClef chercherCategorie(Object selectedValue) {
 		// TODO Auto-generated method stub
-		for (CategorieMotClef c : listeCategoriesMotClefs) {
+		for (CategorieMotClef c : listeCategoriesMotsClefs) {
 			if (c.getNomCategorieMotClef().equals(selectedValue.toString())) {
 				return c;
 			}
@@ -108,7 +108,7 @@ public class Domaine {
 
 	public Object[] afficherCategories() {
 		// TODO Auto-generated method stub
-		return listeCategoriesMotClefs.toArray();
+		return listeCategoriesMotsClefs.toArray();
 	}
 
 	public void ajoutCritere(String nom) {
@@ -143,15 +143,15 @@ public class Domaine {
 		}
 	}
 
-	public void enregistrerCategoriesMotsCles(int id) {
+	public void enregistrerCategoriesMotsClefs(int id) {
 		// TODO Auto-generated method stub
-		Iterator<CategorieMotClef> it = listeCategoriesMotClefs.iterator();
+		Iterator<CategorieMotClef> it = listeCategoriesMotsClefs.iterator();
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
+				String INSERER_CATEGORIE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
-				st.executeUpdate(INSERER_CRITERE);
+				st.executeUpdate(INSERER_CATEGORIE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -190,11 +190,11 @@ public class Domaine {
 		return listeCategories;
 	}
 
-	public String[] getMotsCles(String selectedCategorie) {
+	public String[] getMotsClefs(String selectedCategorie) {
 		// TODO Auto-generated method stub
-		String AFFICHER_MOTSCLES = "SELECT libelle FROM MOTCLEF,CATEGORIEMOTCLEF "+
+		String AFFICHER_MOTSCLES = "SELECT libelle FROM MOT_CLEF,CATEGORIE_MOT_CLEF "+
 									"WHERE nomCategorieMotClef = \""+selectedCategorie+
-									"\""+"AND MOTCLEF.idCategorieMotClef=CATEGORIEMOTCLEF.idCategorieMotClef";
+									"\""+"AND MOT_CLEF.idCategorieMotClef=CATEGORIE_MOT_CLEF.idCategorieMotClef";
 		int nbLignes = 0;
 		int i = 0;
 		String[] listeMotsCles = null;

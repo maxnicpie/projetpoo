@@ -1,24 +1,28 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MotClef {
 	private Statement st;
-	CategorieMotClef categorie_mot_clef = new CategorieMotClef(st);
+	CategorieMotClef categorie = new CategorieMotClef(st);
 	ResultSet rs;
 	private String libelle;
-	
+	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
+
 	public MotClef(String libelle) {
 		this.libelle = libelle;
 	}
-	
+
 	public MotClef(Statement st) {
 		this.st = st;
 	}
 
-	public int getIdMotClef(){
+	public int getIdMotClef() {
 		int recupIdMotClef = 0;
-    	String id = "SELECT idMotClef FROM MOT_CLEF where libelle = \""+libelle+"\"";
+		String id = "SELECT idMotClef FROM MOT_CLEF WHERE libelle = \""
+				+ libelle + "\"";
 		try {
 			rs.next();
 			rs = st.executeQuery(id);
@@ -33,7 +37,7 @@ public class MotClef {
 	public String getLibelleMotClef() {
 		return libelle;
 	}
-	
+
 	public String toString() {
 		return libelle;
 	}
@@ -42,11 +46,11 @@ public class MotClef {
 		this.libelle = libelle;
 	}
 
-	public void creer_mot_clef() {
-		
+	public void creerMotClef() {
+
 		String CREER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES(null, \""
 				+ libelle + "\")";
-		
+
 		try {
 			st.executeQuery(CREER_MOT_CLEF);
 		} catch (SQLException e) {
@@ -55,25 +59,25 @@ public class MotClef {
 		}
 
 	}
-	
-	public String[] getNomMotClef(){
+
+	public String[] getNomMotClef() {
 		int i = 0;
-		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
+		int idCategorieMotClef = categorie.getIdCategorieMotClef();
 		String recupMotClef = "SELECT libelle FROM MOT_CLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
-		
+
 		int nbLignes = 0;
 		try {
 			rs = st.executeQuery(recupMotClef);
 			rs.last();
 			nbLignes = rs.getRow();
 			rs.first();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 		}
-		
+
 		String[] motClef = new String[nbLignes];
 		try {
-			while(i!=nbLignes){
+			while (i != nbLignes) {
 				motClef[i] = rs.getString(1);
 				i++;
 				rs.next();
@@ -82,5 +86,21 @@ public class MotClef {
 		} catch (SQLException e) {
 		}
 		return motClef;
+	}
+
+	public void enregistrerMotsClefs(int id) {
+		// TODO Auto-generated method stub
+		Iterator<MotClef> it = listeMotsClefs.iterator();
+		while (it.hasNext()) {
+			MotClef mot = it.next();
+			try {
+				String INSERER_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
+						+ mot.getNomMotClef() + "\"," + id + ")";
+				st.executeUpdate(INSERER_MOT_CLEF);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

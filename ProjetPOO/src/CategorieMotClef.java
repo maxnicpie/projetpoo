@@ -22,6 +22,10 @@ public class CategorieMotClef {
 
 	}
 	
+	public String toString() {
+		return nom;
+	}
+	
 	public String getNomCategorieMotClef() {
 		return nom;
 	}
@@ -32,8 +36,8 @@ public class CategorieMotClef {
 
 	public int getIdCategorieMotClef() {
 		int recupIdCategorieEtudiant = 0;
-		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef="
-				+ nom;
+		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef = \""
+				+ nom + "\"";
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -46,8 +50,8 @@ public class CategorieMotClef {
 	}
 
 	public void creerCategorieMotClef() {
-		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null,"
-				+ nom + ")";
+		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null, \""
+				+ nom + "\")";
 		try {
 			st.executeQuery(CREER_CATEGORIE_MOT_CLEF);
 		} catch (SQLException e) {

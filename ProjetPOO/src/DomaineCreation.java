@@ -187,7 +187,7 @@ public class DomaineCreation extends JDialog {
 					if (!a.getListeCriteres().isEmpty()) {
 						a.enregistrerCriteres(a.getIdDomaine()); // enregistrement criteres
 					}
-					a.enregistrerCategoriesMotsCles(a.getIdDomaine());
+					a.enregistrerCategoriesMotsClefs(a.getIdDomaine());
 
 					JOptionPane.showMessageDialog(null,
 							"Domaine ajouté", "Succes",

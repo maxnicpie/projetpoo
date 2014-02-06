@@ -61,7 +61,7 @@ public class DomaineMenu extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if (!comboBox.getSelectedItem().toString()
 						.equals("Categorie...")) {
-					String[] motscles = domaineSelect.getMotsCles(comboBox
+					String[] motscles = domaineSelect.getMotsClefs(comboBox
 							.getSelectedItem().toString());
 					list.setListData(motscles);
 				}
