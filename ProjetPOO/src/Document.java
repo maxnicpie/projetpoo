@@ -20,7 +20,7 @@ public class Document {
 		this.nom = nom;
 	}
 
-	public String[] getNomDocument() {
+	public String[] getNomDocumentByMotsCles() {
 		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
 
