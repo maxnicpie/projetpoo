@@ -57,7 +57,7 @@ public class Domaine {
 		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine = "
 				+ nom;
 		try {
-			st.executeQuery(SUPPRIMER_DOMAINE);
+			st.executeUpdate(SUPPRIMER_DOMAINE);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -133,7 +133,7 @@ public class Domaine {
 			try {
 				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,"
 						+ c.getNomCritere() + "," + id + ")";
-				st.executeQuery(INSERER_CRITERE);
+				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -149,7 +149,7 @@ public class Domaine {
 			try {
 				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,"
 						+ c.getNomCategorieMotClef() + "," + id + ")";
-				st.executeQuery(INSERER_CRITERE);
+				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
