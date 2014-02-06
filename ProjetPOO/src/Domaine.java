@@ -1,6 +1,7 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.mysql.jdbc.Statement;
 
@@ -11,18 +12,7 @@ public class Domaine {
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 	private Statement st;
 	private ResultSet rs;
-	
-	public String recupIdDomaine(){
-    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
-		try {
-			st.executeQuery(id);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-		return id;
-	}
-	
+		
 	public Domaine() {
 
 	}
@@ -33,6 +23,17 @@ public class Domaine {
  
 	public void setNom(String nom){
 		this.nom = nom;
+	}
+	
+	public String getIdDomaine(){
+    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
 	}
 
 	public void creerDomaine() {
@@ -117,9 +118,20 @@ public class Domaine {
 		return listeCriteres;
 	}
 
-	public void enregistrerCriteres() {
+	public void enregistrerCriteres(Domaine d) {
 		// TODO Auto-generated method stub
-		
+		Iterator<Critere> it = listeCriteres.iterator();
+		 
+		while (it.hasNext()) {
+		       Critere c = it.next();
+		       try {
+		    	String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,"+c.getNomCritere()+","+d.getIdDomaine()+")";
+				st.executeQuery(INSERER_CRITERE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void enregistrerCategoriesMotsCles() {
