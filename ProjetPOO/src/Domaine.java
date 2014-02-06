@@ -28,7 +28,6 @@ public class Domaine {
 		int recupId = 0;
 		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
 				+ "\"";
-
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -139,11 +138,19 @@ public class Domaine {
 		}
 	}
 
-	public void enregistrerCategoriesMotsCles() {
+	public void enregistrerCategoriesMotsCles(int id) {
 		// TODO Auto-generated method stub
-		for (CategorieMotClef c : listeCategoriesMotClefs) {
-			// enregistrement categorie dans BDD
-			// enregistrement tout les mots clés associés
+		Iterator<CategorieMotClef> it = listeCategoriesMotClefs.iterator();
+		while (it.hasNext()) {
+			CategorieMotClef c = it.next();
+			try {
+				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,"
+						+ c.getNomCategorieMotClef() + "," + id + ")";
+				st.executeQuery(INSERER_CRITERE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
