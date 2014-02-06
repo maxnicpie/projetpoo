@@ -10,8 +10,8 @@ public class CategorieMotClef {
 	Domaine domaine = new Domaine(st);
 	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
-	public CategorieMotClef(String text) {
-		this.nom = text;
+	public CategorieMotClef(String nom) {
+		this.nom = nom;
 	}
 	
 	public CategorieMotClef(Statement st) {
@@ -20,6 +20,10 @@ public class CategorieMotClef {
 	
 	public CategorieMotClef() {
 
+	}
+	
+	public String toString() {
+		return nom;
 	}
 	
 	public String getNomCategorieMotClef() {
@@ -31,9 +35,15 @@ public class CategorieMotClef {
 	}
 
 	public int getIdCategorieMotClef() {
+<<<<<<< HEAD
 		int recupIdCategorieMotClef = 0;
 		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef="
 				+ nom;
+=======
+		int recupIdCategorieEtudiant = 0;
+		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef = \""
+				+ nom + "\"";
+>>>>>>> 98e97d5f7bf66c079b005172dc367e87a6e9e125
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -46,8 +56,8 @@ public class CategorieMotClef {
 	}
 
 	public void creerCategorieMotClef() {
-		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null,"
-				+ nom + ")";
+		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null, \""
+				+ nom + "\")";
 		try {
 			st.executeQuery(CREER_CATEGORIE_MOT_CLEF);
 		} catch (SQLException e) {
