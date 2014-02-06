@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 @SuppressWarnings("serial")
 public class DomaineMenu extends JDialog {
 
+	@SuppressWarnings("unused")
 	private Statement st;
 
 	// private JPanel panelEntreprise;

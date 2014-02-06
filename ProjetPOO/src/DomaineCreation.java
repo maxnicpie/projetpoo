@@ -64,10 +64,13 @@ public class DomaineCreation extends JDialog {
 		listeCategories.addListSelectionListener(new ListSelectionListener() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public void valueChanged(ListSelectionEvent e) {
-				CategorieMotClef cat = a.chercherCategorie(((JList) e
-						.getSource()).getSelectedValue());
-				if (cat != null) {
-					listeMotsCles.setListData(cat.afficherListeMotsClefs());
+				try {
+					CategorieMotClef cat = a.chercherCategorie(((JList) e
+							.getSource()).getSelectedValue());
+					if (cat != null) {
+						listeMotsCles.setListData(cat.afficherListeMotsClefs());
+					}
+				} catch (NullPointerException npe) {
 				}
 			}
 
@@ -187,13 +190,13 @@ public class DomaineCreation extends JDialog {
 					a.setNomDomaine(nomDomaine.getText());
 					a.creerDomaine(); // enregistrement nom domaine
 					if (!a.getListeCriteres().isEmpty()) {
-						a.enregistrerCriteres(a.getIdDomaine()); // enregistrement criteres
+						a.enregistrerCriteres(a.getIdDomaine()); // enregistrement
+																	// criteres
 					}
 					a.enregistrerCategoriesMotsClefs(a.getIdDomaine());
 
-					JOptionPane.showMessageDialog(null,
-							"Domaine ajouté", "Succes",
-							JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Domaine ajouté",
+							"Succes", JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null,
@@ -219,7 +222,7 @@ public class DomaineCreation extends JDialog {
 
 					a.ajouterCategorie(nomCategorie.getText());
 					listeCategories.setListData(a.afficherCategories());
-					listeMotsCles.setModel(null);
+					// listeMotsCles.setModel(null);
 				} else {
 					JOptionPane.showMessageDialog(null, "Entrez une catégorie",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
