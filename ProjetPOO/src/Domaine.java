@@ -26,8 +26,7 @@ public class Domaine {
 
 	public int getIdDomaine() {
 		int recupId = 0;
-		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
-				+ "\"";
+		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine=" + nom;
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -40,8 +39,7 @@ public class Domaine {
 	}
 
 	public void creerDomaine() {
-		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom
-				+ "\")";
+		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null," + nom + ")";
 		try {
 			st.executeQuery(CREER_DOMAINE);
 		} catch (SQLException e) {
@@ -51,8 +49,8 @@ public class Domaine {
 	}
 
 	public void supprimerDomaine() {
-		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\""
-				+ nom + "\"";
+		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine="
+				+ nom;
 		try {
 			st.executeQuery(SUPPRIMER_DOMAINE);
 		} catch (SQLException e) {
