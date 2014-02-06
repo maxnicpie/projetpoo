@@ -5,22 +5,12 @@ import java.util.ArrayList;
 
 public class Domaine {
 
+	ResultSet rs;
 	private String nom;
 	private ArrayList<CategorieMotClef> listeCategoriesMotClefs = new ArrayList<CategorieMotClef>();
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 	private Statement st;
-	private ResultSet rs;
 	
-	public String recupIdDomaine(){
-    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
-		try {
-			st.executeQuery(id);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-		return id;
-	}
 	
 	public Domaine(Statement st) {
 		this.st = st;
@@ -33,6 +23,22 @@ public class Domaine {
 	public void setNom(String nom){
 		this.nom = nom;
 	}
+	
+	public int recupIdDomaine(){
+		int recupId = 0;
+    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
+    	
+		try {
+			rs = st.executeQuery(id);
+			rs.next();
+			recupId = rs.getInt(1);			
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return recupId;
+	}
+	
 
 	public void creerDomaine() {
 		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom

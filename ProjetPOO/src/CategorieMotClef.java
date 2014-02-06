@@ -1,9 +1,11 @@
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 
 public class CategorieMotClef {
+	ResultSet rs;
 	private String nom;
 	private Statement st;	
 	Domaine domaine = new Domaine(st);
@@ -25,19 +27,19 @@ public class CategorieMotClef {
 		this.nom = nom;
 	}
 	
-	public String recupIdCategorieMotClef(){
+	public int recupIdCategorieMotClef(){
     	String id = "SELECT idCategorieMotClef FROM CATEGORIEMOTCLEF where nomCategorieMotClef = \""+nom+"\"";
 		try {
-			st.executeQuery(id);
+			rs = st.executeQuery(id);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
-		return id;
+		return rs;
 	}
 	
 	public void recupererCategorieMotClef(){
-		String idDomaine = domaine.recupIdDomaine();
+		ResultSet idDomaine = domaine.recupIdDomaine();
 
 		String recupCategorieMotClef = "SELECT nomCategorieMotClef FROM CATEGORIEMOTCLEF WHERE idDomaine = \""
 				+ idDomaine + "\"";
