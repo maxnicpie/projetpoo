@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Statement;
@@ -17,7 +18,7 @@ public class Document {
 
 	public void recupererDocument() {
 
-		String idMotClef = motclef.recupIdMotClef();
+		ResultSet idMotClef = motclef.recupIdMotClef();
 
 		String recupDocument = "SELECT titre FROM DOCUMENT, EST_TAGE WHERE idMotClef = \""
 				+ idMotClef + "\"";
