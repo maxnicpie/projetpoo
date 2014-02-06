@@ -23,9 +23,53 @@ public class Domaine {
 		}
 		return id;
 	}
+<<<<<<< HEAD
 
 	public Domaine(Statement st) {
 		this.st = st;
+=======
+ 
+	public void setNom(String nom){
+		this.nom = nom;
+	}
+	
+	public int getIdDomaine(){
+		int recupIdDomaine = 0;
+    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
+    	
+		try {
+			rs = st.executeQuery(id);
+			rs.next();
+			recupIdDomaine = rs.getInt(1);			
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return recupIdDomaine;
+	}
+	
+
+	public void creerDomaine() {
+		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom
+				+ "\")";
+		try {
+			st.executeQuery(CREER_DOMAINE);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void supprimerDomaine() {
+		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\""
+				+ nom + "\"";
+		try {
+			st.executeQuery(SUPPRIMER_DOMAINE);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+>>>>>>> branch 'master' of https://github.com/maxnicpie/projetpoo.git
 	}
 
 	public String getNom() {

@@ -16,15 +16,18 @@ public class MotClef {
 	public MotClef() {
 	}
 
-	public ResultSet recupIdMotClef(){
+	public int getIdMotClef(){
+		int recupIdMotClef = 0;
     	String id = "SELECT idMotClef FROM MOTCLEF where libelle = \""+libelle+"\"";
 		try {
+			rs.next();
 			rs = st.executeQuery(id);
+			recupIdMotClef = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
-		return rs;
+		return recupIdMotClef;
 	}
 
 	public String getLibelleMotClef() {
@@ -53,7 +56,7 @@ public class MotClef {
 	}
 	
 	public void recupererMotClef(){
-		ResultSet idCategorieMotClef = categorie_mot_clef.recupIdCategorieMotClef();
+		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
 
 		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
