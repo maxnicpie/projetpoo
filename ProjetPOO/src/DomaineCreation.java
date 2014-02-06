@@ -132,6 +132,7 @@ public class DomaineCreation extends JDialog {
 						listeMotsCles.setListData(cat.afficherListeMotsClefs());
 					}
 				}
+				nomMotsCles.setText("");
 			}
 		});
 		getContentPane().add(btnAddMotsCles);
@@ -173,6 +174,7 @@ public class DomaineCreation extends JDialog {
 					a.ajoutCritere(nomCritere.getText());
 					listCriteres.setListData(a.afficherCriteres());
 				}
+				nomCritere.setText("");
 			}
 		});
 		btnAjouterCritere.setBounds(41, 397, 205, 27);
@@ -198,7 +200,6 @@ public class DomaineCreation extends JDialog {
 							"Entrez un nom de domaine", "Message d'erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
-
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -223,6 +224,7 @@ public class DomaineCreation extends JDialog {
 					JOptionPane.showMessageDialog(null, "Entrez une catégorie",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
 				}
+				nomCategorie.setText("");
 			}
 		});
 		btnAddCategorie.setBounds(314, 521, 205, 27);
