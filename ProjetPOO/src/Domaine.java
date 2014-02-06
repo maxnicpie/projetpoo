@@ -2,15 +2,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class Domaine {
 
-	ResultSet rs;
 	private String nom;
 	private ArrayList<CategorieMotClef> listeCategoriesMotClefs = new ArrayList<CategorieMotClef>();
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 	private Statement st;
+	private ResultSet rs;
 	
+	public String recupIdDomaine(){
+    	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
+		try {
+			st.executeQuery(id);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return id;
+	}
 	
 	public Domaine(Statement st) {
 		this.st = st;
@@ -125,7 +137,18 @@ public class Domaine {
 
 	public void enregistrerCriteres() {
 		// TODO Auto-generated method stub
-		
+		Iterator<Critere> it = listeCriteres.iterator();
+		 
+		while (it.hasNext()) {
+		       Critere c = it.next();
+		       try {
+		    	String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,"+c.getNomCritere()+","+id+")";
+				st.executeQuery(INSERER_CRITERE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void enregistrerCategoriesMotsCles() {
@@ -136,3 +159,4 @@ public class Domaine {
 		}
 	}
 }
+
