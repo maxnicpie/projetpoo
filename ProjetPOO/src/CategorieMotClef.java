@@ -35,15 +35,9 @@ public class CategorieMotClef {
 	}
 
 	public int getIdCategorieMotClef() {
-<<<<<<< HEAD
 		int recupIdCategorieMotClef = 0;
-		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef="
-				+ nom;
-=======
-		int recupIdCategorieEtudiant = 0;
 		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef = \""
 				+ nom + "\"";
->>>>>>> 98e97d5f7bf66c079b005172dc367e87a6e9e125
 		try {
 			rs = st.executeQuery(id);
 			rs.next();

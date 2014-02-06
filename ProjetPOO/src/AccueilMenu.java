@@ -24,19 +24,23 @@ import javax.swing.border.BevelBorder;
 @SuppressWarnings("serial")
 public class AccueilMenu extends JFrame {
 
-	private JFrame frame = this;
+	@SuppressWarnings("rawtypes")
+	private JComboBox listeComboDomaines;
+	private JFrame frame;
 
 	private Statement st;
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public AccueilMenu(Statement statement) {
 
 		// Créer la connection a la base
 
 		this.st = statement;
+		this.frame=this;
 		
 		final Domaine d = new Domaine(st);
 		String[] listeDomaines = d.afficherListeDomaines();
-
+		
 		frame.setTitle("Gestionnaire électronique de documents");
 		frame.getContentPane().setLayout(null);
 
@@ -58,12 +62,10 @@ public class AccueilMenu extends JFrame {
 		panel.setLayout(null);
 		frame.getContentPane().add(panel);
 		
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		final
-		JComboBox comboBox = new JComboBox(listeDomaines);
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		comboBox.setBounds(180, 11, 166, 29);
-		getContentPane().add(comboBox);
+		listeComboDomaines = new JComboBox(listeDomaines);
+		listeComboDomaines.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		listeComboDomaines.setBounds(180, 11, 166, 29);
+		getContentPane().add(listeComboDomaines);
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -73,7 +75,7 @@ public class AccueilMenu extends JFrame {
 		JButton btnNewButton = new JButton("Nouveau domaine\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineCreation creation = new DomaineCreation(st);
+				DomaineCreation creation = new DomaineCreation(st,listeComboDomaines);
 				creation.setVisible(true);
 			}
 		});
@@ -89,7 +91,7 @@ public class AccueilMenu extends JFrame {
 		JButton btnNewButton_1 = new JButton("-->");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineMenu dm = new DomaineMenu(new Domaine((String)comboBox.getSelectedItem(),st),st);
+				DomaineMenu dm = new DomaineMenu(new Domaine((String)listeComboDomaines.getSelectedItem(),st),st);
 				dm.setVisible(true);
 			}
 		});
