@@ -11,7 +11,7 @@ public class DomaineMenu extends JPanel {
 	
 	public DomaineMenu(JFrame frame) {
 		
-    	this.panelEntreprise = new JPanel();
+    	//this.panelEntreprise = new JPanel();
     	frame.getContentPane().add(panelEntreprise);
         
         panelEntreprise.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
