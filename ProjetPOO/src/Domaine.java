@@ -26,7 +26,7 @@ public class Domaine {
 
 	public int getIdDomaine() {
 		int recupId = 0;
-		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine=" + nom;
+		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine=" + nom;
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
