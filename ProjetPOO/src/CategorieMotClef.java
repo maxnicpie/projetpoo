@@ -32,7 +32,7 @@ public class CategorieMotClef {
 
 	public int getIdCategorieMotClef() {
 		int recupIdCategorieEtudiant = 0;
-		String id = "SELECT idCategorieMotClef FROM CATEGORIEMOTCLEF WHERE nomCategorieMotClef="
+		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef="
 				+ nom;
 		try {
 			rs = st.executeQuery(id);
@@ -46,7 +46,7 @@ public class CategorieMotClef {
 	}
 
 	public void creerCategorieMotClef() {
-		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIEMOTCLEF VALUES(null,"
+		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null,"
 				+ nom + ")";
 		try {
 			st.executeQuery(CREER_CATEGORIE_MOT_CLEF);

@@ -149,7 +149,7 @@ public class Domaine {
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,\""
+				String INSERER_CRITERE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
@@ -163,9 +163,9 @@ public class Domaine {
 		// TODO Auto-generated method stub
 
 		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "
-				+ "FROM CATEGORIEMOTCLEF, DOMAINE "
+				+ "FROM CATEGORIE_MOT_CLEF, DOMAINE "
 				+ "WHERE DOMAINE.idDomaine = " + idDomaine + " "
-				+ "AND DOMAINE.idDomaine = CATEGORIEMOTCLEF.idDomaine";
+				+ "AND DOMAINE.idDomaine = CATEGORIE_MOT_CLEF.idDomaine";
 		int nbLignes = 0;
 		int i = 0;
 		String[] listeCategories = null;

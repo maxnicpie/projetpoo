@@ -18,7 +18,7 @@ public class MotClef {
 
 	public int getIdMotClef(){
 		int recupIdMotClef = 0;
-    	String id = "SELECT idMotClef FROM MOTCLEF where libelle = \""+libelle+"\"";
+    	String id = "SELECT idMotClef FROM MOT_CLEF where libelle = \""+libelle+"\"";
 		try {
 			rs.next();
 			rs = st.executeQuery(id);
@@ -44,7 +44,7 @@ public class MotClef {
 
 	public void creer_mot_clef() {
 		
-		String CREER_MOT_CLEF = "INSERT INTO MOTCLEF VALUES(null, \""
+		String CREER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES(null, \""
 				+ libelle + "\")";
 		
 		try {
@@ -59,7 +59,7 @@ public class MotClef {
 	public String[] getNomMotClef(){
 		int i = 0;
 		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
-		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
+		String recupMotClef = "SELECT libelle FROM MOT_CLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
 		
 		int nbLignes = 0;
