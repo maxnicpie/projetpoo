@@ -1,5 +1,6 @@
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
 public class DomaineMenu extends JDialog {
@@ -11,6 +12,10 @@ public class DomaineMenu extends JDialog {
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
+		
+		JLabel lblNomDeLa = new JLabel("Nom de la catégorie");
+		lblNomDeLa.setBounds(29, 26, 46, 14);
+		getContentPane().add(lblNomDeLa);
 		
     	//this.panelEntreprise = new JPanel();
 		//JFrame panelEntreprise = new JFrame();
@@ -25,5 +30,4 @@ public class DomaineMenu extends JDialog {
 		this.setSize(764, 500);
 		this.setLocationRelativeTo(null);
 	}
-	
 }
