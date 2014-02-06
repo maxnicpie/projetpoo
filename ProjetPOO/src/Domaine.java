@@ -26,7 +26,10 @@ public class Domaine {
 
 	public Domaine(Statement st) {
 		this.st = st;
-		
+	}
+	
+	public Domaine(String nom) {
+		this.nom = nom;
 	}
 
 	public String getNom() {
@@ -159,5 +162,30 @@ public class Domaine {
 			// enregistrement categorie dans BDD
 			// enregistrement tout les mots clés associés
 		}
+	}
+
+	public String[] getCategories(int idDomaine) {
+		// TODO Auto-generated method stub
+		String requete = "SELECT * FROM CATEGORIEMOTCLEF ";
+		resultat = executerRequete(requete);
+		int nbLignes = 0;int i=0;
+		try {
+			resultat.last();
+			nbLignes = resultat.getRow();
+			resultat.first();
+		} catch (SQLException e1) {
+		}
+		
+		String[] villes = new String[nbLignes];
+		try {
+			while(i!=nbLignes+1){
+				villes[i] = resultat.getString(1);
+				i++;
+				resultat.next();
+			}
+
+		} catch (SQLException e) {
+		}
+		return villes;		
 	}
 }

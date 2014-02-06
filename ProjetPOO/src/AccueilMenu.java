@@ -34,7 +34,7 @@ public class AccueilMenu extends JFrame {
 
 		this.st = statement;
 		
-		Domaine d = new Domaine(st);
+		final Domaine d = new Domaine(st);
 		String[] listeDomaines = d.afficherListeDomaines();
 
 		frame.setTitle("Gestionnaire électronique de documents");
@@ -89,7 +89,7 @@ public class AccueilMenu extends JFrame {
 		JButton btnNewButton_1 = new JButton("-->");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineMenu dm = new DomaineMenu((String)comboBox.getSelectedItem());
+				DomaineMenu dm = new DomaineMenu(new Domaine((String)comboBox.getSelectedItem()));
 				dm.setVisible(true);
 			}
 		});
