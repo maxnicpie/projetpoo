@@ -24,19 +24,19 @@ public class Domaine {
 		this.nom = nom;
 	}
 	
-	public int recupIdDomaine(){
-		int recupId = 0;
+	public int getIdDomaine(){
+		int recupIdDomaine = 0;
     	String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \""+nom+"\"";
     	
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
-			recupId = rs.getInt(1);			
+			recupIdDomaine = rs.getInt(1);			
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
-		return recupId;
+		return recupIdDomaine;
 	}
 	
 

@@ -27,20 +27,21 @@ public class CategorieMotClef {
 		this.nom = nom;
 	}
 	
-	public int recupIdCategorieMotClef(){
+	public int getIdCategorieMotClef(){
+		int recupIdCategorieEtudiant = 0;
     	String id = "SELECT idCategorieMotClef FROM CATEGORIEMOTCLEF where nomCategorieMotClef = \""+nom+"\"";
 		try {
 			rs = st.executeQuery(id);
+			rs.next();
+			recupIdCategorieEtudiant = rs.getInt(1);	
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
-		return rs;
+		return recupIdCategorieEtudiant;
 	}
 	
 	public void recupererCategorieMotClef(){
-
-		ResultSet idDomaine = domaine.recupIdDomaine();
 
 		int idDomaine = domaine.getIdDomaine();
 
