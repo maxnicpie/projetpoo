@@ -66,13 +66,15 @@ public class Domaine {
 		String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
 		int nbLignes = 0;
 		int i = 0;
-		String[] listeDomaines = new String[nbLignes];
-
+		String[] listeDomaines = null;
+		
 		try {
 			rs = st.executeQuery(AFFICHER_LISTE_DOMAINES);
 			rs.last();
 			nbLignes = rs.getRow();
+			listeDomaines = new String[nbLignes];
 			rs.first();
+			
 			while (i != nbLignes) {
 				listeDomaines[i] = rs.getString(1);
 				i++;

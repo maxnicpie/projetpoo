@@ -60,12 +60,13 @@ public class AccueilMenu extends JFrame {
 		
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		JComboBox comboBox = new JComboBox(listeDomaines);
-		comboBox.setBounds(180, 11, 177, 29);
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBox.setBounds(180, 11, 166, 29);
 		getContentPane().add(comboBox);
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(390, 0, 2, 53);
+		separator.setBounds(450, 0, 2, 53);
 		getContentPane().add(separator);
 		
 		JButton btnNewButton = new JButton("Nouveau domaine\r\n");
@@ -76,13 +77,23 @@ public class AccueilMenu extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBounds(425, 11, 349, 29);
+		btnNewButton.setBounds(474, 11, 300, 29);
 		getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Domaine existant : \r\n");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(10, 11, 160, 29);
 		getContentPane().add(lblNewLabel);
+		
+		JButton btnNewButton_1 = new JButton("-->");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton_1.setBounds(369, 12, 60, 29);
+		getContentPane().add(btnNewButton_1);
 
 		frame.setSize(800, 600);
 		frame.setLocationRelativeTo(null);

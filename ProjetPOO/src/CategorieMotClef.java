@@ -39,7 +39,10 @@ public class CategorieMotClef {
 	}
 	
 	public void recupererCategorieMotClef(){
+
 		ResultSet idDomaine = domaine.recupIdDomaine();
+
+		int idDomaine = domaine.getIdDomaine();
 
 		String recupCategorieMotClef = "SELECT nomCategorieMotClef FROM CATEGORIEMOTCLEF WHERE idDomaine = \""
 				+ idDomaine + "\"";
