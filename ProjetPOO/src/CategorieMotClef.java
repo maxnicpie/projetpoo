@@ -31,18 +31,18 @@ public class CategorieMotClef {
 	}
 
 	public int getIdCategorieMotClef() {
-		int recupIdCategorieEtudiant = 0;
+		int recupIdCategorieMotClef = 0;
 		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef="
 				+ nom;
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
-			recupIdCategorieEtudiant = rs.getInt(1);
+			recupIdCategorieMotClef = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
 			e.printStackTrace();
 		}
-		return recupIdCategorieEtudiant;
+		return recupIdCategorieMotClef;
 	}
 
 	public void creerCategorieMotClef() {
