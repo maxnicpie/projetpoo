@@ -18,7 +18,7 @@ public class MotClef {
 
 	public int getIdMotClef(){
 		int recupIdMotClef = 0;
-    	String id = "SELECT idMotClef FROM MOTCLEF where libelle = \""+libelle+"\"";
+    	String id = "SELECT idMotClef FROM MOT_CLEF where libelle = \""+libelle+"\"";
 		try {
 			rs.next();
 			rs = st.executeQuery(id);
@@ -44,7 +44,7 @@ public class MotClef {
 
 	public void creer_mot_clef() {
 		
-		String CREER_MOT_CLEF = "INSERT INTO MOTCLEF VALUES(null, \""
+		String CREER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES(null, \""
 				+ libelle + "\")";
 		
 		try {
@@ -56,16 +56,31 @@ public class MotClef {
 
 	}
 	
-	public void getNomMotClef(){
-	
+	public String[] getNomMotClef(){
+		int i = 0;
 		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
-		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
+		String recupMotClef = "SELECT libelle FROM MOT_CLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
+		
+		int nbLignes = 0;
 		try {
-			st.executeQuery(recupMotClef);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
+			rs = st.executeQuery(recupMotClef);
+			rs.last();
+			nbLignes = rs.getRow();
+			rs.first();
+		}catch (SQLException e) {
 		}
+		
+		String[] motClef = new String[nbLignes];
+		try {
+			while(i!=nbLignes){
+				motClef[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+
+		} catch (SQLException e) {
+		}
+		return motClef;
 	}
 }

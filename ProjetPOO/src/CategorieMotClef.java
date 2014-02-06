@@ -8,20 +8,20 @@ public class CategorieMotClef {
 	private String nom;
 	private Statement st;
 	Domaine domaine = new Domaine(st);
-	private ArrayList<MotClef> listeMotClefs = new ArrayList<MotClef>();
+	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
-	public CategorieMotClef(String text) {
-		this.nom = text;
+	public CategorieMotClef(String nom) {
+		this.nom = nom;
 	}
-
 	
 	public CategorieMotClef(Statement st) {
 		this.st = st;
 	}
+	
 	public CategorieMotClef() {
 
 	}
-
+	
 	public String getNomCategorieMotClef() {
 		return nom;
 	}
@@ -32,7 +32,7 @@ public class CategorieMotClef {
 
 	public int getIdCategorieMotClef() {
 		int recupIdCategorieEtudiant = 0;
-		String id = "SELECT idCategorieMotClef FROM CATEGORIEMOTCLEF WHERE nomCategorieMotClef="
+		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef="
 				+ nom;
 		try {
 			rs = st.executeQuery(id);
@@ -45,28 +45,8 @@ public class CategorieMotClef {
 		return recupIdCategorieEtudiant;
 	}
 
-	public void recupererCategorieMotClef() {
-
-		int idDomaine = domaine.getIdDomaine();
-
-		String recupCategorieMotClef = "SELECT nomCategorieMotClef FROM CATEGORIEMOTCLEF WHERE idDomaine="
-				+ idDomaine;
-
-		try {
-			st.executeQuery(recupCategorieMotClef);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-	}
-
-	public String toString() {
-		return nom;
-	}
-
-	public void creer_categorie_mot_clef() {
-
-		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIEMOTCLEF VALUES(null,"
+	public void creerCategorieMotClef() {
+		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null,"
 				+ nom + ")";
 		try {
 			st.executeQuery(CREER_CATEGORIE_MOT_CLEF);
@@ -74,17 +54,16 @@ public class CategorieMotClef {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
 		}
-
 	}
 
-	public void ajoutMotCle(String text) {
+	public void ajouterMotClef(String text) {
 		// TODO Auto-generated method stub
 		MotClef mot = new MotClef(text);
-		listeMotClefs.add(mot);
+		listeMotsClefs.add(mot);
 	}
 
-	public Object[] afficherMotsCles() {
+	public Object[] afficherListeMotsClefs() {
 		// TODO Auto-generated method stub
-		return listeMotClefs.toArray();
+		return listeMotsClefs.toArray();
 	}
 }

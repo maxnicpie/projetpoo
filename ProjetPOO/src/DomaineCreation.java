@@ -67,7 +67,7 @@ public class DomaineCreation extends JDialog {
 				CategorieMotClef cat = a.chercherCategorie(((JList) e
 						.getSource()).getSelectedValue());
 				if (cat != null) {
-					listeMotsCles.setListData(cat.afficherMotsCles());
+					listeMotsCles.setListData(cat.afficherListeMotsClefs());
 				}
 			}
 
@@ -128,8 +128,8 @@ public class DomaineCreation extends JDialog {
 						CategorieMotClef cat = a
 								.chercherCategorie(listeCategories
 										.getSelectedValue());
-						cat.ajoutMotCle(nomMotsCles.getText());
-						listeMotsCles.setListData(cat.afficherMotsCles());
+						cat.ajouterMotClef(nomMotsCles.getText());
+						listeMotsCles.setListData(cat.afficherListeMotsClefs());
 					}
 				}
 			}

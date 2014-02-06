@@ -24,11 +24,7 @@ public class Critere {
 		this.nom = nom;
 	}
 
-	public String toString() {
-		return nom;
-	}
-
-	public void creer_critere() {
+	public void creerCritere() {
 		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null," + nom + ")";
 
 		try {

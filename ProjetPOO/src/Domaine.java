@@ -15,8 +15,8 @@ public class Domaine {
 	public Domaine(Statement st) {
 		this.st = st;
 	}
-	
-	public Domaine(String nom,Statement st) {
+
+	public Domaine(String nom, Statement st) {
 		this.nom = nom;
 		this.st = st;
 	}
@@ -31,7 +31,8 @@ public class Domaine {
 
 	public int getIdDomaine() {
 		int recupId = 0;
-		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine = \""+nom+"\"";
+		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine=\"" + nom
+				+ "\"";
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -44,9 +45,10 @@ public class Domaine {
 	}
 
 	public void creerDomaine() {
-		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null," + nom + ")";
+		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom
+				+ "\")";
 		try {
-			st.executeQuery(CREER_DOMAINE);
+			st.executeUpdate(CREER_DOMAINE);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -54,10 +56,10 @@ public class Domaine {
 	}
 
 	public void supprimerDomaine() {
-		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine = "
-				+ nom;
+		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\"" + nom
+				+ "\"";
 		try {
-			st.executeQuery(SUPPRIMER_DOMAINE);
+			st.executeUpdate(SUPPRIMER_DOMAINE);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,9 +111,9 @@ public class Domaine {
 		return listeCategoriesMotClefs.toArray();
 	}
 
-	public void ajoutCritere(String text) {
+	public void ajoutCritere(String nom) {
 		// TODO Auto-generated method stub
-		Critere c = new Critere(text,st);
+		Critere c = new Critere(nom,st);
 		listeCriteres.add(c);
 	}
 
@@ -131,9 +133,9 @@ public class Domaine {
 		while (it.hasNext()) {
 			Critere c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,"
-						+ c.getNomCritere() + "," + id + ")";
-				st.executeQuery(INSERER_CRITERE);
+				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,\""
+						+ c.getNomCritere() + "\"," + id + ")";
+				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -147,9 +149,9 @@ public class Domaine {
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,"
-						+ c.getNomCategorieMotClef() + "," + id + ")";
-				st.executeQuery(INSERER_CRITERE);
+				String INSERER_CRITERE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
+						+ c.getNomCategorieMotClef() + "\"," + id + ")";
+				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -160,10 +162,10 @@ public class Domaine {
 	public String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
 
-		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "+
-									 "FROM CATEGORIEMOTCLEF, DOMAINE "+
-									 "WHERE DOMAINE.idDomaine = "+idDomaine+" "+
-									 "AND DOMAINE.idDomaine = CATEGORIEMOTCLEF.idDomaine";
+		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "
+				+ "FROM CATEGORIE_MOT_CLEF, DOMAINE "
+				+ "WHERE DOMAINE.idDomaine = " + idDomaine + " "
+				+ "AND DOMAINE.idDomaine = CATEGORIE_MOT_CLEF.idDomaine";
 		int nbLignes = 0;
 		int i = 1;
 		String[] listeCategories = null;
