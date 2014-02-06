@@ -21,7 +21,7 @@ public class Document {
 	}
 
 	public String[] getNomDocument() {
-		int i = 1;
+		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
 
 		String recupDocument = "SELECT titre FROM DOCUMENT, EST_TAGE WHERE idMotClef = \""

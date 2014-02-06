@@ -56,16 +56,31 @@ public class MotClef {
 
 	}
 	
-	public void getNomMotClef(){
-	
+	public String[] getNomMotClef(){
+		int i = 0;
 		int idCategorieMotClef = categorie_mot_clef.getIdCategorieMotClef();
 		String recupMotClef = "SELECT libelle FROM MOTCLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
+		
+		int nbLignes = 0;
 		try {
-			st.executeQuery(recupMotClef);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
+			rs = st.executeQuery(recupMotClef);
+			rs.last();
+			nbLignes = rs.getRow();
+			rs.first();
+		}catch (SQLException e) {
 		}
+		
+		String[] motClef = new String[nbLignes];
+		try {
+			while(i!=nbLignes){
+				motClef[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+
+		} catch (SQLException e) {
+		}
+		return motClef;
 	}
 }
