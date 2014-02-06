@@ -1,27 +1,29 @@
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class DomaineMenu extends JPanel {
+public class DomaineMenu extends JDialog {
 	
-	private JPanel panelEntreprise;
+	//private JPanel panelEntreprise;
 	
-	public DomaineMenu(JFrame frame) {
+	public DomaineMenu(String selected) {
+		
+		this.setModal(true);
+		this.setTitle("Ajout d'un nouveau domaine");
+		this.getContentPane().setLayout(null);
 		
     	//this.panelEntreprise = new JPanel();
-		JFrame panelEntreprise = new JFrame();
-    	frame.getContentPane().add(panelEntreprise);
+		//JFrame panelEntreprise = new JFrame();
+    	//frame.getContentPane().add(panelEntreprise);
         
-        panelEntreprise.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+        //panelEntreprise.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 	    //panelEntreprise.getContentPane().setLayout(null);
-	    panelEntreprise.setBounds(10, 51, 764, 499);
+	    // panelEntreprise.setBounds(10, 51, 764, 499);
+		
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setSize(764, 500);
+		this.setLocationRelativeTo(null);
 	}
-
-	public JPanel getPanel() {
-		// TODO Auto-generated method stub
-		return panelEntreprise;
-	}
+	
 }

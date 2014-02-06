@@ -59,6 +59,7 @@ public class AccueilMenu extends JFrame {
 		frame.getContentPane().add(panel);
 		
 		@SuppressWarnings({ "unchecked", "rawtypes" })
+		final
 		JComboBox comboBox = new JComboBox(listeDomaines);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox.setBounds(180, 11, 166, 29);
@@ -88,7 +89,8 @@ public class AccueilMenu extends JFrame {
 		JButton btnNewButton_1 = new JButton("-->");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineMenu dm = new DomaineMenu();
+				DomaineMenu dm = new DomaineMenu((String)comboBox.getSelectedItem());
+				dm.setVisible(true);
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 13));
