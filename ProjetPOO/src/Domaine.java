@@ -15,8 +15,8 @@ public class Domaine {
 	public Domaine(Statement st) {
 		this.st = st;
 	}
-	
-	public Domaine(String nom,Statement st) {
+
+	public Domaine(String nom, Statement st) {
 		this.nom = nom;
 		this.st = st;
 	}
@@ -31,7 +31,8 @@ public class Domaine {
 
 	public int getIdDomaine() {
 		int recupId = 0;
-		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine=\""+nom+"\"";
+		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine=\"" + nom
+				+ "\"";
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -44,7 +45,8 @@ public class Domaine {
 	}
 
 	public void creerDomaine() {
-		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\""+nom+"\")";
+		String CREER_DOMAINE = "INSERT INTO DOMAINE VALUES (null,\"" + nom
+				+ "\")";
 		try {
 			st.executeUpdate(CREER_DOMAINE);
 		} catch (SQLException e) {
@@ -54,8 +56,8 @@ public class Domaine {
 	}
 
 	public void supprimerDomaine() {
-		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine = "
-				+ nom;
+		String SUPPRIMER_DOMAINE = "DELETE FROM DOMAINE WHERE nomDomaine=\"" + nom
+				+ "\"";
 		try {
 			st.executeUpdate(SUPPRIMER_DOMAINE);
 		} catch (SQLException e) {
@@ -131,7 +133,8 @@ public class Domaine {
 		while (it.hasNext()) {
 			Critere c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,\""+c.getNomCritere()+"\"," + id + ")";
+				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,\""
+						+ c.getNomCritere() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -146,7 +149,8 @@ public class Domaine {
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,\""+c.getNomCategorieMotClef()+"\"," + id + ")";
+				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,\""
+						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -158,10 +162,10 @@ public class Domaine {
 	public String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
 
-		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "+
-									 "FROM CATEGORIEMOTCLEF, DOMAINE "+
-									 "WHERE DOMAINE.idDomaine = "+idDomaine+" "+
-									 "AND DOMAINE.idDomaine = CATEGORIEMOTCLEF.idDomaine";
+		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "
+				+ "FROM CATEGORIEMOTCLEF, DOMAINE "
+				+ "WHERE DOMAINE.idDomaine = " + idDomaine + " "
+				+ "AND DOMAINE.idDomaine = CATEGORIEMOTCLEF.idDomaine";
 		int nbLignes = 0;
 		int i = 0;
 		String[] listeCategories = null;
