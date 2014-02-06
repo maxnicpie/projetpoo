@@ -32,7 +32,7 @@ public class DomaineCreation extends JDialog {
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
 
-		final Domaine a = new Domaine();
+		final Domaine a = new Domaine(st);
 
 		JLabel lblNomDuDomaine = new JLabel("Nom du domaine : ");
 		lblNomDuDomaine.setFont(new Font("Tahoma", Font.BOLD, 16));

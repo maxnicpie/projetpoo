@@ -1,8 +1,7 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-
-import com.mysql.jdbc.Statement;
 
 public class Domaine {
 
@@ -23,8 +22,8 @@ public class Domaine {
 		return id;
 	}
 	
-	public Domaine() {
-
+	public Domaine(Statement st) {
+		this.st = st;
 	}
 
 	public String getNom() {
@@ -60,16 +59,15 @@ public class Domaine {
 	public String[] afficherListeDomaines() {
 		String AFFICHER_LISTE_DOMAINES = "SELECT nomDomaine FROM DOMAINE";
 		int nbLignes = 0;
-		int i = 1;
-		String[] listeDomaines = new String[nbLignes + 1];
-		listeDomaines[0] = "";
+		int i = 0;
+		String[] listeDomaines = new String[nbLignes];
 
 		try {
 			rs = st.executeQuery(AFFICHER_LISTE_DOMAINES);
 			rs.last();
 			nbLignes = rs.getRow();
 			rs.first();
-			while (i != nbLignes + 1) {
+			while (i != nbLignes) {
 				listeDomaines[i] = rs.getString(1);
 				i++;
 				rs.next();

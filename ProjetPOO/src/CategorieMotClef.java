@@ -2,10 +2,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+
 public class CategorieMotClef {
-	Domaine domaine = new Domaine();
 	private String nom;
-	private Statement st;
+	private Statement st;	
+	Domaine domaine = new Domaine(st);
 	private ArrayList<MotClef> listeMotClefs  = new ArrayList<MotClef>();
 
 	public CategorieMotClef(String text) {
