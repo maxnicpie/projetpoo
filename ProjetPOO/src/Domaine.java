@@ -12,28 +12,15 @@ public class Domaine {
 	private Statement st;
 	private ResultSet rs;
 
-	public String recupIdDomaine() {
-		String id = "SELECT idDomaine FROM DOMAINE where nomDomaine = \"" + nom
-				+ "\"";
-		try {
-			st.executeQuery(id);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-		return id;
-	}
-
 	public Domaine(Statement st) {
 		this.st = st;
-		
 	}
 
-	public String getNom() {
+	public String getNomDomaine() {
 		return nom;
 	}
 
-	public void setNom(String nom) {
+	public void setNomDomaine(String nom) {
 		this.nom = nom;
 	}
 
@@ -139,7 +126,6 @@ public class Domaine {
 	public void enregistrerCriteres(int id) {
 		// TODO Auto-generated method stub
 		Iterator<Critere> it = listeCriteres.iterator();
-
 		while (it.hasNext()) {
 			Critere c = it.next();
 			try {

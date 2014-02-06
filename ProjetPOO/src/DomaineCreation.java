@@ -182,7 +182,7 @@ public class DomaineCreation extends JDialog {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!nomDomaine.getText().equals("")) {
-					a.setNom(nomDomaine.getText());
+					a.setNomDomaine(nomDomaine.getText());
 					a.creerDomaine(); // enregistrement nom domaine
 					if (!a.getListeCriteres().isEmpty()) {
 						a.enregistrerCriteres(a.getIdDomaine()); // enregistrement criteres
