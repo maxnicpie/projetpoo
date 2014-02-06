@@ -33,6 +33,9 @@ public class AccueilMenu extends JFrame {
 		// Créer la connection a la base
 
 		this.st = statement;
+		
+		Domaine d = new Domaine(st);
+		String[] listeDomaines = d.afficherListeDomaines();
 
 		frame.setTitle("Gestionnaire électronique de documents");
 		frame.getContentPane().setLayout(null);
@@ -55,7 +58,8 @@ public class AccueilMenu extends JFrame {
 		panel.setLayout(null);
 		frame.getContentPane().add(panel);
 		
-		JComboBox comboBox = new JComboBox();
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		JComboBox comboBox = new JComboBox(listeDomaines);
 		comboBox.setBounds(180, 11, 177, 29);
 		getContentPane().add(comboBox);
 		

@@ -10,7 +10,7 @@ public class Critere {
 		this.nom = nom;
 	}
 	
-	public String getCritere(){
+	public String getNomCritere(){
 		return nom;
 	}
 	

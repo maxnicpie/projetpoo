@@ -13,5 +13,4 @@ public enum Etoile {
 		this.intitule=intitule;
 		this.etoiles=etoiles;
 	}
-	
 }
