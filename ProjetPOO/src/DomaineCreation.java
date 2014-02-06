@@ -62,7 +62,7 @@ public class DomaineCreation extends JDialog {
 		scrollPane_1.setViewportView(listeMotsCles);
 
 		listeCategories.addListSelectionListener(new ListSelectionListener() {
-			@SuppressWarnings("rawtypes")
+			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public void valueChanged(ListSelectionEvent e) {
 				CategorieMotClef cat = a.chercherCategorie(((JList) e
 						.getSource()).getSelectedValue());
@@ -192,6 +192,7 @@ public class DomaineCreation extends JDialog {
 					JOptionPane.showMessageDialog(null,
 							"Domaine ajouté", "Succes",
 							JOptionPane.INFORMATION_MESSAGE);
+					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Entrez un nom de domaine", "Message d'erreur",
@@ -218,7 +219,6 @@ public class DomaineCreation extends JDialog {
 					a.ajouterCategorie(nomCategorie.getText());
 					listeCategories.setListData(a.afficherCategories());
 					listeMotsCles.setModel(null);
-
 				} else {
 					JOptionPane.showMessageDialog(null, "Entrez une catégorie",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);

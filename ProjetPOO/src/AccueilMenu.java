@@ -89,7 +89,7 @@ public class AccueilMenu extends JFrame {
 		JButton btnNewButton_1 = new JButton("-->");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineMenu dm = new DomaineMenu(new Domaine((String)comboBox.getSelectedItem(),st));
+				DomaineMenu dm = new DomaineMenu(new Domaine((String)comboBox.getSelectedItem(),st),st);
 				dm.setVisible(true);
 			}
 		});

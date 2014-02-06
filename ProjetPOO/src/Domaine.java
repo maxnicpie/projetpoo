@@ -111,7 +111,7 @@ public class Domaine {
 
 	public void ajoutCritere(String text) {
 		// TODO Auto-generated method stub
-		Critere c = new Critere(text);
+		Critere c = new Critere(text,st);
 		listeCriteres.add(c);
 	}
 
@@ -165,17 +165,19 @@ public class Domaine {
 									 "WHERE DOMAINE.idDomaine = "+idDomaine+" "+
 									 "AND DOMAINE.idDomaine = CATEGORIEMOTCLEF.idDomaine";
 		int nbLignes = 0;
-		int i = 0;
+		int i = 1;
 		String[] listeCategories = null;
 
 		try {
 			rs = st.executeQuery(AFFICHER_CATEGORIES);
 			rs.last();
 			nbLignes = rs.getRow();
-			listeCategories = new String[nbLignes];
+			listeCategories = new String[nbLignes+1];
 			rs.first();
+			
+			listeCategories[0]="Categorie...";
 
-			while (i != nbLignes) {
+			while (i != nbLignes+1) {
 				listeCategories[i] = rs.getString(1);
 				i++;
 				rs.next();
@@ -185,4 +187,32 @@ public class Domaine {
 		}
 		return listeCategories;
 	}
+
+	public String[] getMotsCles(String selectedCategorie) {
+		// TODO Auto-generated method stub
+		String AFFICHER_MOTSCLES = "SELECT libelle FROM MOTCLEF,CATEGORIEMOTCLEF "+
+									"WHERE nomCategorieMotClef = \""+selectedCategorie+
+									"\""+"AND MOTCLEF.idCategorieMotClef=CATEGORIEMOTCLEF.idCategorieMotClef";
+		int nbLignes = 0;
+		int i = 0;
+		String[] listeMotsCles = null;
+		
+		try {
+		rs = st.executeQuery(AFFICHER_MOTSCLES);
+		rs.last();
+		nbLignes = rs.getRow();
+		listeMotsCles = new String[nbLignes];
+		rs.first();
+		
+		while (i != nbLignes) {
+			listeMotsCles[i] = rs.getString(1);
+		i++;
+		rs.next();
+		}
+		} catch (SQLException e) {
+		e.printStackTrace();
+		}
+		return listeMotsCles;
+	}
+
 }
