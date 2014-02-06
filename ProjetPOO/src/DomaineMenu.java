@@ -1,21 +1,43 @@
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
 
 @SuppressWarnings("serial")
 public class DomaineMenu extends JDialog {
 	
 	//private JPanel panelEntreprise;
 	
-	public DomaineMenu(String selected) {
-		
+	public DomaineMenu(Domaine domaineSelect) {
+				
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
 		
-		JLabel lblNomDeLa = new JLabel("Nom de la catégorie");
-		lblNomDeLa.setBounds(29, 26, 46, 14);
+		JLabel lblNomDeLa = new JLabel("Nom de la catégorie :");
+		lblNomDeLa.setBounds(29, 26, 124, 22);
 		getContentPane().add(lblNomDeLa);
+		
+		String[] categories = domaineSelect.getCategories(domaineSelect.getIdDomaine());
+		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		JComboBox comboBox = new JComboBox(categories);
+		comboBox.setBounds(29, 59, 191, 22);
+		getContentPane().add(comboBox);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(29, 109, 191, 265);
+		getContentPane().add(scrollPane);
+		
+		JList list = new JList();
+		scrollPane.setViewportView(list);
+		
+		JButton btnNewButton = new JButton("Rechercher");
+		btnNewButton.setBounds(29, 394, 191, 66);
+		getContentPane().add(btnNewButton);
 		
     	//this.panelEntreprise = new JPanel();
 		//JFrame panelEntreprise = new JFrame();

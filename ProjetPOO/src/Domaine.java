@@ -15,6 +15,11 @@ public class Domaine {
 	public Domaine(Statement st) {
 		this.st = st;
 	}
+	
+	public Domaine(String nom,Statement st) {
+		this.nom = nom;
+		this.st = st;
+	}
 
 	public String getNomDomaine() {
 		return nom;
@@ -150,5 +155,33 @@ public class Domaine {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public String[] getCategories(int idDomaine) {
+		// TODO Auto-generated method stub
+		String AFFICHER_CATEGORIES = "select nomCategorieMotClef "+
+									 "FROM CATEGORIEMOTCLEF,DOMAINE "+
+									 "where DOMAINE.idDomaine=1 "+
+									 "AND DOMAINE.idDomaine=CATEGORIEMOTCLEF.idDomaine";
+		int nbLignes = 0;
+		int i = 0;
+		String[] listeCategories = null;
+
+		try {
+			rs = st.executeQuery(AFFICHER_CATEGORIES);
+			rs.last();
+			nbLignes = rs.getRow();
+			listeCategories = new String[nbLignes];
+			rs.first();
+
+			while (i != nbLignes) {
+				listeCategories[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listeCategories;
 	}
 }
