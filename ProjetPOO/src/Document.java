@@ -20,8 +20,8 @@ public class Document {
 		this.nom = nom;
 	}
 
-	public String[] getNomDocument() {
-		int i = 1;
+	public String[] getNomDocumentByMotsCles() {
+		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
 
 		String recupDocument = "SELECT titre FROM DOCUMENT, EST_TAGE WHERE idMotClef = \""

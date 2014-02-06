@@ -22,10 +22,6 @@ public class CategorieMotClef {
 
 	}
 
-	public String getNomCategorieMotClef() {
-		return nom;
-	}
-
 	public void setNomCategorieMotClef(String nom) {
 		this.nom = nom;
 	}
@@ -45,21 +41,6 @@ public class CategorieMotClef {
 		return recupIdCategorieEtudiant;
 	}
 
-	public void recupererCategorieMotClef() {
-
-		int idDomaine = domaine.getIdDomaine();
-
-		String recupCategorieMotClef = "SELECT nomCategorieMotClef FROM CATEGORIEMOTCLEF WHERE idDomaine="
-				+ idDomaine;
-
-		try {
-			st.executeQuery(recupCategorieMotClef);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-	}
-
 	public String toString() {
 		return nom;
 	}
@@ -76,6 +57,7 @@ public class CategorieMotClef {
 		}
 
 	}
+	
 
 	public void ajoutMotCle(String text) {
 		// TODO Auto-generated method stub
