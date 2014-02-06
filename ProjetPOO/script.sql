@@ -93,7 +93,7 @@ INSERT INTO NOTE VALUES
 
 INSERT INTO CATEGORIE_MOT_CLEF VALUES
 (null, 'Lieux', 1),
-(null, 'Genre',2 );
+(null, 'Genre', 2);
 
 INSERT INTO MOT_CLEF VALUES
 (null, 'Belfort', 1),
@@ -110,5 +110,5 @@ INSERT INTO PAPER_DOCUMENT VALUES
 (null, 'ceci est un commentaire', 1);
 
 INSERT INTO EST_TAGE VALUES
-(1,2),
-(2,1);
+(1, 2),
+(2, 1);
