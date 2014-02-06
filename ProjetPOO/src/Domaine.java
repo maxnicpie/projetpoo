@@ -31,7 +31,7 @@ public class Domaine {
 
 	public int getIdDomaine() {
 		int recupId = 0;
-		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine = \""+nom+"\"";
+		String id = "SELECT idDomaine FROM DOMAINE WHERE nomDomaine=\""+nom+"\"";
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
@@ -131,8 +131,7 @@ public class Domaine {
 		while (it.hasNext()) {
 			Critere c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,"
-						+ c.getNomCritere() + "," + id + ")";
+				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,\""+c.getNomCritere()+"\"," + id + ")";
 				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -147,8 +146,7 @@ public class Domaine {
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
-				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,"
-						+ c.getNomCategorieMotClef() + "," + id + ")";
+				String INSERER_CRITERE = "INSERT INTO CATEGORIEMOTCLEF VALUES (null,\""+c.getNomCategorieMotClef()+"\"," + id + ")";
 				st.executeUpdate(INSERER_CRITERE);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
