@@ -11,6 +11,7 @@ public class MotClef {
 	private String libelle;
 	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
+
 	public MotClef(String libelle) {
 		this.libelle = libelle;
 	}
@@ -19,13 +20,18 @@ public class MotClef {
 		this.st = st;
 	}
 
+	public MotClef(String libelle, Statement st) {
+		this.st = st;
+		this.libelle = libelle;
+	}
+
 	public int getIdMotClef() {
 		int recupIdMotClef = 0;
-		String id = "SELECT idMotClef FROM MOT_CLEF WHERE libelle = \""
-				+ libelle + "\"";
+		String id = "SELECT idMotClef FROM MOT_CLEF WHERE libelle=\"" + libelle
+				+ "\"";
 		try {
-			rs.next();
 			rs = st.executeQuery(id);
+			rs.next();
 			recupIdMotClef = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
@@ -52,7 +58,7 @@ public class MotClef {
 				+ libelle + "\")";
 
 		try {
-			st.executeQuery(CREER_MOT_CLEF);
+			st.executeUpdate(CREER_MOT_CLEF);
 		} catch (SQLException e) {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
@@ -60,7 +66,7 @@ public class MotClef {
 
 	}
 
-	public String[] getNomMotClef() {
+	public String[] getMotsClefs() {
 		int i = 0;
 		int idCategorieMotClef = categorie.getIdCategorieMotClef();
 		String recupMotClef = "SELECT libelle FROM MOT_CLEF WHERE idCategorieMotClef = \""
@@ -88,6 +94,35 @@ public class MotClef {
 		return motClef;
 	}
 
+	public String[] getMotsClefs(String selectedCategorie) {
+		// TODO Auto-generated method stub
+		String AFFICHER_MOTSCLES = "SELECT libelle FROM MOT_CLEF,CATEGORIE_MOT_CLEF "
+				+ "WHERE nomCategorieMotClef = \""
+				+ selectedCategorie
+				+ "\""
+				+ "AND MOT_CLEF.idCategorieMotClef=CATEGORIE_MOT_CLEF.idCategorieMotClef";
+		int nbLignes = 0;
+		int i = 0;
+		String[] listeMotsCles = null;
+
+		try {
+			rs = st.executeQuery(AFFICHER_MOTSCLES);
+			rs.last();
+			nbLignes = rs.getRow();
+			listeMotsCles = new String[nbLignes];
+			rs.first();
+
+			while (i != nbLignes) {
+				listeMotsCles[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listeMotsCles;
+	}
+
 	public void enregistrerMotsClefs(int id) {
 		// TODO Auto-generated method stub
 		Iterator<MotClef> it = listeMotsClefs.iterator();
@@ -95,39 +130,12 @@ public class MotClef {
 			MotClef mot = it.next();
 			try {
 				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
-						+ mot.getNomMotClef() + "\"," + id + ")";
+						+ mot.getLibelleMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_MOT_CLEF);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public String[] getMotsClefs(String selectedCategorie) {
-		// TODO Auto-generated method stub
-		String AFFICHER_MOTSCLES = "SELECT libelle FROM MOT_CLEF,CATEGORIE_MOT_CLEF "+
-									"WHERE nomCategorieMotClef = \""+selectedCategorie+
-									"\""+"AND MOT_CLEF.idCategorieMotClef=CATEGORIE_MOT_CLEF.idCategorieMotClef";
-		int nbLignes = 0;
-		int i = 0;
-		String[] listeMotsCles = null;
-		
-		try {
-		rs = st.executeQuery(AFFICHER_MOTSCLES);
-		rs.last();
-		nbLignes = rs.getRow();
-		listeMotsCles = new String[nbLignes];
-		rs.first();
-		
-		while (i != nbLignes) {
-			listeMotsCles[i] = rs.getString(1);
-		i++;
-		rs.next();
-		}
-		} catch (SQLException e) {
-		e.printStackTrace();
-		}
-		return listeMotsCles;
 	}
 }

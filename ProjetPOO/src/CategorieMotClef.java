@@ -15,19 +15,19 @@ public class CategorieMotClef {
 	public CategorieMotClef(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public CategorieMotClef(Statement st) {
 		this.st = st;
 	}
-	
+
 	public CategorieMotClef() {
 
 	}
-	
+
 	public String toString() {
 		return nom;
 	}
-	
+
 	public String getNomCategorieMotClef() {
 		return nom;
 	}
@@ -38,7 +38,7 @@ public class CategorieMotClef {
 
 	public int getIdCategorieMotClef() {
 		int recupIdCategorieMotClef = 0;
-		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef = \""
+		String id = "SELECT idCategorieMotClef FROM CATEGORIE_MOT_CLEF WHERE nomCategorieMotClef=\""
 				+ nom + "\"";
 		try {
 			rs = st.executeQuery(id);
@@ -55,7 +55,7 @@ public class CategorieMotClef {
 		String CREER_CATEGORIE_MOT_CLEF = "INSERT INTO CATEGORIE_MOT_CLEF VALUES(null, \""
 				+ nom + "\")";
 		try {
-			st.executeQuery(CREER_CATEGORIE_MOT_CLEF);
+			st.executeUpdate(CREER_CATEGORIE_MOT_CLEF);
 		} catch (SQLException e) {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
@@ -72,8 +72,7 @@ public class CategorieMotClef {
 		// TODO Auto-generated method stub
 		return listeMotsClefs.toArray();
 	}
-	
-	public String[] getCategories(int idDomaine) {
+	    String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
 
 		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "
@@ -143,4 +142,19 @@ public class CategorieMotClef {
 		}
 	}
 
+	public void enregistrerMotsClefs(int id) {
+		// TODO Auto-generated method stub
+		Iterator<MotClef> it = listeMotsClefs.iterator();
+		while (it.hasNext()) {
+			MotClef mot = it.next();
+			try {
+				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
+						+ mot.getLibelleMotClef() + "\"," + id + ")";
+				st.executeUpdate(INSERER_MOT_CLEF);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }

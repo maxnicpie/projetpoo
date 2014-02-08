@@ -72,7 +72,7 @@ public class Critere {
 		return listeCriteres;
 	}
 	
-	public void ajoutCritere(String nom) {
+	public void ajouterCritere(String nom) {
 		// TODO Auto-generated method stub
 		Critere c = new Critere(nom,st);
 		listeCriteres.add(c);

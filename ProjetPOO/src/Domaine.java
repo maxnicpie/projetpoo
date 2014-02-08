@@ -17,6 +17,10 @@ public class Domaine {
 		this.st = st;
 	}
 
+	public String toString() {
+		return nom;
+	}
+
 	public String getNomDomaine() {
 		return nom;
 	}
