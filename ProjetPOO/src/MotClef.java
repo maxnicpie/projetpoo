@@ -103,4 +103,31 @@ public class MotClef {
 			}
 		}
 	}
+	
+	public String[] getMotsClefs(String selectedCategorie) {
+		// TODO Auto-generated method stub
+		String AFFICHER_MOTSCLES = "SELECT libelle FROM MOT_CLEF,CATEGORIE_MOT_CLEF "+
+									"WHERE nomCategorieMotClef = \""+selectedCategorie+
+									"\""+"AND MOT_CLEF.idCategorieMotClef=CATEGORIE_MOT_CLEF.idCategorieMotClef";
+		int nbLignes = 0;
+		int i = 0;
+		String[] listeMotsCles = null;
+		
+		try {
+		rs = st.executeQuery(AFFICHER_MOTSCLES);
+		rs.last();
+		nbLignes = rs.getRow();
+		listeMotsCles = new String[nbLignes];
+		rs.first();
+		
+		while (i != nbLignes) {
+			listeMotsCles[i] = rs.getString(1);
+		i++;
+		rs.next();
+		}
+		} catch (SQLException e) {
+		e.printStackTrace();
+		}
+		return listeMotsCles;
+	}
 }

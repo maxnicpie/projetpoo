@@ -24,7 +24,7 @@ public class DomaineMenu extends JDialog {
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
-
+		
 		JLabel lblNomDeLa = new JLabel("Nom de la catégorie :");
 		lblNomDeLa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNomDeLa.setBounds(34, 26, 191, 22);
@@ -38,7 +38,9 @@ public class DomaineMenu extends JDialog {
 		final JList list = new JList();
 		scrollPane.setViewportView(list);
 
-		String[] categories = domaineSelect.getCategories(domaineSelect
+		final MotClef mot = new MotClef(st);
+		final CategorieMotClef c = new CategorieMotClef(st);
+		String[] categories = c.getCategories(domaineSelect
 				.getIdDomaine());
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -62,7 +64,7 @@ public class DomaineMenu extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if (!comboBox.getSelectedItem().toString()
 						.equals("Categorie...")) {
-					String[] motscles = domaineSelect.getMotsClefs(comboBox
+					String[] motscles = mot.getMotsClefs(comboBox
 							.getSelectedItem().toString());
 					list.setListData(motscles);
 				}
@@ -86,6 +88,16 @@ public class DomaineMenu extends JDialog {
 		JLabel lblEtOu = new JLabel("ET / OU");
 		lblEtOu.setBounds(239, 186, 46, 14);
 		getContentPane().add(lblEtOu);
+		
+		JButton btnNouveauDocument = new JButton("Nouveau Document");
+		btnNouveauDocument.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DocumentCreation dom = new DocumentCreation(st);
+				dom.setVisible(true);
+			}
+		});
+		btnNouveauDocument.setBounds(517, 61, 220, 44);
+		getContentPane().add(btnNouveauDocument);
 
 		// this.panelEntreprise = new JPanel();
 		// JFrame panelEntreprise = new JFrame();

@@ -26,16 +26,19 @@ public class DomaineCreation extends JDialog {
 	private JTextField nomCategorie;
 	private JTextField nomMotsCles;
 	private JTextField nomCritere;
+	@SuppressWarnings({ "rawtypes", "unused" })
 	private JComboBox listeComboDomaines;
 
-	public DomaineCreation(Statement st,final JComboBox listeComboDomaines) {
+	public DomaineCreation(Statement st,@SuppressWarnings("rawtypes") final JComboBox listeComboDomaines) {
 
 		this.listeComboDomaines=listeComboDomaines;
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
-
+		
 		final Domaine a = new Domaine(st);
+		final CategorieMotClef cat1 = new CategorieMotClef();
+		final Critere critere1 = new Critere();
 
 		JLabel lblNomDuDomaine = new JLabel("Nom du domaine : ");
 		lblNomDuDomaine.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -68,7 +71,7 @@ public class DomaineCreation extends JDialog {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public void valueChanged(ListSelectionEvent e) {
 				try {
-					CategorieMotClef cat = a.chercherCategorie(((JList) e
+					CategorieMotClef cat = cat1.chercherCategorie(((JList) e
 							.getSource()).getSelectedValue());
 					if (cat != null) {
 						listeMotsCles.setListData(cat.afficherListeMotsClefs());
@@ -131,7 +134,7 @@ public class DomaineCreation extends JDialog {
 										"Message d'erreur",
 										JOptionPane.ERROR_MESSAGE);
 					} else {
-						CategorieMotClef cat = a
+						CategorieMotClef cat = cat1
 								.chercherCategorie(listeCategories
 										.getSelectedValue());
 						cat.ajouterMotClef(nomMotsCles.getText());
@@ -178,8 +181,8 @@ public class DomaineCreation extends JDialog {
 					JOptionPane.showMessageDialog(null, "Entrez un critère",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);
 				} else {
-					a.ajoutCritere(nomCritere.getText());
-					listCriteres.setListData(a.afficherCriteres());
+					critere1.ajoutCritere(nomCritere.getText());
+					listCriteres.setListData(critere1.afficherCriteres());
 				}
 				nomCritere.setText("");
 			}
@@ -194,11 +197,11 @@ public class DomaineCreation extends JDialog {
 				if (!nomDomaine.getText().equals("")) {
 					a.setNomDomaine(nomDomaine.getText());
 					a.creerDomaine(); // enregistrement nom domaine
-					if (!a.getListeCriteres().isEmpty()) {
-						a.enregistrerCriteres(a.getIdDomaine()); // enregistrement
+					if (!critere1.getListeCriteres().isEmpty()) {
+						critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement
 																	// criteres
 					}
-					a.enregistrerCategoriesMotsClefs(a.getIdDomaine());
+					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine());
 
 					JOptionPane.showMessageDialog(null, "Domaine ajouté",
 							"Succes", JOptionPane.INFORMATION_MESSAGE);
@@ -227,8 +230,8 @@ public class DomaineCreation extends JDialog {
 					nomMotsCles.setEnabled(true);
 					btnAddMotsCles.setEnabled(true);
 
-					a.ajouterCategorie(nomCategorie.getText());
-					listeCategories.setListData(a.afficherCategories());
+					cat1.ajouterCategorie(nomCategorie.getText());
+					listeCategories.setListData(cat1.afficherCategories());
 				} else {
 					JOptionPane.showMessageDialog(null, "Entrez une catégorie",
 							"Message d'erreur", JOptionPane.ERROR_MESSAGE);

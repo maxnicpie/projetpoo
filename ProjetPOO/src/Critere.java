@@ -1,11 +1,14 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Critere {
 	private String nom;
 	private Statement st;
 	private ResultSet rs;
+	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 
 	public Critere(String nom,Statement st) {
 		this.nom = nom;
@@ -67,5 +70,37 @@ public class Critere {
 			e.printStackTrace();
 		}
 		return listeCriteres;
+	}
+	
+	public void ajoutCritere(String nom) {
+		// TODO Auto-generated method stub
+		Critere c = new Critere(nom,st);
+		listeCriteres.add(c);
+	}
+
+	public Object[] afficherCriteres() {
+		// TODO Auto-generated method stub
+		return listeCriteres.toArray();
+	}
+
+	public ArrayList<Critere> getListeCriteres() {
+		// TODO Auto-generated method stub
+		return listeCriteres;
+	}
+
+	public void enregistrerCriteres(int id) {
+		// TODO Auto-generated method stub
+		Iterator<Critere> it = listeCriteres.iterator();
+		while (it.hasNext()) {
+			Critere c = it.next();
+			try {
+				String INSERER_CRITERE = "INSERT INTO CRITERE VALUES (null,\""
+						+ c.getNomCritere() + "\"," + id + ")";
+				st.executeUpdate(INSERER_CRITERE);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
