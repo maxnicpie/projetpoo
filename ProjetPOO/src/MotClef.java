@@ -25,6 +25,10 @@ public class MotClef {
 		this.libelle = libelle;
 	}
 
+	public MotClef() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdMotClef() {
 		int recupIdMotClef = 0;
 		String id = "SELECT idMotClef FROM MOT_CLEF WHERE libelle=\"" + libelle
@@ -66,6 +70,17 @@ public class MotClef {
 
 	}
 
+	public void ajouterMotCle(String text) {
+		// TODO Auto-generated method stub
+		MotClef mot = new MotClef(text);
+		listeMotsClefs.add(mot);
+	}
+	
+	public Object[] afficherMotsCles() {
+		// TODO Auto-generated method stub
+		return listeMotsClefs.toArray();
+	}
+	
 	public String[] getMotsClefs() {
 		int i = 0;
 		int idCategorieMotClef = categorie.getIdCategorieMotClef();
@@ -137,5 +152,16 @@ public class MotClef {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void supprimerMotCle(Object selectedValue) {
+		// TODO Auto-generated method stub
+		MotClef temp = new MotClef();
+		for (MotClef mot : listeMotsClefs) {
+			if (mot.getLibelleMotClef().equals(selectedValue.toString())) {
+				temp = mot;
+			}
+		}
+		listeMotsClefs.remove(temp);
 	}
 }

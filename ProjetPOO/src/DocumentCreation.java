@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -73,7 +74,7 @@ public class DocumentCreation extends JDialog {
 		scrollPane.setViewportView(commentaireField);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(371, 227, 201, 259);
+		scrollPane_1.setBounds(359, 227, 201, 259);
 		getContentPane().add(scrollPane_1);
 
 		@SuppressWarnings("rawtypes")
@@ -113,21 +114,72 @@ public class DocumentCreation extends JDialog {
 		listeCategoriesExistantes.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent event) {
-				listMotsClesExistants.setListData(mot1.getMotsClefs((String) listeCategoriesExistantes.getSelectedItem()));
+				listMotsClesExistants.setListData(mot1
+						.getMotsClefs((String) listeCategoriesExistantes
+								.getSelectedItem()));
 			}
 		});
-		listeCategoriesExistantes.setBounds(371, 94, 196, 27);
+		listeCategoriesExistantes.setBounds(359, 94, 196, 27);
 		getContentPane().add(listeCategoriesExistantes);
 
 		JLabel lblCategorie = new JLabel("Categorie");
 		lblCategorie.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblCategorie.setBounds(356, 49, 187, 34);
+		lblCategorie.setBounds(344, 49, 187, 34);
 		getContentPane().add(lblCategorie);
 
-		JLabel lblMotsCls = new JLabel("Mots - Clés :");
+		JLabel lblMotsCls = new JLabel("Mots - Clés  existants :");
 		lblMotsCls.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblMotsCls.setBounds(356, 167, 187, 34);
+		lblMotsCls.setBounds(344, 167, 187, 34);
 		getContentPane().add(lblMotsCls);
+
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(582, 267, 201, 219);
+		getContentPane().add(scrollPane_2);
+
+		@SuppressWarnings("rawtypes")
+		final
+		JList listMotsCles = new JList();
+		scrollPane_2.setViewportView(listMotsCles);
+
+		JButton btnAffecter = new JButton("Affecter");
+		btnAffecter.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
+			public void actionPerformed(ActionEvent arg0) {
+				if (listMotsClesExistants.getSelectedValue() != null) {
+					mot1.ajouterMotCle((String) listMotsClesExistants
+							.getSelectedValue());
+					listMotsCles.setListData(mot1.afficherMotsCles());
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Selectionnez un mot clé", "Message d'erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAffecter.setBounds(582, 227, 95, 34);
+		getContentPane().add(btnAffecter);
+
+		JButton buttonSupprimer = new JButton("Retirer");
+		buttonSupprimer.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
+			public void actionPerformed(ActionEvent e) {
+				if (listMotsCles.getSelectedValue() != null) {
+					mot1.supprimerMotCle(listMotsCles.getSelectedValue());
+					listMotsCles.setListData(mot1.afficherMotsCles());
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Selectionnez un mot clé", "Message d'erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}				
+			}
+		});
+		buttonSupprimer.setBounds(687, 227, 96, 34);
+		getContentPane().add(buttonSupprimer);
+
+		JLabel lblMotsCls_1 = new JLabel("Mots - Clés document :");
+		lblMotsCls_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMotsCls_1.setBounds(582, 167, 187, 34);
+		getContentPane().add(lblMotsCls_1);
 
 		this.setResizable(false);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
