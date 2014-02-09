@@ -72,7 +72,8 @@ public class CategorieMotClef {
 		// TODO Auto-generated method stub
 		return listeMotsClefs.toArray();
 	}
-	    String[] getCategories(int idDomaine) {
+	    
+	public String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
 
 		String AFFICHER_CATEGORIES = "SELECT nomCategorieMotClef "

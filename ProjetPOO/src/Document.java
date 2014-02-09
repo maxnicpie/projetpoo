@@ -6,7 +6,6 @@ import com.mysql.jdbc.Statement;
 public class Document {
 	private Statement st;
 	MotClef motclef = new MotClef(st);
-	@SuppressWarnings("unused")
 	private String titre;
 	private ResultSet rs;
 	@SuppressWarnings("unused")

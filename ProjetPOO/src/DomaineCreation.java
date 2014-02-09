@@ -26,11 +26,9 @@ public class DomaineCreation extends JDialog {
 	private JTextField nomCategorie;
 	private JTextField nomMotClef;
 	private JTextField nomCritere;
-	private JComboBox listeComboDomaines;
 
-	public DomaineCreation(Statement st, final JComboBox listeComboDomaines) {
+	public DomaineCreation(Statement st, @SuppressWarnings("rawtypes") final JComboBox listeComboDomaines) {
 
-		this.listeComboDomaines = listeComboDomaines;
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);

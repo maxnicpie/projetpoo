@@ -92,7 +92,7 @@ public class DomaineMenu extends JDialog {
 		JButton btnNouveauDocument = new JButton("Nouveau Document");
 		btnNouveauDocument.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DocumentCreation dom = new DocumentCreation(st);
+				DocumentCreation dom = new DocumentCreation(st,domaineSelect);
 				dom.setVisible(true);
 			}
 		});
