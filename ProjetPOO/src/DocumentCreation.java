@@ -1,0 +1,137 @@
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+@SuppressWarnings("serial")
+public class DocumentCreation extends JDialog {
+	private JTextField nomDocument;
+	private JTextField lienField;
+
+	public DocumentCreation(Statement st, Domaine domaineSelect) {
+
+		final CategorieMotClef c = new CategorieMotClef(st);
+		String[] listeCategories = c
+				.getCategories(domaineSelect.getIdDomaine());
+		final MotClef mot1 = new MotClef(st);
+
+		this.setModal(true);
+		this.setTitle("Ajout d'un nouveau domaine");
+		this.getContentPane().setLayout(null);
+
+		JLabel lblNomDuDocument = new JLabel("Nom du document : ");
+		lblNomDuDocument.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNomDuDocument.setBounds(31, 49, 187, 34);
+		getContentPane().add(lblNomDuDocument);
+
+		nomDocument = new JTextField();
+		nomDocument.setColumns(10);
+		nomDocument.setBounds(77, 94, 205, 27);
+		getContentPane().add(nomDocument);
+
+		final JRadioButton radioElectronique = new JRadioButton("Electronique");
+		radioElectronique.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		radioElectronique.setBounds(29, 227, 109, 23);
+		getContentPane().add(radioElectronique);
+
+		JLabel lblTypeDeDocument = new JLabel("Type de document\r\n : ");
+		lblTypeDeDocument.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTypeDeDocument.setBounds(29, 167, 187, 34);
+		getContentPane().add(lblTypeDeDocument);
+
+		final JRadioButton radioPapier = new JRadioButton("Papier");
+		radioPapier.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		radioPapier.setBounds(29, 328, 109, 23);
+		getContentPane().add(radioPapier);
+
+		lienField = new JTextField();
+		lienField.setEnabled(false);
+		lienField.setBounds(29, 283, 287, 23);
+		getContentPane().add(lienField);
+		lienField.setColumns(10);
+
+		JLabel lblLien = new JLabel("Lien : ");
+		lblLien.setBounds(29, 267, 46, 14);
+		getContentPane().add(lblLien);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(29, 358, 287, 118);
+		getContentPane().add(scrollPane);
+
+		final JTextArea commentaireField = new JTextArea();
+		commentaireField.setEnabled(false);
+		scrollPane.setViewportView(commentaireField);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(371, 227, 201, 259);
+		getContentPane().add(scrollPane_1);
+
+		@SuppressWarnings("rawtypes")
+		final JList listMotsClesExistants = new JList();
+		scrollPane_1.setViewportView(listMotsClesExistants);
+
+		radioElectronique.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lienField.setEnabled(true);
+				if (radioPapier.isSelected() == true) {
+					radioPapier.setSelected(false);
+					commentaireField.setEnabled(false);
+					commentaireField.setText("");
+				}
+			}
+		});
+
+		radioPapier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				commentaireField.setEnabled(true);
+				if (radioPapier.isSelected() == true) {
+					radioElectronique.setSelected(false);
+					lienField.setEnabled(false);
+					lienField.setText("");
+				}
+			}
+		});
+
+		JButton btnNewButton = new JButton("Ajouter");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton.setBounds(29, 499, 287, 47);
+		getContentPane().add(btnNewButton);
+
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		final JComboBox listeCategoriesExistantes = new JComboBox(
+				listeCategories);
+		listeCategoriesExistantes.addActionListener(new ActionListener() {
+			@SuppressWarnings("unchecked")
+			public void actionPerformed(ActionEvent event) {
+				listMotsClesExistants.setListData(mot1.getMotsClefs((String) listeCategoriesExistantes.getSelectedItem()));
+			}
+		});
+		listeCategoriesExistantes.setBounds(371, 94, 196, 27);
+		getContentPane().add(listeCategoriesExistantes);
+
+		JLabel lblCategorie = new JLabel("Categorie");
+		lblCategorie.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblCategorie.setBounds(356, 49, 187, 34);
+		getContentPane().add(lblCategorie);
+
+		JLabel lblMotsCls = new JLabel("Mots - Clés :");
+		lblMotsCls.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblMotsCls.setBounds(356, 167, 187, 34);
+		getContentPane().add(lblMotsCls);
+
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setSize(800, 600);
+		this.setLocationRelativeTo(null);
+	}
+}
