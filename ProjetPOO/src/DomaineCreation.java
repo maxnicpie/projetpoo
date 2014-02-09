@@ -27,7 +27,8 @@ public class DomaineCreation extends JDialog {
 	private JTextField nomMotClef;
 	private JTextField nomCritere;
 
-	public DomaineCreation(Statement st, @SuppressWarnings("rawtypes") final JComboBox listeComboDomaines) {
+	public DomaineCreation(Statement st,
+			@SuppressWarnings("rawtypes") final JComboBox listeComboDomaines) {
 
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
@@ -197,22 +198,18 @@ public class DomaineCreation extends JDialog {
 					if (!critere1.getListeCriteres().isEmpty()) {
 						critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement
 						// criteres
-						if (!critere1.getListeCriteres().isEmpty()) {
-							critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement
-							// criteres
-						}
-						cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine());
-
-						JOptionPane.showMessageDialog(null, "Domaine ajouté",
-								"Succes", JOptionPane.INFORMATION_MESSAGE);
-						dispose();
-						listeComboDomaines.addItem(nomDomaine.getText());
-
-					} else {
-						JOptionPane.showMessageDialog(null,
-								"Entrez un nom de domaine", "Message d'erreur",
-								JOptionPane.ERROR_MESSAGE);
 					}
+					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine());
+
+					JOptionPane.showMessageDialog(null, "Domaine ajouté",
+							"Succes", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
+					listeComboDomaines.addItem(nomDomaine.getText());
+
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Entrez un nom de domaine", "Message d'erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
