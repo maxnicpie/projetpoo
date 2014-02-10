@@ -13,13 +13,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 @SuppressWarnings("serial")
 public class DocumentCreation extends JDialog {
 	private JTextField nomDocument;
 	private JTextField lienField;
 
-	public DocumentCreation(Statement st, Domaine domaineSelect) {
+	public DocumentCreation(final Statement st, final Domaine domaineSelect) {
 
 		final CategorieMotClef c = new CategorieMotClef(st);
 		String[] listeCategories = c
@@ -77,8 +78,19 @@ public class DocumentCreation extends JDialog {
 		scrollPane_1.setBounds(359, 227, 201, 259);
 		getContentPane().add(scrollPane_1);
 
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(582, 267, 201, 219);
+		getContentPane().add(scrollPane_2);
+
+		@SuppressWarnings("rawtypes")
+		final JList listMotsCles = new JList();
+		listMotsCles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_2.setViewportView(listMotsCles);
+
 		@SuppressWarnings("rawtypes")
 		final JList listMotsClesExistants = new JList();
+		listMotsClesExistants
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listMotsClesExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
@@ -103,10 +115,39 @@ public class DocumentCreation extends JDialog {
 			}
 		});
 
-		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBounds(29, 499, 287, 47);
-		getContentPane().add(btnNewButton);
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!nomDocument.getText().equals("")) {
+					if (listMotsCles.getModel().getSize() != 0) {
+						if (radioPapier.isSelected()
+								|| radioElectronique.isSelected()) {
+							Document doc1 = new Document(st);
+							doc1.setNom(nomDocument.getText());
+							doc1.creerDocument();
+							doc1.affecterMotsCles(domaineSelect.getIdDomaine(),
+									listMotsCles.getModel());
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Selectionnez un type de document",
+									"Message d'erreur",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Affectez des motsCles", "Message d'erreur",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Entrez un nom de document", "Message d'erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAjouter.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnAjouter.setBounds(29, 499, 287, 47);
+		getContentPane().add(btnAjouter);
 
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		final JComboBox listeCategoriesExistantes = new JComboBox(
@@ -131,15 +172,6 @@ public class DocumentCreation extends JDialog {
 		lblMotsCls.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMotsCls.setBounds(344, 167, 187, 34);
 		getContentPane().add(lblMotsCls);
-
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(582, 267, 201, 219);
-		getContentPane().add(scrollPane_2);
-
-		@SuppressWarnings("rawtypes")
-		final
-		JList listMotsCles = new JList();
-		scrollPane_2.setViewportView(listMotsCles);
 
 		JButton btnAffecter = new JButton("Affecter");
 		btnAffecter.addActionListener(new ActionListener() {
@@ -170,7 +202,7 @@ public class DocumentCreation extends JDialog {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
 							JOptionPane.ERROR_MESSAGE);
-				}				
+				}
 			}
 		});
 		buttonSupprimer.setBounds(687, 227, 96, 34);
