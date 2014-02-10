@@ -189,7 +189,7 @@ public class DomaineCreation extends JDialog {
 		btnAjouterCritere.setBounds(41, 397, 205, 27);
 		getContentPane().add(btnAjouterCritere);
 
-		JButton btnNewButton = new JButton("Ajouter domaine");
+		JButton btnNewButton = new JButton("Ajouter Domaine");
 		btnNewButton.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent arg0) {
@@ -218,7 +218,7 @@ public class DomaineCreation extends JDialog {
 		btnNewButton.setBounds(41, 464, 205, 84);
 		getContentPane().add(btnNewButton);
 
-		JButton btnAddCategorie = new JButton("Ajouter Categorie");
+		JButton btnAddCategorie = new JButton("Ajouter Catégorie");
 		btnAddCategorie.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
