@@ -37,7 +37,7 @@ public class DomaineCreation extends JDialog {
 		final Domaine a = new Domaine(st);
 		final CategorieMotClef cat1 = new CategorieMotClef(st);
 		final Critere critere1 = new Critere(st);
-		final MotClef mot = new MotClef(st);
+		final MotClef m = new MotClef(st);
 
 		JLabel lblNomDuDomaine = new JLabel("Nom du domaine : ");
 		lblNomDuDomaine.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -73,7 +73,7 @@ public class DomaineCreation extends JDialog {
 					CategorieMotClef cat = cat1.chercherCategorie(((JList) e
 							.getSource()).getSelectedValue());
 					if (cat != null) {
-						listeMotsClefs.setListData(cat.afficherListeMotsClefs());
+						listeMotsClefs.setListData(m.afficherListeMotsClefs());
 					}
 				} catch (NullPointerException npe) {
 				}
@@ -136,8 +136,8 @@ public class DomaineCreation extends JDialog {
 						CategorieMotClef cat = cat1
 								.chercherCategorie(listeCategories
 										.getSelectedValue());
-						cat.ajouterMotClef(nomMotClef.getText());
-						listeMotsClefs.setListData(cat.afficherListeMotsClefs());
+						m.ajouterMotClef(nomMotClef.getText());
+						listeMotsClefs.setListData(m.afficherListeMotsClefs());
 						nomMotClef.setText("");
 					}
 				}
@@ -201,7 +201,8 @@ public class DomaineCreation extends JDialog {
 						// criteres
 					}
 					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine()); //enregistrement categorie en fonction du domaine
-
+					//cat1.enregistrerMotsClefs(cat1.getIdCategorieMotClef());
+					
 					JOptionPane.showMessageDialog(null, "Domaine ajouté",
 							"Succes", JOptionPane.INFORMATION_MESSAGE);
 					dispose();

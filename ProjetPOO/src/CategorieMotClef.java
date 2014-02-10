@@ -9,7 +9,6 @@ public class CategorieMotClef {
 	private String nom;
 	private Statement st;
 	private ArrayList<CategorieMotClef> listeCategoriesMotsClefs = new ArrayList<CategorieMotClef>();
-	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();;
 
 	public CategorieMotClef(String nom, Statement st) {
 		this.nom = nom;
@@ -114,7 +113,7 @@ public class CategorieMotClef {
 		return listeCategoriesMotsClefs.toArray();
 	}
 	
-	public ArrayList<CategorieMotClef> getListeMotsClefs() {
+	public ArrayList<CategorieMotClef> getListeCategoriesMotsClefs() {
 		// TODO Auto-generated method stub
 		return listeCategoriesMotsClefs;
 	}
@@ -124,40 +123,13 @@ public class CategorieMotClef {
 		Iterator<CategorieMotClef> it = listeCategoriesMotsClefs.iterator();
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
+			MotClef m = new MotClef(st);
 			try {
 				String INSERER_CATEGORIE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CATEGORIE);
-				enregistrerMotsClefs(c.getIdCategorieMotClef());
+				m.enregistrerMotsClefs(c.getIdCategorieMotClef());
 				//System.out.println(c.getIdCategorieMotClef());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void ajouterMotClef(String text) {
-		// TODO Auto-generated method stub
-		MotClef mot = new MotClef(text);
-		listeMotsClefs .add(mot);
-	}
-
-	public Object[] afficherListeMotsClefs() {
-		// TODO Auto-generated method stub
-		return listeMotsClefs.toArray();
-	}
-	
-	public void enregistrerMotsClefs(int id) {
-		// TODO Auto-generated method stub
-		Iterator<MotClef> it = listeMotsClefs.iterator();
-		while (it.hasNext()) {
-			MotClef mot = it.next();
-			try {
-				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
-						+ mot.getLibelleMotClef() + "\"," + id + ")";
-				System.out.println(INSERER_MOT_CLEF);
-				st.executeUpdate(INSERER_MOT_CLEF);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

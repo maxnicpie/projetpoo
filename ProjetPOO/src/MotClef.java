@@ -69,22 +69,6 @@ public class MotClef {
 
 	}
 
-	public void ajouterMotClef(String text) {
-		// TODO Auto-generated method stub
-		MotClef mot = new MotClef(text);
-		listeMotsClefs.add(mot);
-	}
-
-	public Object[] afficherListeMotsClefs() {
-		// TODO Auto-generated method stub
-		return listeMotsClefs.toArray();
-	}
-
-	public ArrayList<MotClef> getListeMotsClefs() {
-		// TODO Auto-generated method stub
-		return listeMotsClefs;
-	}
-
 	public String[] getMotsClefs() {
 		int i = 0;
 		int idCategorieMotClef = categorie.getIdCategorieMotClef();
@@ -157,6 +141,22 @@ public class MotClef {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void ajouterMotClef(String text) {
+		// TODO Auto-generated method stub
+		MotClef mot = new MotClef(text);
+		listeMotsClefs.add(mot);
+	}
+
+	public Object[] afficherListeMotsClefs() {
+		// TODO Auto-generated method stub
+		return listeMotsClefs.toArray();
+	}
+
+	public ArrayList<MotClef> getListeMotsClefs() {
+		// TODO Auto-generated method stub
+		return listeMotsClefs;
 	}
 
 	public void supprimerMotClef(Object selectedValue) {
