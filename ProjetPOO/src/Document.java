@@ -1,7 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import com.mysql.jdbc.Statement;
+import javax.swing.ListModel;
 
 public class Document {
 	private Statement st;
@@ -37,11 +38,11 @@ public class Document {
 	public String[] getNomDocumentByMotsCles() {
 		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
-		//int idDocument = getIdDocument();
+		// int idDocument = getIdDocument();
 
 		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
-				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument AND m.idMotClef = \"" + idMotClef
-				+ "\";";
+				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument AND m.idMotClef = \""
+				+ idMotClef + "\";";
 
 		int nbLignes = 0;
 		try {
@@ -63,6 +64,40 @@ public class Document {
 		} catch (SQLException e) {
 		}
 		return document;
+	}
+
+	public void setNom(String string) {
+		// TODO Auto-generated method stub
+		this.nom = string;
+	}
+
+	public void creerDocument() {
+		// TODO Auto-generated method stub
+		String CREER_DOCUMENT = "INSERT INTO DOCUMENT VALUES (null,\"" + nom
+				+ "\")";
+		try {
+			st.executeUpdate(CREER_DOCUMENT);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void affecterMotsCles(int idDomaine,
+			@SuppressWarnings("rawtypes") ListModel model) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < model.getSize(); i++) {
+			MotClef mot = new MotClef(model.getElementAt(i).toString(), st);
+			String AFFECTER_MOTSCLES = "INSERT INTO EST_TAGE VALUES ("
+					+ idDomaine + "," + mot.getIdMotClef() + ")";
+			try {
+				st.executeUpdate(AFFECTER_MOTSCLES);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 }
