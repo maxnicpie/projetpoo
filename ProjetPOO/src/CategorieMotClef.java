@@ -128,14 +128,14 @@ public class CategorieMotClef {
 	public void enregistrerCategoriesMotsClefs(int id) {
 		// TODO Auto-generated method stub
 		Iterator<CategorieMotClef> it = listeCategoriesMotsClefs.iterator();
-		MotClef mot = new MotClef(st);
+		//MotClef mot = new MotClef(st);
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
 			try {
 				String INSERER_CATEGORIE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CATEGORIE);
-				mot.enregistrerMotsClefs(c.getIdCategorieMotClef());
+				//mot.enregistrerMotsClefs(c.getIdCategorieMotClef());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
