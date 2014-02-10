@@ -78,8 +78,8 @@ public class DocumentCreation extends JDialog {
 		getContentPane().add(scrollPane_1);
 
 		@SuppressWarnings("rawtypes")
-		final JList listMotsClesExistants = new JList();
-		scrollPane_1.setViewportView(listMotsClesExistants);
+		final JList listeMotsClefsExistants = new JList();
+		scrollPane_1.setViewportView(listeMotsClefsExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -114,7 +114,7 @@ public class DocumentCreation extends JDialog {
 		listeCategoriesExistantes.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent event) {
-				listMotsClesExistants.setListData(mot1
+				listeMotsClefsExistants.setListData(mot1
 						.getMotsClefs((String) listeCategoriesExistantes
 								.getSelectedItem()));
 			}
@@ -138,17 +138,17 @@ public class DocumentCreation extends JDialog {
 
 		@SuppressWarnings("rawtypes")
 		final
-		JList listMotsCles = new JList();
-		scrollPane_2.setViewportView(listMotsCles);
+		JList listeMotsClefs = new JList();
+		scrollPane_2.setViewportView(listeMotsClefs);
 
 		JButton btnAffecter = new JButton("Affecter");
 		btnAffecter.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent arg0) {
-				if (listMotsClesExistants.getSelectedValue() != null) {
-					mot1.ajouterMotCle((String) listMotsClesExistants
+				if (listeMotsClefsExistants.getSelectedValue() != null) {
+					mot1.ajouterMotClef((String) listeMotsClefsExistants
 							.getSelectedValue());
-					listMotsCles.setListData(mot1.afficherMotsCles());
+					listeMotsClefs.setListData(mot1.afficherMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
@@ -163,9 +163,9 @@ public class DocumentCreation extends JDialog {
 		buttonSupprimer.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
-				if (listMotsCles.getSelectedValue() != null) {
-					mot1.supprimerMotCle(listMotsCles.getSelectedValue());
-					listMotsCles.setListData(mot1.afficherMotsCles());
+				if (listeMotsClefs.getSelectedValue() != null) {
+					mot1.supprimerMotClef(listeMotsClefs.getSelectedValue());
+					listeMotsClefs.setListData(mot1.afficherMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",

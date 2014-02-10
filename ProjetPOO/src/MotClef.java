@@ -70,13 +70,13 @@ public class MotClef {
 
 	}
 
-	public void ajouterMotCle(String text) {
+	public void ajouterMotClef(String text) {
 		// TODO Auto-generated method stub
 		MotClef mot = new MotClef(text);
 		listeMotsClefs.add(mot);
 	}
 	
-	public Object[] afficherMotsCles() {
+	public Object[] afficherMotsClefs() {
 		// TODO Auto-generated method stub
 		return listeMotsClefs.toArray();
 	}
@@ -154,7 +154,7 @@ public class MotClef {
 		}
 	}
 
-	public void supprimerMotCle(Object selectedValue) {
+	public void supprimerMotClef(Object selectedValue) {
 		// TODO Auto-generated method stub
 		MotClef temp = new MotClef();
 		for (MotClef mot : listeMotsClefs) {
