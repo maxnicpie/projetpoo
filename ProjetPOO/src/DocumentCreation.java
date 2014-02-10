@@ -83,9 +83,9 @@ public class DocumentCreation extends JDialog {
 		getContentPane().add(scrollPane_2);
 
 		@SuppressWarnings("rawtypes")
-		final JList listMotsCles = new JList();
-		listMotsCles.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_2.setViewportView(listMotsCles);
+		final JList listeMotsClefs = new JList();
+		listeMotsClefs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_2.setViewportView(listeMotsClefs);
 
 		@SuppressWarnings("rawtypes")
 		final JList listeMotsClefsExistants = new JList();
@@ -118,14 +118,32 @@ public class DocumentCreation extends JDialog {
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!nomDocument.getText().equals("")) {
-					if (listMotsCles.getModel().getSize() != 0) {
+					if (listeMotsClefs.getModel().getSize() != 0) {
 						if (radioPapier.isSelected()
 								|| radioElectronique.isSelected()) {
 							Document doc1 = new Document(st);
 							doc1.setNom(nomDocument.getText());
 							doc1.creerDocument();
 							doc1.affecterMotsCles(domaineSelect.getIdDomaine(),
-									listMotsCles.getModel());
+									listeMotsClefs.getModel());
+
+							if (radioPapier.isSelected()) {
+								PaperDocument paper = new PaperDocument(doc1
+										.getNom(), st);
+								paper.setCommentaire(commentaireField.getText());
+								paper.enregistrerPapier(doc1.getIdDocument());
+							} else {
+								ElectronicDocument electronique = new ElectronicDocument(
+										doc1.getNom(), st);
+								electronique.setLink(lienField.getText());
+								electronique.enregistrerElectronique(doc1
+										.getIdDocument());
+							}
+
+							JOptionPane.showMessageDialog(null,
+									"Ajout du document",
+									"Succès",
+									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Selectionnez un type de document",
@@ -171,11 +189,6 @@ public class DocumentCreation extends JDialog {
 		lblMotsCls.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblMotsCls.setBounds(344, 167, 187, 34);
 		getContentPane().add(lblMotsCls);
-
-		@SuppressWarnings("rawtypes")
-		final
-		JList listeMotsClefs = new JList();
-		scrollPane_2.setViewportView(listeMotsClefs);
 
 		JButton btnAffecter = new JButton("Affecter");
 		btnAffecter.addActionListener(new ActionListener() {
