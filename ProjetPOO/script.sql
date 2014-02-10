@@ -88,7 +88,9 @@ INSERT INTO DOMAINE VALUES
 INSERT INTO CRITERE VALUES
 (null, 'Prix', 1),
 (null, 'Réalisation', 2),
-(null, 'Qualité', 3); 
+(null, 'Qualité', 3),
+(null, 'Bonne photo', 4),
+(null, 'Temps pour la réalisation', 5);
 
 INSERT INTO NOTE VALUES
 (null, 1, 1),
