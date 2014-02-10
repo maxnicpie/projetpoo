@@ -81,23 +81,35 @@ CREATE TABLE EST_TAGE(
 
 INSERT INTO DOMAINE VALUES
 (null, 'Sport'),
-(null, 'Musique');
+(null, 'Musique'),
+(null, 'Cuisine'),
+(null, 'Automobile');
 
 INSERT INTO CRITERE VALUES
-(null, 'Critere 1', 1),
-(null, 'Critere 2', 2); 
+(null, 'Prix', 1),
+(null, 'Réalisation', 2),
+(null, 'Qualité', 3); 
 
 INSERT INTO NOTE VALUES
-(null, 3, 1),
-(null, 5, 2);
+(null, 1, 1),
+(null, 2, 2),
+(null, 3, 3),
+(null, 4, 4),
+(null, 5, 5);
 
 INSERT INTO CATEGORIE_MOT_CLEF VALUES
 (null, 'Lieux', 1),
-(null, 'Genre', 2);
+(null, 'Genre', 2),
+(null, 'Plat', 3),
+(null, 'Marque', 4);
 
 INSERT INTO MOT_CLEF VALUES
 (null, 'Belfort', 1),
-(null, 'Raddon', 2); 
+(null, 'Paysage', 2),
+(null, 'Portrait', 3),
+(null, 'Raddon', 4),
+(null, 'Dessert', 5),
+(null, 'Entrée', 6);
 
 INSERT INTO DOCUMENT VALUES
 (null, 'Document 1'),
