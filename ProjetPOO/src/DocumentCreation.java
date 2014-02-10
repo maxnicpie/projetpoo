@@ -89,8 +89,7 @@ public class DocumentCreation extends JDialog {
 
 		@SuppressWarnings("rawtypes")
 		final JList listMotsClesExistants = new JList();
-		listMotsClesExistants
-				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listMotsClesExistants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listMotsClesExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
@@ -173,14 +172,19 @@ public class DocumentCreation extends JDialog {
 		lblMotsCls.setBounds(344, 167, 187, 34);
 		getContentPane().add(lblMotsCls);
 
+		@SuppressWarnings("rawtypes")
+		final
+		JList listeMotsClefs = new JList();
+		scrollPane_2.setViewportView(listeMotsClefs);
+
 		JButton btnAffecter = new JButton("Affecter");
 		btnAffecter.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent arg0) {
 				if (listMotsClesExistants.getSelectedValue() != null) {
-					mot1.ajouterMotCle((String) listMotsClesExistants
+					mot1.ajouterMotClef((String) listMotsClesExistants
 							.getSelectedValue());
-					listMotsCles.setListData(mot1.afficherMotsCles());
+					listeMotsClefs.setListData(mot1.afficherMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
@@ -195,9 +199,9 @@ public class DocumentCreation extends JDialog {
 		buttonSupprimer.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
-				if (listMotsCles.getSelectedValue() != null) {
-					mot1.supprimerMotCle(listMotsCles.getSelectedValue());
-					listMotsCles.setListData(mot1.afficherMotsCles());
+				if (listeMotsClefs.getSelectedValue() != null) {
+					mot1.supprimerMotClef(listeMotsClefs.getSelectedValue());
+					listeMotsClefs.setListData(mot1.afficherMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",

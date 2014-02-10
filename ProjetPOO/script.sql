@@ -86,11 +86,11 @@ INSERT INTO DOMAINE VALUES
 (null, 'Automobile');
 
 INSERT INTO CRITERE VALUES
-(null, 'Prix', 1),
-(null, 'Réalisation', 2),
+(null, 'Prix', 4),
+(null, 'Instruments', 2),
 (null, 'Qualité', 3),
 (null, 'Bonne photo', 4),
-(null, 'Temps pour la réalisation', 4);
+(null, 'Temps de course', 1);
 
 INSERT INTO NOTE VALUES
 (null, 1, 1),
@@ -107,11 +107,12 @@ INSERT INTO CATEGORIE_MOT_CLEF VALUES
 
 INSERT INTO MOT_CLEF VALUES
 (null, 'Belfort', 1),
-(null, 'Paysage', 2),
-(null, 'Portrait', 3),
-(null, 'Raddon', 4),
+(null, 'Rock', 2),
+(null, 'Classique', 2),
+(null, 'Raddon', 1),
 (null, 'Dessert', 3),
-(null, 'Entrée', 2);
+(null, 'Entrée', 3),
+(null, 'Peugeot', 4);
 
 INSERT INTO DOCUMENT VALUES
 (null, 'Document 1'),
