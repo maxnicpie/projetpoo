@@ -7,22 +7,20 @@ import javax.swing.ListModel;
 public class Document {
 	private Statement st;
 	MotClef motclef = new MotClef(st);
-	private String titre;
 	private ResultSet rs;
-	@SuppressWarnings("unused")
 	private String nom;
 
-	public Document(Statement st) {
-		this.st = st;
+	public Document(String document) {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Document(String nom) {
-		this.nom = nom;
+	public Document(Statement st2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdDocument() {
 		int recupIdDocument = 0;
-		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + titre
+		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + nom
 				+ "\"";
 		try {
 			rs.next();
@@ -98,6 +96,11 @@ public class Document {
 			}
 		}
 
+	}
+
+	public String getNom() {
+		// TODO Auto-generated method stub
+		return nom;
 	}
 
 }

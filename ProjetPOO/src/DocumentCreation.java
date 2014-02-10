@@ -89,7 +89,8 @@ public class DocumentCreation extends JDialog {
 
 		@SuppressWarnings("rawtypes")
 		final JList listMotsClesExistants = new JList();
-		listMotsClesExistants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listMotsClesExistants
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listMotsClesExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
@@ -126,6 +127,24 @@ public class DocumentCreation extends JDialog {
 							doc1.creerDocument();
 							doc1.affecterMotsCles(domaineSelect.getIdDomaine(),
 									listMotsCles.getModel());
+
+							if (radioPapier.isSelected()) {
+								PaperDocument paper = new PaperDocument(doc1
+										.getNom(), st);
+								paper.setCommentaire(commentaireField.getText());
+								paper.enregistrerPapier(doc1.getIdDocument());
+							} else {
+								ElectronicDocument electronique = new ElectronicDocument(
+										doc1.getNom(), st);
+								electronique.setLink(lienField.getText());
+								electronique.enregistrerElectronique(doc1
+										.getIdDocument());
+							}
+
+							JOptionPane.showMessageDialog(null,
+									"Ajout du document",
+									"Succès",
+									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Selectionnez un type de document",
@@ -172,11 +191,6 @@ public class DocumentCreation extends JDialog {
 		lblMotsCls.setBounds(344, 167, 187, 34);
 		getContentPane().add(lblMotsCls);
 
-		@SuppressWarnings("rawtypes")
-		final
-		JList listeMotsClefs = new JList();
-		scrollPane_2.setViewportView(listeMotsClefs);
-
 		JButton btnAffecter = new JButton("Affecter");
 		btnAffecter.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
@@ -184,7 +198,7 @@ public class DocumentCreation extends JDialog {
 				if (listMotsClesExistants.getSelectedValue() != null) {
 					mot1.ajouterMotClef((String) listMotsClesExistants
 							.getSelectedValue());
-					listeMotsClefs.setListData(mot1.afficherMotsClefs());
+					listMotsCles.setListData(mot1.afficherMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
@@ -199,9 +213,9 @@ public class DocumentCreation extends JDialog {
 		buttonSupprimer.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent e) {
-				if (listeMotsClefs.getSelectedValue() != null) {
-					mot1.supprimerMotClef(listeMotsClefs.getSelectedValue());
-					listeMotsClefs.setListData(mot1.afficherMotsClefs());
+				if (listMotsCles.getSelectedValue() != null) {
+					mot1.supprimerMotClef(listMotsCles.getSelectedValue());
+					listMotsCles.setListData(mot1.afficherMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
