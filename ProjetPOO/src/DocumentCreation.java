@@ -88,9 +88,9 @@ public class DocumentCreation extends JDialog {
 		scrollPane_2.setViewportView(listMotsCles);
 
 		@SuppressWarnings("rawtypes")
-		final JList listMotsClesExistants = new JList();
-		listMotsClesExistants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_1.setViewportView(listMotsClesExistants);
+		final JList listeMotsClefsExistants = new JList();
+		listeMotsClefsExistants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(listeMotsClefsExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -154,7 +154,7 @@ public class DocumentCreation extends JDialog {
 		listeCategoriesExistantes.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent event) {
-				listMotsClesExistants.setListData(mot1
+				listeMotsClefsExistants.setListData(mot1
 						.getMotsClefs((String) listeCategoriesExistantes
 								.getSelectedItem()));
 			}
@@ -181,10 +181,10 @@ public class DocumentCreation extends JDialog {
 		btnAffecter.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
 			public void actionPerformed(ActionEvent arg0) {
-				if (listMotsClesExistants.getSelectedValue() != null) {
-					mot1.ajouterMotClef((String) listMotsClesExistants
+				if (listeMotsClefsExistants.getSelectedValue() != null) {
+					mot1.ajouterMotClef((String) listeMotsClefsExistants
 							.getSelectedValue());
-					listeMotsClefs.setListData(mot1.afficherMotsClefs());
+					listeMotsClefs.setListData(mot1.afficherListeMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
@@ -201,7 +201,7 @@ public class DocumentCreation extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if (listeMotsClefs.getSelectedValue() != null) {
 					mot1.supprimerMotClef(listeMotsClefs.getSelectedValue());
-					listeMotsClefs.setListData(mot1.afficherMotsClefs());
+					listeMotsClefs.setListData(mot1.afficherListeMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",

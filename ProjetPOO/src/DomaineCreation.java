@@ -35,8 +35,9 @@ public class DomaineCreation extends JDialog {
 		this.getContentPane().setLayout(null);
 
 		final Domaine a = new Domaine(st);
-		final CategorieMotClef cat1 = new CategorieMotClef();
-		final Critere critere1 = new Critere();
+		final CategorieMotClef cat1 = new CategorieMotClef(st);
+		final Critere critere1 = new Critere(st);
+		final MotClef mot = new MotClef(st);
 
 		JLabel lblNomDuDomaine = new JLabel("Nom du domaine : ");
 		lblNomDuDomaine.setFont(new Font("Tahoma", Font.BOLD, 16));

@@ -19,6 +19,10 @@ public class Critere {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Critere(Statement st) {
+		this.st = st;
+	}
+
 	public String getNomCritere() {
 		return nom;
 	}
@@ -41,7 +45,6 @@ public class Critere {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
 		}
-
 	}
 
 	public String[] getCriteres(int idDomaine) {
