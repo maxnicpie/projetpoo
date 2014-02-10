@@ -43,6 +43,7 @@ public class Document {
 				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument AND m.idMotClef = \"" + idMotClef
 				+ "\";";
 
+		
 		int nbLignes = 0;
 		try {
 			rs = st.executeQuery(recupDocument);
