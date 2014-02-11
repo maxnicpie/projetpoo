@@ -47,11 +47,10 @@ public class Document {
 				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
 			} else {
-				recupDocument = recupDocument + " OR m.idMotClef = \""
+				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
 				   }
 			recupDocument = recupDocument + ";";
-
 		    }
 			try {
 				rs = st.executeQuery(recupDocument);
