@@ -34,7 +34,7 @@ public class Document {
 		return recupIdDocument;
 	}
 
-	public String[] getNomDocumentByMotsCles(List motClefExistant) {
+	public String[] getNomDocumentByMotsClefs(List motClefExistant) {
 		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
 
