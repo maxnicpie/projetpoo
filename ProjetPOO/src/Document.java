@@ -1,6 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ListModel;
@@ -18,63 +20,7 @@ public class Document {
 	public Document(Statement st2) {
 		// TODO Auto-generated constructor stub
 	}
-
-	public int getIdDocument() {
-		int recupIdDocument = 0;
-		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + nom
-				+ "\"";
-		try {
-			rs.next();
-			rs = st.executeQuery(id);
-			recupIdDocument = rs.getInt(1);
-		} catch (SQLException e) {
-			// TODO Bloc catch généré automatiquement
-			e.printStackTrace();
-		}
-		return recupIdDocument;
-	}
-
-	public String[] getNomDocumentByMotsClefs(List motClefExistant) {
-		int i = 0;
-		int idMotClef = motclef.getIdMotClef();
-
-		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
-				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
-
-		int nbLignes = 0;
-
-		for (int j = 0; j < motClefExistant.size() ; j++) {
-			if (j == 0) {
-				recupDocument = recupDocument + " AND m.idMotClef = \""
-						+ idMotClef + "\" ";
-			} else {
-				recupDocument = recupDocument + " AND m.idMotClef = \""
-						+ idMotClef + "\" ";
-				   }
-			recupDocument = recupDocument + ";";
-		    }
-			try {
-				rs = st.executeQuery(recupDocument);
-				rs.last();
-				nbLignes = rs.getRow();
-				rs.first();
-			} catch (SQLException e) {
-			}
-
-			String[] document = new String[nbLignes];
-			try {
-				while (i != nbLignes) {
-					document[i] = rs.getString(1);
-					i++;
-					rs.next();
-				}
-
-			} catch (SQLException e) {
-			}
-			return document;
-			
-	}
-
+	
 	public void setNom(String string) {
 		// TODO Auto-generated method stub
 		this.nom = string;
@@ -111,5 +57,74 @@ public class Document {
 	public String getNom() {
 		// TODO Auto-generated method stub
 		return nom;
+	}
+
+	public int getIdDocument() {
+		int recupIdDocument = 0;
+		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + nom
+				+ "\"";
+		try {
+			rs.next();
+			rs = st.executeQuery(id);
+			recupIdDocument = rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Bloc catch généré automatiquement
+			e.printStackTrace();
+		}
+		return recupIdDocument;
+	}
+
+	public String[] getDocumentByMotsClefs(ArrayList<MotClef> motsClefs) {
+		int i = 0;
+		int nbLignes = 0;
+		String[] document = null;
+		Iterator<MotClef> it = motsClefs.iterator();
+		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
+				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
+		while (it.hasNext()) {
+			MotClef m = it.next();
+			recupDocument = recupDocument + " AND m.idMotClef = \""
+					+ m.getIdMotClef() + "\"";
+		}
+		try {
+			rs.last();
+			nbLignes = rs.getRow();
+			document = new String[nbLignes + 1];
+			rs.first();
+			while (i != nbLignes) {
+				document[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+		} catch (SQLException e) {
+		}
+		return document;
+	}
+	
+	public String[] getDocumentByCriteres(ArrayList<Critere> criteres) {
+		int i = 0;
+		int nbLignes = 0;
+		String[] document = null;
+		Iterator<Critere> it = criteres.iterator();
+		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
+				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
+		while (it.hasNext()) {
+			Critere c = it.next();
+			recupDocument = recupDocument + " AND m.idMotClef = \""
+					+ c + "\"";
+		}
+		try {
+			rs.last();
+			nbLignes = rs.getRow();
+			document = new String[nbLignes + 1];
+			rs.first();
+			while (i != nbLignes) {
+				document[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+		} catch (SQLException e) {
+		}
+		return document;
 	}
 }
