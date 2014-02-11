@@ -49,9 +49,10 @@ public class Document {
 			} else {
 				recupDocument = recupDocument + " OR m.idMotClef = \""
 						+ idMotClef + "\" ";
-			}
+				   }
 			recupDocument = recupDocument + ";";
 
+		    }
 			try {
 				rs = st.executeQuery(recupDocument);
 				rs.last();
@@ -71,8 +72,6 @@ public class Document {
 			} catch (SQLException e) {
 			}
 			return document;
-		}
-		return null;
 			
 	}
 
