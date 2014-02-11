@@ -6,7 +6,9 @@ public enum Etoile {
 	QUATRE_ETOILES("Quatre étoiles", 4),
 	CINQ_ETOILES("Cinq étoiles", 5);
 
+	@SuppressWarnings("unused")
 	private String intitule;
+	@SuppressWarnings("unused")
 	private int etoiles;
 
 	Etoile(String intitule, int etoiles) {

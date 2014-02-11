@@ -16,6 +16,7 @@ public class Document {
 
 	public Document(Statement st2) {
 		// TODO Auto-generated constructor stub
+		this.st = st2;
 	}
 
 	public int getIdDocument() {
@@ -23,8 +24,8 @@ public class Document {
 		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + nom
 				+ "\"";
 		try {
-			rs.next();
 			rs = st.executeQuery(id);
+			rs.next();
 			recupIdDocument = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Bloc catch généré automatiquement
