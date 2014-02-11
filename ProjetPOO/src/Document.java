@@ -1,6 +1,7 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.swing.ListModel;
 
@@ -33,7 +34,7 @@ public class Document {
 		return recupIdDocument;
 	}
 
-	public String[] getNomDocumentByMotsCles(int motClefExistant) {
+	public String[] getNomDocumentByMotsCles(List motClefExistant) {
 		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
 
@@ -42,7 +43,7 @@ public class Document {
 
 		int nbLignes = 0;
 
-		for (int j = 0; j < motClefExistant; j++) {
+		for (int j = 0; j < motClefExistant.size() ; j++) {
 			if (j == 0) {
 				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
