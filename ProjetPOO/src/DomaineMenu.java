@@ -37,6 +37,7 @@ public class DomaineMenu extends JDialog {
 		@SuppressWarnings({ "rawtypes" })
 		final JList list = new JList();
 		scrollPane.setViewportView(list);
+		
 
 		final MotClef mot = new MotClef(st);
 		final CategorieMotClef c = new CategorieMotClef(st);
