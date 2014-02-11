@@ -145,7 +145,7 @@ public class DocumentCreation extends JDialog {
 								Document doc1 = new Document(sta);
 								doc1.setNom(nomDocument.getText());
 								doc1.creerDocument();
-								doc1.affecterMotsCles(doc1.getIdDocument(),
+								doc1.affecterMotsClefs(doc1.getIdDocument(),
 										listeMotsClefs.getModel());
 
 								if (radioPapier.isSelected()) {

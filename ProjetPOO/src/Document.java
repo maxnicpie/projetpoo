@@ -95,7 +95,7 @@ public class Document {
 		}
 	}
 
-	public void affecterMotsCles(int idDomaine,
+	public void affecterMotsClefs(int idDomaine,
 			@SuppressWarnings("rawtypes") ListModel model) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < model.getSize(); i++) {
@@ -153,7 +153,7 @@ public class Document {
 		while (it.hasNext()) {
 			Critere c = it.next();
 			recupDocument = recupDocument + " AND m.idMotClef = \""
-					+ c + "\"";
+					+ c.getIdCritere() + "\"";
 		}
 		try {
 			rs.last();

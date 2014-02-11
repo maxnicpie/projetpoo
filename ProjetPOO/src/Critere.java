@@ -107,11 +107,11 @@ public class Critere {
 		}
 	}
 
-	public int getIdCritere(String selectedItem) {
+	public int getIdCritere() {
 		// TODO Auto-generated method stub
 		int recupId = 0;
 		String id = "SELECT idCritere FROM critere WHERE nomCritere=\""
-				+ selectedItem + "\"";
+				+ nom + "\"";
 		try {
 			rs = st.executeQuery(id);
 			rs.next();
