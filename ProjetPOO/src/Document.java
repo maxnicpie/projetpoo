@@ -46,36 +46,36 @@ public class Document {
 
 		int nbLignes = 0;
 
-		for (int j = 0; j < motClefExistant.size() ; j++) {
+		for (int j = 0; j < motClefExistant.size(); j++) {
 			if (j == 0) {
 				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
 			} else {
 				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
-				   }
+			}
 			recupDocument = recupDocument + ";";
-		    }
-			try {
-				rs = st.executeQuery(recupDocument);
-				rs.last();
-				nbLignes = rs.getRow();
-				rs.first();
-			} catch (SQLException e) {
+		}
+		try {
+			rs = st.executeQuery(recupDocument);
+			rs.last();
+			nbLignes = rs.getRow();
+			rs.first();
+		} catch (SQLException e) {
+		}
+
+		String[] document = new String[nbLignes];
+		try {
+			while (i != nbLignes) {
+				document[i] = rs.getString(1);
+				i++;
+				rs.next();
 			}
 
-			String[] document = new String[nbLignes];
-			try {
-				while (i != nbLignes) {
-					document[i] = rs.getString(1);
-					i++;
-					rs.next();
-				}
+		} catch (SQLException e) {
+		}
+		return document;
 
-			} catch (SQLException e) {
-			}
-			return document;
-			
 	}
 
 	public void setNom(String string) {
@@ -116,19 +116,15 @@ public class Document {
 		return nom;
 	}
 
-	public String[] getDocumentByMotsClefs(ArrayList<MotClef> motsClefs) {
+	public String[] getDocumentByMotClef(MotClef motClef) {
 		int i = 0;
 		int nbLignes = 0;
 		String[] document = null;
-		Iterator<MotClef> it = motsClefs.iterator();
 		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
-				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
-		while (it.hasNext()) {
-			MotClef m = it.next();
-			recupDocument = recupDocument + " AND m.idMotClef = \""
-					+ m.getIdMotClef() + "\"";
-		}
+				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument = e.idDocument AND m.idMotClef = \""
+				+ motClef.getIdMotClef() + "\"";
 		try {
+			rs = st.executeQuery(recupDocument);
 			rs.last();
 			nbLignes = rs.getRow();
 			document = new String[nbLignes + 1];
@@ -142,20 +138,14 @@ public class Document {
 		}
 		return document;
 	}
-	
-	public String[] getDocumentByCriteres(ArrayList<Critere> criteres) {
+
+	public String[] getDocumentByCritere(Critere critere) {
 		int i = 0;
 		int nbLignes = 0;
 		String[] document = null;
-		Iterator<Critere> it = criteres.iterator();
-		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
-				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
-		while (it.hasNext()) {
-			Critere c = it.next();
-			recupDocument = recupDocument + " AND m.idMotClef = \""
-					+ c.getIdCritere() + "\"";
-		}
+		String recupDocument = "";
 		try {
+			rs = st.executeQuery(recupDocument);
 			rs.last();
 			nbLignes = rs.getRow();
 			document = new String[nbLignes + 1];
