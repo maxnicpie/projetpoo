@@ -6,7 +6,7 @@ import javax.swing.ListModel;
 
 public class Document {
 	private Statement st;
-	MotClef motclef = new MotClef(st);
+	private MotClef motclef = new MotClef(st);
 	private ResultSet rs;
 	private String nom;
 
@@ -95,12 +95,10 @@ public class Document {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public String getNom() {
 		// TODO Auto-generated method stub
 		return nom;
 	}
-
 }

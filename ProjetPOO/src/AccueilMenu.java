@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -33,14 +34,14 @@ public class AccueilMenu extends JFrame {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public AccueilMenu(Statement statement) {
 
-		// Créer la connection a la base
+		// Créer la connexion à la base
 
 		this.st = statement;
-		this.frame=this;
-		
+		this.frame = this;
+
 		final Domaine d = new Domaine(st);
 		String[] listeDomaines = d.afficherListeDomaines();
-		
+
 		frame.setTitle("Gestionnaire électronique de documents");
 		frame.getContentPane().setLayout(null);
 
@@ -61,37 +62,39 @@ public class AccueilMenu extends JFrame {
 		panel.setBounds(10, 51, 764, 499);
 		panel.setLayout(null);
 		frame.getContentPane().add(panel);
-		
+
 		listeComboDomaines = new JComboBox(listeDomaines);
 		listeComboDomaines.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		listeComboDomaines.setBounds(180, 11, 166, 29);
 		getContentPane().add(listeComboDomaines);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
 		separator.setBounds(450, 0, 2, 53);
 		getContentPane().add(separator);
-		
+
 		JButton btnNewButton = new JButton("Nouveau domaine\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineCreation creation = new DomaineCreation(st,listeComboDomaines);
+				DomaineCreation creation = new DomaineCreation(st,
+						listeComboDomaines);
 				creation.setVisible(true);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton.setBounds(474, 11, 300, 29);
 		getContentPane().add(btnNewButton);
-		
+
 		JLabel lblNewLabel = new JLabel("Domaine existant : \r\n");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNewLabel.setBounds(10, 11, 160, 29);
 		getContentPane().add(lblNewLabel);
-		
-		JButton btnNewButton_1 = new JButton("-->");
+
+		JButton btnNewButton_1 = new JButton(new ImageIcon("fleche.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineMenu dm = new DomaineMenu(new Domaine((String)listeComboDomaines.getSelectedItem(),st),st);
+				DomaineMenu dm = new DomaineMenu(new Domaine(
+						(String) listeComboDomaines.getSelectedItem(), st), st);
 				dm.setVisible(true);
 			}
 		});
