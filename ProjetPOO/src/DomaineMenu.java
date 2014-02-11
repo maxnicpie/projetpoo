@@ -12,11 +12,9 @@ import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
 public class DomaineMenu extends JDialog {
-	
+
 	@SuppressWarnings("unused")
 	private Statement st;
-
-	// private JPanel panelEntreprise;
 
 	@SuppressWarnings("unchecked")
 	public DomaineMenu(final Domaine domaineSelect, final Statement st) {
@@ -24,7 +22,7 @@ public class DomaineMenu extends JDialog {
 		this.setModal(true);
 		this.setTitle("Ajout d'un nouveau domaine");
 		this.getContentPane().setLayout(null);
-		
+
 		JLabel lblNomDeLa = new JLabel("Nom de la catégorie :");
 		lblNomDeLa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNomDeLa.setBounds(34, 26, 191, 22);
@@ -41,20 +39,18 @@ public class DomaineMenu extends JDialog {
 
 		final MotClef mot = new MotClef(st);
 		final CategorieMotClef c = new CategorieMotClef(st);
-		String[] categories = c.getCategories(domaineSelect
-				.getIdDomaine());
-		
+		String[] categories = c.getCategories(domaineSelect.getIdDomaine());
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(295, 61, 196, 315);
 		getContentPane().add(scrollPane_1);
-		
-		@SuppressWarnings({ "rawtypes"})
+
+		@SuppressWarnings({ "rawtypes" })
 		final JList list_1 = new JList();
 		scrollPane_1.setViewportView(list_1);
-		
+
 		Critere c1 = new Critere(null, st);
-		String[] criteres = c1.getCriteres(domaineSelect
-				.getIdDomaine());
+		String[] criteres = c1.getCriteres(domaineSelect.getIdDomaine());
 		list_1.setListData(criteres);
 
 		@SuppressWarnings({ "rawtypes" })
@@ -89,11 +85,11 @@ public class DomaineMenu extends JDialog {
 		JLabel lblEtOu = new JLabel("ET / OU");
 		lblEtOu.setBounds(239, 186, 46, 14);
 		getContentPane().add(lblEtOu);
-		
+
 		JButton btnNouveauDocument = new JButton("Nouveau Document");
 		btnNouveauDocument.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DocumentCreation dom = new DocumentCreation(st,domaineSelect);
+				DocumentCreation dom = new DocumentCreation(st, domaineSelect);
 				dom.setVisible(true);
 			}
 		});

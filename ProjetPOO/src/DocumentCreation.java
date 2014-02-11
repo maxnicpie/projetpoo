@@ -108,6 +108,9 @@ public class DocumentCreation extends JDialog {
 		note.setModel(new SpinnerNumberModel(0, 0, 5, 1));
 		note.setBounds(650, 518, 46, 27);
 		getContentPane().add(note);
+		listeMotsClefsExistants
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(listeMotsClefsExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -174,6 +177,9 @@ public class DocumentCreation extends JDialog {
 										JOptionPane.ERROR_MESSAGE);
 							}
 							
+							JOptionPane.showMessageDialog(null,
+									"Ajout du document", "Succès",
+									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Selectionnez un type de document",

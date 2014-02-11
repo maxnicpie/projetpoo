@@ -6,7 +6,7 @@ public class ElectronicDocument extends Document {
 	private String link;
 	private Statement st;
 
-	public ElectronicDocument(String document,Statement st) {
+	public ElectronicDocument(String document, Statement st) {
 		super(document);
 		this.st = st;
 	}
@@ -21,8 +21,8 @@ public class ElectronicDocument extends Document {
 
 	public void enregistrerElectronique(int idDocument) {
 		// TODO Auto-generated method stub
-		String ELECTRONIQUE = "INSERT INTO PAPER_DOCUMENT VALUES (null,\"" + link
-				+ "\","+idDocument+" )";
+		String ELECTRONIQUE = "INSERT INTO PAPER_DOCUMENT VALUES (null,\""
+				+ link + "\"," + idDocument + " )";
 		try {
 			st.executeUpdate(ELECTRONIQUE);
 		} catch (SQLException e) {
@@ -30,5 +30,4 @@ public class ElectronicDocument extends Document {
 			e.printStackTrace();
 		}
 	}
-
 }

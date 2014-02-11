@@ -6,8 +6,8 @@ import java.util.Iterator;
 
 public class MotClef {
 	private Statement st;
-	CategorieMotClef categorie = new CategorieMotClef(st);
-	ResultSet rs;
+	private CategorieMotClef categorie = new CategorieMotClef(st);
+	private ResultSet rs;
 	private String libelle;
 	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
@@ -66,7 +66,6 @@ public class MotClef {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
 		}
-
 	}
 
 	public String[] getMotsClefs() {

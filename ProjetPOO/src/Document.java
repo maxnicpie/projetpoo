@@ -1,12 +1,13 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.swing.ListModel;
 
 public class Document {
 	private Statement st;
-	MotClef motclef = new MotClef(st);
+	private MotClef motclef = new MotClef(st);
 	private ResultSet rs;
 	private String nom;
 
@@ -34,7 +35,7 @@ public class Document {
 		return recupIdDocument;
 	}
 
-	public String[] getNomDocumentByMotsCles(int motClefExistant) {
+	public String[] getNomDocumentByMotsClefs(List motClefExistant) {
 		int i = 0;
 		int idMotClef = motclef.getIdMotClef();
 
@@ -43,16 +44,15 @@ public class Document {
 
 		int nbLignes = 0;
 
-		for (int j = 0; j < motClefExistant; j++) {
+		for (int j = 0; j < motClefExistant.size() ; j++) {
 			if (j == 0) {
 				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
 			} else {
-				recupDocument = recupDocument + " OR m.idMotClef = \""
+				recupDocument = recupDocument + " AND m.idMotClef = \""
 						+ idMotClef + "\" ";
 				   }
 			recupDocument = recupDocument + ";";
-
 		    }
 			try {
 				rs = st.executeQuery(recupDocument);
@@ -107,12 +107,10 @@ public class Document {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public String getNom() {
 		// TODO Auto-generated method stub
 		return nom;
 	}
-
 }

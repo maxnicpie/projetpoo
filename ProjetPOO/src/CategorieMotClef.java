@@ -60,7 +60,7 @@ public class CategorieMotClef {
 			e.printStackTrace();
 		}
 	}
-	    
+
 	public String[] getCategories(int idDomaine) {
 		// TODO Auto-generated method stub
 
@@ -76,12 +76,12 @@ public class CategorieMotClef {
 			rs = st.executeQuery(AFFICHER_CATEGORIES);
 			rs.last();
 			nbLignes = rs.getRow();
-			listeCategories = new String[nbLignes+1];
+			listeCategories = new String[nbLignes + 1];
 			rs.first();
-			
-			listeCategories[0]="Categorie...";
 
-			while (i != nbLignes+1) {
+			listeCategories[0] = "Categorie...";
+
+			while (i != nbLignes + 1) {
 				listeCategories[i] = rs.getString(1);
 				i++;
 				rs.next();
@@ -91,13 +91,13 @@ public class CategorieMotClef {
 		}
 		return listeCategories;
 	}
-	
+
 	public void ajouterCategorie(String nom) {
 		// TODO Auto-generated method stub
 		CategorieMotClef c = new CategorieMotClef(nom, st);
 		listeCategoriesMotsClefs.add(c);
 	}
-	
+
 	public CategorieMotClef chercherCategorie(Object selectedValue) {
 		// TODO Auto-generated method stub
 		for (CategorieMotClef c : listeCategoriesMotsClefs) {
@@ -107,17 +107,17 @@ public class CategorieMotClef {
 		}
 		return null;
 	}
-	
+
 	public Object[] afficherCategories() {
 		// TODO Auto-generated method stub
 		return listeCategoriesMotsClefs.toArray();
 	}
-	
+
 	public ArrayList<CategorieMotClef> getListeCategoriesMotsClefs() {
 		// TODO Auto-generated method stub
 		return listeCategoriesMotsClefs;
 	}
-	
+
 	public void enregistrerCategoriesMotsClefs(int id) {
 		// TODO Auto-generated method stub
 		Iterator<CategorieMotClef> it = listeCategoriesMotsClefs.iterator();
@@ -129,7 +129,6 @@ public class CategorieMotClef {
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CATEGORIE);
 				m.enregistrerMotsClefs(c.getIdCategorieMotClef());
-				//System.out.println(c.getIdCategorieMotClef());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
