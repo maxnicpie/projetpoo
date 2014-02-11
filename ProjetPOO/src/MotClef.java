@@ -11,7 +11,6 @@ public class MotClef {
 	private String libelle;
 	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
 
-
 	public MotClef(String libelle) {
 		this.libelle = libelle;
 	}
@@ -70,17 +69,6 @@ public class MotClef {
 
 	}
 
-	public void ajouterMotClef(String text) {
-		// TODO Auto-generated method stub
-		MotClef mot = new MotClef(text);
-		listeMotsClefs.add(mot);
-	}
-	
-	public Object[] afficherMotsClefs() {
-		// TODO Auto-generated method stub
-		return listeMotsClefs.toArray();
-	}
-	
 	public String[] getMotsClefs() {
 		int i = 0;
 		int idCategorieMotClef = categorie.getIdCategorieMotClef();
@@ -146,12 +134,29 @@ public class MotClef {
 			try {
 				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
 						+ mot.getLibelleMotClef() + "\"," + id + ")";
+				System.out.println(INSERER_MOT_CLEF);
 				st.executeUpdate(INSERER_MOT_CLEF);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void ajouterMotClef(String text) {
+		// TODO Auto-generated method stub
+		MotClef mot = new MotClef(text);
+		listeMotsClefs.add(mot);
+	}
+
+	public Object[] afficherListeMotsClefs() {
+		// TODO Auto-generated method stub
+		return listeMotsClefs.toArray();
+	}
+
+	public ArrayList<MotClef> getListeMotsClefs() {
+		// TODO Auto-generated method stub
+		return listeMotsClefs;
 	}
 
 	public void supprimerMotClef(Object selectedValue) {

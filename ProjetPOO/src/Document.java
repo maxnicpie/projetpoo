@@ -1,27 +1,26 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-import com.mysql.jdbc.Statement;
+import javax.swing.ListModel;
 
 public class Document {
 	private Statement st;
 	MotClef motclef = new MotClef(st);
-	private String titre;
 	private ResultSet rs;
-	@SuppressWarnings("unused")
 	private String nom;
 
-	public Document(Statement st) {
-		this.st = st;
+	public Document(String document) {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Document(String nom) {
-		this.nom = nom;
+	public Document(Statement st2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdDocument() {
 		int recupIdDocument = 0;
-		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + titre
+		String id = "SELECT idDocument FROM DOCUMENT where titre = \"" + nom
 				+ "\"";
 		try {
 			rs.next();
@@ -75,6 +74,45 @@ public class Document {
 		}
 		return null;
 			
+	}
+
+	public void setNom(String string) {
+		// TODO Auto-generated method stub
+		this.nom = string;
+	}
+
+	public void creerDocument() {
+		// TODO Auto-generated method stub
+		String CREER_DOCUMENT = "INSERT INTO DOCUMENT VALUES (null,\"" + nom
+				+ "\")";
+		try {
+			st.executeUpdate(CREER_DOCUMENT);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void affecterMotsCles(int idDomaine,
+			@SuppressWarnings("rawtypes") ListModel model) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < model.getSize(); i++) {
+			MotClef mot = new MotClef(model.getElementAt(i).toString(), st);
+			String AFFECTER_MOTSCLES = "INSERT INTO EST_TAGE VALUES ("
+					+ idDomaine + "," + mot.getIdMotClef() + ")";
+			try {
+				st.executeUpdate(AFFECTER_MOTSCLES);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public String getNom() {
+		// TODO Auto-generated method stub
+		return nom;
 	}
 
 }

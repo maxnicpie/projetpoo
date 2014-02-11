@@ -10,13 +10,17 @@ public class Critere {
 	private ResultSet rs;
 	private ArrayList<Critere> listeCriteres = new ArrayList<Critere>();
 
-	public Critere(String nom,Statement st) {
+	public Critere(String nom, Statement st) {
 		this.nom = nom;
 		this.st = st;
 	}
 
 	public Critere() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Critere(Statement st) {
+		this.st = st;
 	}
 
 	public String getNomCritere() {
@@ -26,22 +30,21 @@ public class Critere {
 	public void setNomCritere(String nom) {
 		this.nom = nom;
 	}
-	
+
 	public String toString() {
 		return nom;
 	}
 
 	public void creerCritere() {
-		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null, \""
-				+ nom + "\")";
+		String CREER_CRITERE = "INSERT INTO CRITERE VALUES(null, \"" + nom
+				+ "\")";
 
 		try {
-			st.executeQuery(CREER_CRITERE);
+			st.executeUpdate(CREER_CRITERE);
 		} catch (SQLException e) {
 			System.out.println("Erreur de requete");
 			e.printStackTrace();
 		}
-
 	}
 
 	public String[] getCriteres(int idDomaine) {
@@ -71,10 +74,10 @@ public class Critere {
 		}
 		return listeCriteres;
 	}
-	
+
 	public void ajouterCritere(String nom) {
 		// TODO Auto-generated method stub
-		Critere c = new Critere(nom,st);
+		Critere c = new Critere(nom, st);
 		listeCriteres.add(c);
 	}
 

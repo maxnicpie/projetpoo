@@ -13,13 +13,14 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 @SuppressWarnings("serial")
 public class DocumentCreation extends JDialog {
 	private JTextField nomDocument;
 	private JTextField lienField;
 
-	public DocumentCreation(Statement st, Domaine domaineSelect) {
+	public DocumentCreation(final Statement st, final Domaine domaineSelect) {
 
 		final CategorieMotClef c = new CategorieMotClef(st);
 		String[] listeCategories = c
@@ -77,8 +78,18 @@ public class DocumentCreation extends JDialog {
 		scrollPane_1.setBounds(359, 227, 201, 259);
 		getContentPane().add(scrollPane_1);
 
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(582, 267, 201, 219);
+		getContentPane().add(scrollPane_2);
+
+		@SuppressWarnings("rawtypes")
+		final JList listeMotsClefs = new JList();
+		listeMotsClefs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_2.setViewportView(listeMotsClefs);
+
 		@SuppressWarnings("rawtypes")
 		final JList listeMotsClefsExistants = new JList();
+		listeMotsClefsExistants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listeMotsClefsExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
@@ -103,10 +114,57 @@ public class DocumentCreation extends JDialog {
 			}
 		});
 
-		JButton btnNewButton = new JButton("Ajouter");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBounds(29, 499, 287, 47);
-		getContentPane().add(btnNewButton);
+		JButton btnAjouter = new JButton("Ajouter");
+		btnAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (!nomDocument.getText().equals("")) {
+					if (listeMotsClefs.getModel().getSize() != 0) {
+						if (radioPapier.isSelected()
+								|| radioElectronique.isSelected()) {
+							Document doc1 = new Document(st);
+							doc1.setNom(nomDocument.getText());
+							doc1.creerDocument();
+							doc1.affecterMotsCles(domaineSelect.getIdDomaine(),
+									listeMotsClefs.getModel());
+
+							if (radioPapier.isSelected()) {
+								PaperDocument paper = new PaperDocument(doc1
+										.getNom(), st);
+								paper.setCommentaire(commentaireField.getText());
+								paper.enregistrerPapier(doc1.getIdDocument());
+							} else {
+								ElectronicDocument electronique = new ElectronicDocument(
+										doc1.getNom(), st);
+								electronique.setLink(lienField.getText());
+								electronique.enregistrerElectronique(doc1
+										.getIdDocument());
+							}
+
+							JOptionPane.showMessageDialog(null,
+									"Ajout du document",
+									"Succès",
+									JOptionPane.INFORMATION_MESSAGE);
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Selectionnez un type de document",
+									"Message d'erreur",
+									JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null,
+								"Affectez des motsCles", "Message d'erreur",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Entrez un nom de document", "Message d'erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAjouter.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnAjouter.setBounds(29, 499, 287, 47);
+		getContentPane().add(btnAjouter);
 
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		final JComboBox listeCategoriesExistantes = new JComboBox(
@@ -132,15 +190,6 @@ public class DocumentCreation extends JDialog {
 		lblMotsCls.setBounds(344, 167, 187, 34);
 		getContentPane().add(lblMotsCls);
 
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(582, 267, 201, 219);
-		getContentPane().add(scrollPane_2);
-
-		@SuppressWarnings("rawtypes")
-		final
-		JList listeMotsClefs = new JList();
-		scrollPane_2.setViewportView(listeMotsClefs);
-
 		JButton btnAffecter = new JButton("Affecter");
 		btnAffecter.addActionListener(new ActionListener() {
 			@SuppressWarnings("unchecked")
@@ -148,7 +197,7 @@ public class DocumentCreation extends JDialog {
 				if (listeMotsClefsExistants.getSelectedValue() != null) {
 					mot1.ajouterMotClef((String) listeMotsClefsExistants
 							.getSelectedValue());
-					listeMotsClefs.setListData(mot1.afficherMotsClefs());
+					listeMotsClefs.setListData(mot1.afficherListeMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
@@ -165,12 +214,12 @@ public class DocumentCreation extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				if (listeMotsClefs.getSelectedValue() != null) {
 					mot1.supprimerMotClef(listeMotsClefs.getSelectedValue());
-					listeMotsClefs.setListData(mot1.afficherMotsClefs());
+					listeMotsClefs.setListData(mot1.afficherListeMotsClefs());
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Selectionnez un mot clé", "Message d'erreur",
 							JOptionPane.ERROR_MESSAGE);
-				}				
+				}
 			}
 		});
 		buttonSupprimer.setBounds(687, 227, 96, 34);

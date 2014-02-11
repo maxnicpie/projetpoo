@@ -1,14 +1,14 @@
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class ElectronicDocument extends Document {
 
 	private String link;
+	private Statement st;
 
-	public ElectronicDocument(String document) {
+	public ElectronicDocument(String document,Statement st) {
 		super(document);
-	}
-
-	public ElectronicDocument(String document, String link) {
-		this(document);
-		this.setLink(link);
+		this.st = st;
 	}
 
 	public String getLink() {
@@ -17,6 +17,18 @@ public class ElectronicDocument extends Document {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public void enregistrerElectronique(int idDocument) {
+		// TODO Auto-generated method stub
+		String ELECTRONIQUE = "INSERT INTO PAPER_DOCUMENT VALUES (null,\"" + link
+				+ "\","+idDocument+" )";
+		try {
+			st.executeUpdate(ELECTRONIQUE);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
