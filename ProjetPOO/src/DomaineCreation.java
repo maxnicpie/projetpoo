@@ -133,6 +133,7 @@ public class DomaineCreation extends JDialog {
 										"Message d'erreur",
 										JOptionPane.ERROR_MESSAGE);
 					} else {
+						@SuppressWarnings("unused")
 						CategorieMotClef cat = cat1
 								.chercherCategorie(listeCategories
 										.getSelectedValue());
