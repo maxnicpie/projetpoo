@@ -89,7 +89,8 @@ public class DocumentCreation extends JDialog {
 
 		@SuppressWarnings("rawtypes")
 		final JList listeMotsClefsExistants = new JList();
-		listeMotsClefsExistants.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listeMotsClefsExistants
+				.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(listeMotsClefsExistants);
 
 		radioElectronique.addActionListener(new ActionListener() {
@@ -141,8 +142,7 @@ public class DocumentCreation extends JDialog {
 							}
 
 							JOptionPane.showMessageDialog(null,
-									"Ajout du document",
-									"Succès",
+									"Ajout du document", "Succès",
 									JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,

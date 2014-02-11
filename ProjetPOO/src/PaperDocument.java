@@ -2,11 +2,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class PaperDocument extends Document {
-	
+
 	private String commentaire;
 	private Statement st;
 
-	public PaperDocument(String document,Statement st){
+	public PaperDocument(String document, Statement st) {
 		super(document);
 		this.st = st;
 	}
@@ -21,8 +21,8 @@ public class PaperDocument extends Document {
 
 	public void enregistrerPapier(int idDocument) {
 		// TODO Auto-generated method stub
-		String PAPER = "INSERT INTO PAPER_DOCUMENT VALUES (null,\"" + commentaire
-				+ "\","+idDocument+" )";
+		String PAPER = "INSERT INTO PAPER_DOCUMENT VALUES (null,\""
+				+ commentaire + "\"," + idDocument + " )";
 		try {
 			st.executeUpdate(PAPER);
 		} catch (SQLException e) {
@@ -30,7 +30,4 @@ public class PaperDocument extends Document {
 			e.printStackTrace();
 		}
 	}
-
-	
-
 }
