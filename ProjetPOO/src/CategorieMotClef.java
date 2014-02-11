@@ -9,10 +9,12 @@ public class CategorieMotClef {
 	private String nom;
 	private Statement st;
 	private ArrayList<CategorieMotClef> listeCategoriesMotsClefs = new ArrayList<CategorieMotClef>();
+	private MotClef motclef;
 
 	public CategorieMotClef(String nom, Statement st) {
 		this.nom = nom;
 		this.st = st;
+		motclef = new MotClef(st);
 	}
 
 	public CategorieMotClef(Statement st) {
@@ -134,5 +136,15 @@ public class CategorieMotClef {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void ajouterMotClef(String text) {
+		// TODO Auto-generated method stub
+		motclef.ajouterMotClef(text);
+	}
+
+	public Object[] afficherListeMotsClefs() {
+		// TODO Auto-generated method stub
+		return motclef.afficherListeMotsClefs();
 	}
 }

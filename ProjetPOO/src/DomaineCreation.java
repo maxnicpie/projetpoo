@@ -73,7 +73,7 @@ public class DomaineCreation extends JDialog {
 					CategorieMotClef cat = cat1.chercherCategorie(((JList) e
 							.getSource()).getSelectedValue());
 					if (cat != null) {
-						listeMotsClefs.setListData(m.afficherListeMotsClefs());
+						listeMotsClefs.setListData(cat.afficherListeMotsClefs());
 					}
 				} catch (NullPointerException npe) {
 				}
@@ -133,12 +133,11 @@ public class DomaineCreation extends JDialog {
 										"Message d'erreur",
 										JOptionPane.ERROR_MESSAGE);
 					} else {
-						@SuppressWarnings("unused")
 						CategorieMotClef cat = cat1
 								.chercherCategorie(listeCategories
 										.getSelectedValue());
-						m.ajouterMotClef(nomMotClef.getText());
-						listeMotsClefs.setListData(m.afficherListeMotsClefs());
+						cat.ajouterMotClef(nomMotClef.getText());
+						listeMotsClefs.setListData(cat.afficherListeMotsClefs());
 						nomMotClef.setText("");
 					}
 				}

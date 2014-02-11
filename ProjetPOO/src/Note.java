@@ -14,9 +14,10 @@ public class Note {
 	public void enregistrerNote(String selectedItem, int idDocument) {
 		// TODO Auto-generated method stub
 		Critere critere = new Critere(st);
-
+		critere.setNomCritere(selectedItem);
+		
 		String NOTE = "INSERT INTO note VALUES (null," + etoiles + ","
-				+ critere.getIdCritere(selectedItem) + "," + idDocument + ")";
+				+ critere.getIdCritere() + "," + idDocument + ")";
 		try {
 			st.executeUpdate(NOTE);
 		} catch (SQLException e) {
