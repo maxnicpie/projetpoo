@@ -1,6 +1,8 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.ListModel;
@@ -112,5 +114,59 @@ public class Document {
 	public String getNom() {
 		// TODO Auto-generated method stub
 		return nom;
+	}
+
+	public String[] getDocumentByMotsClefs(ArrayList<MotClef> motsClefs) {
+		int i = 0;
+		int nbLignes = 0;
+		String[] document = null;
+		Iterator<MotClef> it = motsClefs.iterator();
+		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
+				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
+		while (it.hasNext()) {
+			MotClef m = it.next();
+			recupDocument = recupDocument + " AND m.idMotClef = \""
+					+ m.getIdMotClef() + "\"";
+		}
+		try {
+			rs.last();
+			nbLignes = rs.getRow();
+			document = new String[nbLignes + 1];
+			rs.first();
+			while (i != nbLignes) {
+				document[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+		} catch (SQLException e) {
+		}
+		return document;
+	}
+	
+	public String[] getDocumentByCriteres(ArrayList<Critere> criteres) {
+		int i = 0;
+		int nbLignes = 0;
+		String[] document = null;
+		Iterator<Critere> it = criteres.iterator();
+		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
+				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
+		while (it.hasNext()) {
+			Critere c = it.next();
+			recupDocument = recupDocument + " AND m.idMotClef = \""
+					+ c + "\"";
+		}
+		try {
+			rs.last();
+			nbLignes = rs.getRow();
+			document = new String[nbLignes + 1];
+			rs.first();
+			while (i != nbLignes) {
+				document[i] = rs.getString(1);
+				i++;
+				rs.next();
+			}
+		} catch (SQLException e) {
+		}
+		return document;
 	}
 }
