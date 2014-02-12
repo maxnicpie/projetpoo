@@ -37,7 +37,6 @@ public class DomaineCreation extends JDialog {
 		final Domaine a = new Domaine(st);
 		final CategorieMotClef cat1 = new CategorieMotClef(st);
 		final Critere critere1 = new Critere(st);
-		final MotClef m = new MotClef(st);
 
 		JLabel lblNomDuDomaine = new JLabel("Nom du domaine : ");
 		lblNomDuDomaine.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -196,10 +195,11 @@ public class DomaineCreation extends JDialog {
 					a.setNomDomaine(nomDomaine.getText());
 					a.creerDomaine(); // enregistrement nom domaine
 					if (!critere1.getListeCriteres().isEmpty()) {
-						critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement critere
-						// criteres
+						critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement
+																		// critere
 					}
-					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine()); // enregistrement categorie
+					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine()); // enregistrement
+																			// categorie
 					JOptionPane.showMessageDialog(null, "Domaine ajouté",
 							"Succes", JOptionPane.INFORMATION_MESSAGE);
 					dispose();

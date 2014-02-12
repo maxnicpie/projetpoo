@@ -10,7 +10,7 @@ public class CategorieMotClef {
 	private Statement st;
 	private ArrayList<CategorieMotClef> listeCategoriesMotsClefs = new ArrayList<CategorieMotClef>();
 	private MotClef motclef;
-
+	
 	public CategorieMotClef(String nom, Statement st) {
 		this.nom = nom;
 		this.st = st;
@@ -19,6 +19,7 @@ public class CategorieMotClef {
 
 	public CategorieMotClef(Statement st) {
 		this.st = st;
+		motclef = new MotClef(st);
 	}
 
 	public CategorieMotClef() {
@@ -125,12 +126,12 @@ public class CategorieMotClef {
 		Iterator<CategorieMotClef> it = listeCategoriesMotsClefs.iterator();
 		while (it.hasNext()) {
 			CategorieMotClef c = it.next();
+			//MotClef m = new MotClef(st);
 			try {
 				String INSERER_CATEGORIE = "INSERT INTO CATEGORIE_MOT_CLEF VALUES (null,\""
 						+ c.getNomCategorieMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_CATEGORIE);
-				//motclef.enregistrerMotsClefs(c.getIdCategorieMotClef());
-				System.out.print(motclef.afficherListeMotsClefs());
+				enregistrerMotsClefs(c.getIdCategorieMotClef());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -146,6 +147,11 @@ public class CategorieMotClef {
 	public Object[] afficherListeMotsClefs() {
 		// TODO Auto-generated method stub
 		return motclef.afficherListeMotsClefs();
+	}
+	
+	public ArrayList<MotClef> getListeMotsClefs() {
+		// TODO Auto-generated method stub
+		return motclef.getListeMotsClefs();
 	}
 	
 	public void enregistrerMotsClefs(int id) {

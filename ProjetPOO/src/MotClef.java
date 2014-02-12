@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 public class MotClef {
 	private Statement st;
-	private CategorieMotClef categorie = new CategorieMotClef(st);
 	private ResultSet rs;
 	private String libelle;
 	private ArrayList<MotClef> listeMotsClefs = new ArrayList<MotClef>();
@@ -68,9 +67,9 @@ public class MotClef {
 		}
 	}
 
-	public String[] getMotsClefs() {
+	public String[] getMotsClefs(CategorieMotClef c) {
 		int i = 0;
-		int idCategorieMotClef = categorie.getIdCategorieMotClef();
+		int idCategorieMotClef = c.getIdCategorieMotClef();
 		String recupMotClef = "SELECT libelle FROM MOT_CLEF WHERE idCategorieMotClef = \""
 				+ idCategorieMotClef + "\"";
 
@@ -134,7 +133,6 @@ public class MotClef {
 				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
 						+ mot.getLibelleMotClef() + "\"," + id + ")";
 				st.executeUpdate(INSERER_MOT_CLEF);
-				System.out.println(INSERER_MOT_CLEF);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -144,7 +142,7 @@ public class MotClef {
 
 	public void ajouterMotClef(String text) {
 		// TODO Auto-generated method stub
-		MotClef mot = new MotClef(text);
+		MotClef mot = new MotClef(text, st);
 		listeMotsClefs.add(mot);
 	}
 
