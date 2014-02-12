@@ -133,8 +133,8 @@ public class MotClef {
 			try {
 				String INSERER_MOT_CLEF = "INSERT INTO MOT_CLEF VALUES (null,\""
 						+ mot.getLibelleMotClef() + "\"," + id + ")";
-				System.out.println(INSERER_MOT_CLEF);
 				st.executeUpdate(INSERER_MOT_CLEF);
+				System.out.println(INSERER_MOT_CLEF);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

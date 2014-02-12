@@ -141,7 +141,6 @@ public class DomaineCreation extends JDialog {
 						nomMotClef.setText("");
 					}
 				}
-
 			}
 		});
 		getContentPane().add(btnAddMotsCles);
@@ -197,22 +196,10 @@ public class DomaineCreation extends JDialog {
 					a.setNomDomaine(nomDomaine.getText());
 					a.creerDomaine(); // enregistrement nom domaine
 					if (!critere1.getListeCriteres().isEmpty()) {
-						critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement
-																		// critere
-																		// en
-																		// fonction
-																		// du
-																		// domaine
+						critere1.enregistrerCriteres(a.getIdDomaine()); // enregistrement critere
 						// criteres
 					}
-					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine()); // enregistrement
-																			// categorie
-																			// en
-																			// fonction
-																			// du
-																			// domaine
-					// cat1.enregistrerMotsClefs(cat1.getIdCategorieMotClef());
-
+					cat1.enregistrerCategoriesMotsClefs(a.getIdDomaine()); // enregistrement categorie
 					JOptionPane.showMessageDialog(null, "Domaine ajouté",
 							"Succes", JOptionPane.INFORMATION_MESSAGE);
 					dispose();

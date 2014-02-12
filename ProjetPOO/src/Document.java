@@ -9,7 +9,6 @@ import javax.swing.ListModel;
 
 public class Document {
 	private Statement st;
-	private MotClef motclef = new MotClef(st);
 	private ResultSet rs;
 	private String nom;
 
@@ -35,47 +34,6 @@ public class Document {
 			e.printStackTrace();
 		}
 		return recupIdDocument;
-	}
-
-	public String[] getNomDocumentByMotsClefs(List motClefExistant) {
-		int i = 0;
-		int idMotClef = motclef.getIdMotClef();
-
-		String recupDocument = "SELECT titre FROM DOCUMENT d, EST_TAGE e, MOT_CLEF m  "
-				+ "WHERE m.idMotClef = e.idMotClef AND d.idDocument=e.idDocument";
-
-		int nbLignes = 0;
-
-		for (int j = 0; j < motClefExistant.size(); j++) {
-			if (j == 0) {
-				recupDocument = recupDocument + " AND m.idMotClef = \""
-						+ idMotClef + "\" ";
-			} else {
-				recupDocument = recupDocument + " AND m.idMotClef = \""
-						+ idMotClef + "\" ";
-			}
-			recupDocument = recupDocument + ";";
-		}
-		try {
-			rs = st.executeQuery(recupDocument);
-			rs.last();
-			nbLignes = rs.getRow();
-			rs.first();
-		} catch (SQLException e) {
-		}
-
-		String[] document = new String[nbLignes];
-		try {
-			while (i != nbLignes) {
-				document[i] = rs.getString(1);
-				i++;
-				rs.next();
-			}
-
-		} catch (SQLException e) {
-		}
-		return document;
-
 	}
 
 	public void setNom(String string) {
@@ -143,7 +101,9 @@ public class Document {
 		int i = 0;
 		int nbLignes = 0;
 		String[] document = null;
-		String recupDocument = "";
+		String recupDocument = "SELECT titre FROM DOCUMENT d, NOTE n, CRITERE c "
+				+ "WHERE c.idCritere = n.idCritere AND d.idDocument = n.idDocument AND c.idCritere = \""
+				+ critere.getIdCritere() + "\"";
 		try {
 			rs = st.executeQuery(recupDocument);
 			rs.last();
