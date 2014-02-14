@@ -28,6 +28,7 @@ public class AccueilMenu extends JFrame {
 	@SuppressWarnings("rawtypes")
 	private JComboBox listeComboDomaines;
 	private JFrame frame;
+	private DomaineMenu dm;
 
 	private Statement st;
 
@@ -93,9 +94,14 @@ public class AccueilMenu extends JFrame {
 		JButton btnNewButton_1 = new JButton(new ImageIcon("fleche.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DomaineMenu dm = new DomaineMenu(new Domaine(
+				if(dm != null){
+					frame.remove(dm.getPanel());
+				}else{
+					frame.remove(panel);
+				}
+				dm = new DomaineMenu(frame,new Domaine(
 						(String) listeComboDomaines.getSelectedItem(), st), st);
-				dm.setVisible(true);
+				//frame.remove(dm.getPanel());
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 13));
